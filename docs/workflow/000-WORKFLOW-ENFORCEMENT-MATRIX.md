@@ -63,10 +63,10 @@ Mechanisms that **guide** and **educate** about proper patterns
 
 | Rule Category | Source Doc | Primary Enforcement | Secondary Enforcement | Tertiary Enforcement | Notes |
 |---------------|------------|---------------------|----------------------|---------------------|-------|
-| ESLint Validation | 105-SYSTEM-CODE-QUALITY | ✅ CI consistency hook | Evidence verification | Command documentation | Must match CI exactly |
-| TypeScript Checking | 105-SYSTEM-CODE-QUALITY | ✅ CI consistency hook | Evidence verification | Error documentation | Zero tolerance policy |
-| Validation Claims | 105-SYSTEM-CODE-QUALITY | ✅ Evidence requirement | Quality review | Anti-theater examples | No empty checkmarks |
-| Error Resolution | 105-SYSTEM-CODE-QUALITY | ✅ Investigation triggers | Agent consultation | RCCAFP framework | Systematic analysis |
+| ESLint Validation | 106-SYSTEM-CODE-QUALITY | ✅ CI consistency hook | Evidence verification | Command documentation | Must match CI exactly |
+| TypeScript Checking | 106-SYSTEM-CODE-QUALITY | ✅ CI consistency hook | Evidence verification | Error documentation | Zero tolerance policy |
+| Validation Claims | 106-SYSTEM-CODE-QUALITY | ✅ Evidence requirement | Quality review | Anti-theater examples | No empty checkmarks |
+| Error Resolution | 106-SYSTEM-CODE-QUALITY | ✅ Investigation triggers | Agent consultation | RCCAFP framework | Systematic analysis |
 
 ## Session Progress Summary
 
@@ -112,10 +112,10 @@ Mechanisms that **guide** and **educate** about proper patterns
 ├── suggest-octave-compression.sh  # 103-DOC-OCTAVE ✅ Active
 ├── validate-links.sh              # 006-WORKFLOW-LINK ✅ Active
 ├── enforce-archive-headers.sh     # 102-DOC-ARCHIVAL ✅ Active
-├── enforce-ci-consistency.sh      # 105-SYSTEM-CODE-QUALITY 📋 Planned
-├── require-validation-evidence.sh # 105-SYSTEM-CODE-QUALITY 📋 Planned
-├── enforce-test-first.sh          # 105-SYSTEM-CODE-QUALITY 📋 Planned
-├── enforce-error-resolution.sh    # 105-SYSTEM-CODE-QUALITY 📋 Planned
+├── enforce-ci-consistency.sh      # 106-SYSTEM-CODE-QUALITY 📋 Planned
+├── require-validation-evidence.sh # 106-SYSTEM-CODE-QUALITY 📋 Planned
+├── enforce-test-first.sh          # 106-SYSTEM-CODE-QUALITY 📋 Planned
+├── enforce-error-resolution.sh    # 106-SYSTEM-CODE-QUALITY 📋 Planned
 └── enforce-bridge-boundaries.sh   # 005-WORKFLOW-DIRECTORY 📋 Planned
 
 ~/.githooks/

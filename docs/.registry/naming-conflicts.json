@@ -1,0 +1,66 @@
+{
+  "conflicts": [
+    {
+      "sequence": "105",
+      "directory": "docs/standards",
+      "conflicting_files": [
+        "105-DOC-ASSUMPTION-MANAGEMENT.md",
+        "105-SYSTEM-CODE-QUALITY-ENFORCEMENT-GATES.md"
+      ],
+      "detected_date": "2025-08-19",
+      "status": "resolved",
+      "resolution_action": "Renamed 105-SYSTEM-CODE-QUALITY-ENFORCEMENT-GATES.md to 106-SYSTEM-CODE-QUALITY-ENFORCEMENT-GATES.md",
+      "resolved_by": "system-steward"
+    },
+    {
+      "sequence": "106-109",
+      "directory": "docs/security (formerly docs/standards/security)",
+      "conflicting_files": [
+        "106-SEC-WORKFLOW-INTEGRATION-ARCHITECTURE.md",
+        "107-SEC-PROMPTING-LIBRARY.md", 
+        "108-SEC-SPECIALIST-ENHANCEMENT.md",
+        "109-SEC-IMPLEMENTATION-GUIDE.md"
+      ],
+      "conflict_type": "range_violation",
+      "issue": "Security documents using standards range (100-199) while located in nested security directory",
+      "detected_date": "2025-08-19",
+      "status": "resolved",
+      "resolution_action": "Moved security documents to docs/security/ and renumbered to 400-403 range",
+      "resolved_by": "system-steward"
+    }
+  ],
+  "resolved": [
+    {
+      "original_conflict": "105 sequence duplicate",
+      "resolution": "Quality gates renamed to 106",
+      "resolved_date": "2025-08-19",
+      "steward_action": "sequence_renumbering"
+    },
+    {
+      "original_conflict": "Security documents in wrong range and location",
+      "resolution": "Moved to docs/security/ and renumbered 400-403",
+      "resolved_date": "2025-08-19", 
+      "steward_action": "structural_reorganization"
+    }
+  ],
+  "range_violations_prevented": {
+    "workflow_range": "000-099 enforced in docs/workflow/",
+    "standards_range": "100-199 enforced in docs/standards/",
+    "future_phases_range": "200-299 enforced in docs/future-phases/",
+    "security_range": "400-499 enforced in docs/security/",
+    "reports_range": "800-899 enforced in reports/"
+  },
+  "prevention_rules": {
+    "sequence_check": "Always verify sequence availability before creation",
+    "range_validation": "Sequence numbers must match directory range definitions",
+    "steward_approval": "Document creation requires system-steward governance",
+    "conflict_resolution": "Immediate blocking and resolution required",
+    "structural_integrity": "Maintain logical directory organization with proper numbering"
+  },
+  "metadata": {
+    "last_updated": "2025-08-19T00:00:00Z",
+    "updated_by": "system-steward",
+    "version": "2.0",
+    "schema_changes": "Added range violations tracking and structural reorganization logging"
+  }
+}

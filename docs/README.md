@@ -1,8 +1,19 @@
 # HestAI Documentation Hub
 
-This directory contains the complete operational standards, workflows, and enforcement mechanisms for the HestAI system.
+Complete operational standards, workflows, and enforcement mechanisms for the HestAI system.
 
-The documentation is organized into two primary areas:
+## Directory Structure
+
+```
+docs/
+├── workflow/        # 000-099: Project lifecycle & processes
+├── standards/       # 100-199: Documentation & quality rules  
+├── future-phases/   # 200-299: Planned developments
+├── security/        # 400-499: Security architecture & integration
+└── .registry/       # Governance tracking & sequence management
+```
+
+## Core Areas
 
 ## 1. `/workflow` - The "How" of Operations
 **Purpose:** Defines the end-to-end project lifecycle, agent roles, prompts, and enforcement mechanisms that govern our process.
@@ -30,12 +41,20 @@ The documentation is organized into two primary areas:
 - **[104-DOC-ENFORCEMENT-GATES.md](./standards/104-DOC-ENFORCEMENT-GATES.md)**: Technical implementation of documentation hooks and validators.
 - **[105-DOC-ASSUMPTION-MANAGEMENT.md](./standards/105-DOC-ASSUMPTION-MANAGEMENT.md)**: Systematic assumption tracking and validation protocols.
 
-### Security Standards
-- **[/standards/security/](./standards/security/)**: Contains the complete Security-First integration architecture.
-  - **[106-SEC-WORKFLOW-INTEGRATION-ARCHITECTURE.md](./standards/security/106-SEC-WORKFLOW-INTEGRATION-ARCHITECTURE.md)**: Security integration patterns and architectural guidelines.
-  - **[107-SEC-PROMPTING-LIBRARY.md](./standards/security/107-SEC-PROMPTING-LIBRARY.md)**: Security-aware prompting templates and patterns.
-  - **[108-SEC-SPECIALIST-ENHANCEMENT.md](./standards/security/108-SEC-SPECIALIST-ENHANCEMENT.md)**: Security specialist role definitions and capabilities.
-  - **[109-SEC-IMPLEMENTATION-GUIDE.md](./standards/security/109-SEC-IMPLEMENTATION-GUIDE.md)**: Practical security implementation and deployment guide.
+### Code Quality Standards
+- **[106-SYSTEM-CODE-QUALITY-ENFORCEMENT-GATES.md](./standards/106-SYSTEM-CODE-QUALITY-ENFORCEMENT-GATES.md)**: Quality enforcement through automated validation gates.
+
+## 3. `/security` - Security Architecture
+**Purpose:** Security-first integration patterns, prompting libraries, and implementation guides.
+
+### Security Integration
+- **[400-SEC-WORKFLOW-INTEGRATION-ARCHITECTURE.md](./security/400-SEC-WORKFLOW-INTEGRATION-ARCHITECTURE.md)**: Security integration patterns and architectural guidelines.
+- **[401-SEC-PROMPTING-LIBRARY.md](./security/401-SEC-PROMPTING-LIBRARY.md)**: Security-aware prompting templates and patterns.
+- **[402-SEC-SPECIALIST-ENHANCEMENT.md](./security/402-SEC-SPECIALIST-ENHANCEMENT.md)**: Security specialist role definitions and capabilities.
+- **[403-SEC-IMPLEMENTATION-GUIDE.md](./security/403-SEC-IMPLEMENTATION-GUIDE.md)**: Practical security implementation and deployment guide.
+
+## 4. `/future-phases` - Evolution Planning
+**Purpose:** Planned developments, architectural proposals, and system evolution paths.
 
 ---
 
@@ -54,7 +73,7 @@ The documentation is organized into two primary areas:
 ### Setting up Infrastructure?
 1. Review [004-WORKFLOW-HOOKS-GUIDE.md](./workflow/004-WORKFLOW-HOOKS-GUIDE.md) for hook installation and management
 2. Check [104-DOC-ENFORCEMENT-GATES.md](./standards/104-DOC-ENFORCEMENT-GATES.md) for technical implementation
-3. Consult [/standards/security/](./standards/security/) for security integration requirements
+3. Consult [/security/](./security/) for security integration requirements
 
 ### Troubleshooting?
 1. Use [003-WORKFLOW-ERROR-HANDLING.md](./workflow/003-WORKFLOW-ERROR-HANDLING.md) for systematic error resolution

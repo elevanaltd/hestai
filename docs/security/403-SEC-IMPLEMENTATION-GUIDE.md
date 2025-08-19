@@ -12,7 +12,7 @@
 ### 1.1 Template and Prompt Enhancement
 
 #### North Star Template Update
-**File:** `/templates/106-SEC-NORTH-STAR-TEMPLATE.md`
+**File:** `/templates/400-SEC-NORTH-STAR-TEMPLATE.md`
 **Status:** ✓ Complete
 **Integration:** Replace existing North Star template with security-enhanced version
 
@@ -33,7 +33,7 @@
    - Confirm creative flow preservation
 
 #### Security-Aware Prompting Library
-**File:** `/docs/107-SEC-PROMPTING-LIBRARY.md`
+**File:** `/docs/security/401-SEC-PROMPTING-LIBRARY.md`
 **Status:** ✓ Complete
 **Integration:** Connect prompts to phase detection and consultation triggers
 
@@ -60,7 +60,7 @@
 ### 1.2 Security-Specialist Role Enhancement
 
 #### Enhanced Consultation Modes
-**File:** `/docs/108-SEC-SPECIALIST-ENHANCEMENT.md`
+**File:** `/docs/security/402-SEC-SPECIALIST-ENHANCEMENT.md`
 **Status:** ✓ Specification Complete
 **Integration:** Extend existing security-specialist with new capabilities
 

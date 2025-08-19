@@ -1,0 +1,47 @@
+{
+  "steward_approvals": [
+    {
+      "approval_id": "STEW-001",
+      "document_path": "docs/standards/106-SYSTEM-CODE-QUALITY-ENFORCEMENT-GATES.md",
+      "action": "sequence_renumbering",
+      "steward_role": "system-steward",
+      "approval_date": "2025-08-19T00:00:00Z",
+      "reason": "Resolved sequence conflict with 105-DOC-ASSUMPTION-MANAGEMENT.md",
+      "status": "approved"
+    },
+    {
+      "approval_id": "STEW-002",
+      "document_paths": [
+        "docs/security/400-SEC-WORKFLOW-INTEGRATION-ARCHITECTURE.md",
+        "docs/security/401-SEC-PROMPTING-LIBRARY.md", 
+        "docs/security/402-SEC-SPECIALIST-ENHANCEMENT.md",
+        "docs/security/403-SEC-IMPLEMENTATION-GUIDE.md"
+      ],
+      "action": "structural_reorganization",
+      "steward_role": "system-steward",
+      "approval_date": "2025-08-19T00:00:00Z",
+      "reason": "Security documents were in wrong directory (docs/standards/security/) and using wrong number range (106-109). Moved to docs/security/ and renumbered to proper 400-499 range to resolve structural inconsistency and numbering conflicts.",
+      "status": "approved",
+      "scope": "major_restructuring"
+    }
+  ],
+  "blocked_attempts": [],
+  "governance_rules": {
+    "document_creation": "Requires system-steward approval",
+    "sequence_validation": "Must check registry before creation and validate against directory ranges",
+    "range_enforcement": "Sequence numbers must comply with directory-specific ranges",
+    "conflict_resolution": "Immediate steward intervention required",
+    "approval_logging": "All approvals must be logged with reasoning",
+    "structural_integrity": "Maintain logical directory organization"
+  },
+  "steward_authorities": [
+    "system-steward"
+  ],
+  "audit_trail": {
+    "creation_date": "2025-08-19T00:00:00Z",
+    "created_by": "system-steward",
+    "purpose": "Document governance and approval tracking",
+    "version": "2.0",
+    "major_restructuring": "2025-08-19: Security documents moved and renumbered, range enforcement implemented"
+  }
+}

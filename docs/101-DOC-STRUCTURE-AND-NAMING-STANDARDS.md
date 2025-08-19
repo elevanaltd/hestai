@@ -28,7 +28,16 @@ Examples
 - 401-SEC-AUTHZ-MODEL.md
 - 812-REPORT-LOAD-TEST.oct.md
 - 322-UI-GUIDELINES.md
-- 214-PROJECT-BUILD-PLAN.md
+- 201-PROJECT-MYAPP-D2-DESIGN.md (PROJECT deliverables require phase)
+
+PROJECT Phase Requirements
+PROJECT context documents must include workflow phase:
+- Pattern: {NN}-PROJECT[-{NAME}]-{PHASE}-{NAME}.md
+- Valid phases: D1, D2, D3, B0, B1, B2, B3, B4
+- Examples:
+  - 201-PROJECT-WEBAPP-D1-NORTH-STAR.md
+  - 202-PROJECT-WEBAPP-D3-BLUEPRINT.md
+  - 203-PROJECT-WEBAPP-B2-IMPLEMENTATION-LOG.md
 
 Forbidden
 - Versioned suffixes (_v01, -final, -latest)

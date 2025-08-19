@@ -199,6 +199,22 @@ Each Crystal session typically uses a fresh worktree, which means:
 
 ## ENFORCEMENT IN MAIN WORKFLOW
 
+### Current Hook Implementation Status
+
+**Active Claude Hooks:**
+- `enforce-doc-naming.sh` - PROJECT phase naming + standard document patterns ✅
+- `context7_enforcement_gate.sh` - External library consultation enforcement ✅  
+- `enforce-phase-dependencies.sh` - PROJECT phase progression gates ✅
+- `enforce-traced-analyze.sh` - Critical-engineer consultation triggers (TRACED A) ✅
+- `enforce-traced-consult.sh` - Testguard consultation triggers (TRACED C) ✅
+- `suggest-octave-compression.sh` - OCTAVE compression suggestions ✅
+- `validate-links.sh` - Relative link validation ✅
+- `enforce-archive-headers.sh` - Archive document header validation ✅
+
+**Git Hooks:**
+- `pre-commit` - Test-first (TDD) validation (TRACED T) ✅
+- `commit-msg` - Code review evidence suggestions (TRACED R) ✅
+
 ### Add to Every Phase's Workspace Setup
 
 When any phase involves code changes, verify hooks are active:
@@ -212,6 +228,27 @@ echo "🔒 Verifying quality gates..."
     exit 1
 }
 ```
+
+### PROJECT Phase Enforcement
+
+The workflow now automatically enforces:
+- **Phase naming**: PROJECT documents must include phase (D1-B4)
+- **Phase progression**: Cannot skip phases (D1→D2→D3→B0→B1→B2→B3→B4)
+- **File existence**: Each phase requires its immediate predecessor
+
+### TRACED Protocol Enforcement
+
+Complete TRACED protocol implementation ensures quality discipline:
+- **T** (Test-First): Pre-commit hooks block commits without test files
+- **R** (Review): Git hooks suggest code review evidence
+- **A** (Analyze): Critical-engineer consultation required for architectural decisions
+- **C** (Consult): Testguard consultation required for testing discipline changes  
+- **E** (Execute): Quality gates (lint/typecheck/tests) enforced
+- **D** (Document): Documentation requirements enforced throughout
+
+**TRACED Triggers:**
+- **Analyze triggers**: Database schemas, performance-critical code, security components, architecture patterns
+- **Consult triggers**: Test framework changes, coverage modifications, test quarantine, new test domains
 
 ### Code Review Requirements
 

@@ -11,8 +11,11 @@
 
 | Hook Name                     | Location         | Purpose                                                        |
 |-------------------------------|------------------|----------------------------------------------------------------|
-| enforce-doc-naming.sh         | ~/.claude/hooks/ | Blocks files with invalid naming patterns AND deep nesting    |
-| enforce-context7-consultation.sh | ~/.claude/hooks/ | Blocks external imports without Context7 consultation evidence |
+| enforce-doc-naming.sh         | ~/.claude/hooks/ | Blocks files with invalid naming patterns AND PROJECT phases  |
+| context7_enforcement_gate.sh  | ~/.claude/hooks/ | Blocks external imports without Context7 consultation evidence |
+| enforce-phase-dependencies.sh | ~/.claude/hooks/ | Blocks PROJECT phase creation without prerequisites           |
+| enforce-traced-analyze.sh     | ~/.claude/hooks/ | Blocks architecture changes without critical-engineer consultation (TRACED A) |
+| enforce-traced-consult.sh     | ~/.claude/hooks/ | Blocks test methodology changes without testguard consultation (TRACED C) |
 | suggest-octave-compression.sh | ~/.claude/hooks/ | Suggests OCTAVE compression for large, pattern-heavy files    |
 | validate-links.sh             | ~/.claude/hooks/ | Validates relative links exist and cross-repo references      |
 | enforce-archive-headers.sh    | ~/.claude/hooks/ | Ensures archived files have required Status/Date/Path headers |
@@ -21,8 +24,8 @@
 
 | Hook Name  | Location      | Purpose                                           |
 |------------|---------------|---------------------------------------------------|
-| pre-commit | ~/.githooks/  | Enforces test-first requirement for code creation |
-| commit-msg | ~/.githooks/  | Suggests review evidence in commit messages      |
+| pre-commit | ~/.githooks/  | Enforces test-first requirement (TRACED T)       |
+| commit-msg | ~/.githooks/  | Suggests review evidence (TRACED R)              |
 
 ### Planned Hooks 📋
 
@@ -42,14 +45,23 @@
 
 ### Test Individual Hooks
 ```bash
-# Test filename and depth validation (combined)
-echo '{"tool_name": "Write", "tool_input": {"file_path": "/path/to/test-file.md"}}' | ~/.claude/hooks/enforce-doc-naming.sh
+# Test filename and PROJECT phase validation
+echo '{"tool_name": "Write", "tool_input": {"file_path": "/path/to/201-PROJECT-TEST.md"}}' | ~/.claude/hooks/enforce-doc-naming.sh
+
+# Test PROJECT phase dependencies
+echo '{"tool_name": "Write", "tool_input": {"file_path": "/docs/201-PROJECT-TEST-D2-DESIGN.md"}}' | ~/.claude/hooks/enforce-phase-dependencies.sh
+
+# Test TRACED analyze triggers
+echo '{"tool_name": "Write", "tool_input": {"file_path": "/src/migrations/001-schema.sql", "content": "CREATE TABLE users..."}}' | ~/.claude/hooks/enforce-traced-analyze.sh
+
+# Test TRACED consult triggers  
+echo '{"tool_name": "Write", "tool_input": {"file_path": "/test/new-framework.test.js", "content": "import vitest from \"vitest\""}}' | ~/.claude/hooks/enforce-traced-consult.sh
+
+# Test Context7 consultation enforcement
+echo '{"tool_name": "Write", "tool_input": {"file_path": "/test/file.js", "content": "import lodash from \"lodash\""}}' | ~/.claude/hooks/context7_enforcement_gate.sh
 
 # Test OCTAVE compression suggestion
 echo '{"tool_name": "Write", "tool_input": {"file_path": "/path/to/large-file.md"}}' | ~/.claude/hooks/suggest-octave-compression.sh
-
-# Test Context7 consultation enforcement
-echo '{"tool_name": "Write", "tool_input": {"file_path": "/test/file.js", "content": "import lodash from \"lodash\""}}' | ~/.claude/hooks/enforce-context7-consultation.sh
 
 # Test link validation
 echo '{"tool_name": "Write", "tool_input": {"file_path": "/test/doc.md", "content": "[broken link](nonexistent.md)"}}' | ~/.claude/hooks/validate-links.sh
@@ -100,9 +112,11 @@ pre-commit run --all-files
 ## Implementation Status
 
 ### Blocking Enforcement (Active)
-- ✅ **Filename patterns** - Invalid names cannot be created
-- ✅ **Directory depth** - Deep nesting blocked in docs/
-- ✅ **Test-first** - Code requires accompanying test file
+- ✅ **Filename patterns** - Invalid names and missing PROJECT phases blocked
+- ✅ **PROJECT phase dependencies** - Phase progression enforced (D1→D2→D3→B0→B1→B2→B3→B4)
+- ✅ **TRACED analyze** - Architecture changes require critical-engineer consultation
+- ✅ **TRACED consult** - Test methodology changes require testguard consultation
+- ✅ **Test-first** - Code requires accompanying test file (TRACED T)
 - ✅ **Context7 consultation** - External imports require consultation evidence
 - ✅ **Link validation** - Broken links detected and blocked
 - ✅ **Archive headers** - Missing headers blocked for archived files

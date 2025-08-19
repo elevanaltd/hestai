@@ -136,8 +136,9 @@ Task decomposition, sequencing, and build plan creation.
 
 **Key Deliverables:**
 - `2xx-PROJECT[-{NAME}]-B1-BUILD-PLAN.md` - Detailed task breakdown with sequencing
-- `2xx-PROJECT[-{NAME}]-B1-WORKSPACE.md` - Environment and tooling setup documentation
+- `2xx-PROJECT[-{NAME}]-B1-WORKSPACE.md` - Environment and tooling setup documentation  
 - `2xx-PROJECT[-{NAME}]-B1-DEPENDENCIES.md` - Dependency map and critical path analysis
+- TRACED protocol execution artifacts
 
 **Planning Criteria:**
 - All architectural components have corresponding tasks
@@ -159,15 +160,16 @@ Core development with test-first practices and quality gates.
 **Purpose:** Execute build plan through disciplined development with continuous quality validation and architectural compliance.
 
 **Sub-Phases & Specialists:**
-- **B2_01: IMPLEMENTATION-LEAD** - Coordinate development, manage task flow, ensure quality standards
-- **B2_02: UNIVERSAL-TEST-ENGINEER** - Create comprehensive test suites, validate coverage requirements
+- **B2_00: TESTGUARD/TEST-METHODOLOGY-GUARDIAN** - Establish test strategy, methodology, and compliance framework
+- **B2_01: IMPLEMENTATION-LEAD/TECHNICAL-ARCHITECT** - Coordinate development, manage task flow, ensure quality standards
+- **B2_02: UNIVERSAL-TEST-ENGINEER** - Create comprehensive test suites within approved methodology
 - **B2_03: CODE-REVIEW-SPECIALIST** - Review all code changes for quality, security, and standards
 - **B2_04: ERROR-RESOLVER** - Address integration issues, CI failures, and blocking problems
 
 **RACI:**
-- **R**: implementation-lead (B2_01), universal-test-engineer (B2_02), code-review-specialist (B2_03), error-resolver (B2_04)
+- **R**: testguard/test-methodology-guardian (B2_00), implementation-lead/technical-architect (B2_01), universal-test-engineer (B2_02), code-review-specialist (B2_03), error-resolver (B2_04)
 - **A**: critical-engineer (maintains production standards)
-- **C**: technical-architect (architecture compliance), Context7 (library usage), critical-engineer (complex decisions)
+- **C**: technical-architect (architecture compliance), Context7 (library usage), testguard/test-methodology-guardian (ongoing methodology compliance)
 - **I**: solution-steward, completion-architect, security-specialist
 
 **Entry Requirements:**
@@ -176,17 +178,29 @@ Core development with test-first practices and quality gates.
 - Test frameworks and CI/CD pipeline ready
 - Team onboarded with clear task assignments
 
+**B2_00 Test Methodology Requirements:**
+- Establish test strategy aligned with project requirements
+- Define coverage requirements and testing patterns
+- Set up methodology compliance validation
+- Approve testing frameworks and approaches
+- Create test integrity monitoring procedures
+
 **Key Deliverables:**
 - `2xx-PROJECT[-{NAME}]-B2-IMPLEMENTATION-LOG.md` - Development progress and decision record
+- `2xx-PROJECT[-{NAME}]-B2-TEST-STRATEGY.md` - Test methodology and compliance framework
 - Source code with comprehensive test coverage
 - CI/CD pipeline with all quality gates passing
 - Code review evidence and architectural compliance documentation
+- TRACED protocol compliance artifacts
 
 **Implementation Standards:**
-- TEST FIRST: No code without failing test
+- TEST METHODOLOGY FIRST: testguard consultation before any test creation
+- TEST FIRST: No code without failing test (within approved methodology)
+- TRACED METHODOLOGY: Follow T-R-A-C-E-D protocol (Test→Review→Analyze→Consult→Execute→Document)
 - Context7 consultation for all library usage
 - Code review for every change
 - Continuous integration with immediate failure resolution
+- Continuous methodology compliance validation
 - Architecture compliance validation
 - Security scanning and vulnerability assessment
 
@@ -211,14 +225,14 @@ Component integration, system testing, and validation.
 
 **Sub-Phases & Specialists:**
 - **B3_01: COMPLETION-ARCHITECT** - Orchestrate component integration and system coherence
-- **B3_02: UNIVERSAL-TEST-ENGINEER** - Execute integration, E2E, and performance testing
+- **B3_02: UNIVERSAL-TEST-ENGINEER** - Execute integration, E2E, and performance testing (with testguard/test-methodology-guardian guidance for complex test scenarios)
 - **B3_03: SECURITY-SPECIALIST** - Conduct security audit and penetration testing
 - **B3_04: COHERENCE-ORACLE** - Validate cross-system consistency and architectural alignment
 
 **RACI:**
 - **R**: completion-architect (B3_01), universal-test-engineer (B3_02), security-specialist (B3_03), coherence-oracle (B3_04)
 - **A**: critical-engineer (production readiness authority)
-- **C**: technical-architect (system architecture), error-architect (failure mode analysis), requirements-steward (requirement fulfillment)
+- **C**: technical-architect (system architecture), error-architect (failure mode analysis), requirements-steward (requirement fulfillment), testguard/test-methodology-guardian (integration test methodology)
 - **I**: implementation-lead, solution-steward, system-steward
 
 **Entry Requirements:**

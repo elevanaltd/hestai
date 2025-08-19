@@ -1,42 +1,78 @@
-# docs/ README
+# HestAI Documentation Hub
 
-Purpose
-- Quick reference for documentation structure, profiles, and naming.
+This directory contains the complete operational standards, workflows, and enforcement mechanisms for the HestAI system.
 
-Profiles
-- Org profile (documentation-first repos): required dirs docs/, reports/, _archive/; optional sessions/, scripts/
-- Code profile (code + docs repos): required dirs src/, tests/, docs/, docs/adr/, reports/, _archive/; optional builds/, lib/, sessions/, scripts/
+The documentation is organized into two primary areas:
 
-Top-level directories (intent)
-- docs/: canonical standards, guides, ADR index
-- reports/: time-bound analyses, audits, retros
-- _archive/: retired docs; preserve original prefixes
-- sessions/ (optional): raw notes, explorations, scratch
-- scripts/ (optional): tooling scripts (hooks, generators)
+## 1. `/workflow` - The "How" of Operations
+**Purpose:** Defines the end-to-end project lifecycle, agent roles, prompts, and enforcement mechanisms that govern our process.
 
-Naming pattern
-- {CATEGORY}{NN}-{CONTEXT[-QUALIFIER]-NAME}.{EXT}
-  - CATEGORY{NN}: 3-digit range taxonomy (first digit family; next two sequence)
-  - CONTEXT: DOC, SYSTEM, PROJECT, WORKFLOW, SCRIPT, AUTH, UI, RUNTIME, DATA, SEC, OPS, BUILD, REPORT
-  - QUALIFIER: optional (single token) only to disambiguate
-  - NAME: UPPERCASE-WITH-HYPHENS (hyphens only)
-  - EXT: md or oct.md (compressed canonical)
+### Core Workflow Documents
+- **[000-WORKFLOW-ENFORCEMENT-MATRIX.md](./workflow/000-WORKFLOW-ENFORCEMENT-MATRIX.md)**: The single source of truth for all rule enforcement mechanisms. **START HERE** to understand what is enforced.
+- **[001-WORKFLOW-NORTH-STAR.md](./workflow/001-WORKFLOW-NORTH-STAR.md)**: The complete 8-phase project workflow (D1-B4) with RACI charts and specialist roles.
+- **[002-WORKFLOW-PROMPTS.md](./workflow/002-WORKFLOW-PROMPTS.md)**: Standardized prompts for each specialist agent in the workflow.
+- **[004-WORKFLOW-HOOKS-GUIDE.md](./workflow/004-WORKFLOW-HOOKS-GUIDE.md)**: The complete guide to managing and referencing our automated quality hooks.
 
-Nesting rule (docs/)
-- Max depth = 2 (e.g., docs/adr/401-SEC-AUTHZ-MODEL.md)
-- Prefer shallow tree + rich filenames over deep nesting
+### Process & Structure
+- **[003-WORKFLOW-ERROR-HANDLING.md](./workflow/003-WORKFLOW-ERROR-HANDLING.md)**: Systematic error resolution and escalation procedures.
+- **[005-WORKFLOW-DIRECTORY-STRUCTURE.md](./workflow/005-WORKFLOW-DIRECTORY-STRUCTURE.md)**: Bridge/build content separation and repository organization.
+- **[006-WORKFLOW-LINK-STANDARDS.md](./workflow/006-WORKFLOW-LINK-STANDARDS.md)**: Link validation, cross-repo references, and migration safety.
+- **[008-WORKFLOW-LLM-CONSTELLATION-PROPOSAL.md](./workflow/008-WORKFLOW-LLM-CONSTELLATION-PROPOSAL.md)**: Multi-model collaboration architecture.
 
-Anti-proliferation
-- One canonical standards doc: 101-DOC-STRUCTURE-AND-NAMING-STANDARDS.oct.md
-- Use Git branches/PRs for review. Do not create parallel numbered drafts.
+## 2. `/standards` - The "What" of Assets
+**Purpose:** Defines canonical rules for documentation, naming, security, and data management.
 
-Anchors
-- 1xx-DOC-NORTH-STAR.oct.md
-- 1xx-DOC-STRUCTURE-AND-NAMING-STANDARDS.oct.md
+### Documentation Standards
+- **[100-DOC-NORTH-STAR.oct.md](./standards/100-DOC-NORTH-STAR.oct.md)**: The core principles of our documentation philosophy.
+- **[101-DOC-STRUCTURE-AND-NAMING-STANDARDS.md](./standards/101-DOC-STRUCTURE-AND-NAMING-STANDARDS.md)**: Rules for file naming, directory structure, and repository profiles.
+- **[102-DOC-ARCHIVAL-RULES.md](./standards/102-DOC-ARCHIVAL-RULES.md)**: Document lifecycle management and archival procedures.
+- **[103-DOC-OCTAVE-COMPRESSION-RULES.md](./standards/103-DOC-OCTAVE-COMPRESSION-RULES.md)**: OCTAVE format compression guidelines and standards.
+- **[104-DOC-ENFORCEMENT-GATES.md](./standards/104-DOC-ENFORCEMENT-GATES.md)**: Technical implementation of documentation hooks and validators.
+- **[105-DOC-ASSUMPTION-MANAGEMENT.md](./standards/105-DOC-ASSUMPTION-MANAGEMENT.md)**: Systematic assumption tracking and validation protocols.
 
-Examples
-- 103-DOC-NORTH-STAR.oct.md
-- adr/401-SEC-AUTHZ-MODEL.md
-- reports/801-REPORT-SECURITY-AUDIT.oct.md
+### Security Standards
+- **[/standards/security/](./standards/security/)**: Contains the complete Security-First integration architecture.
+  - **[106-SEC-WORKFLOW-INTEGRATION-ARCHITECTURE.md](./standards/security/106-SEC-WORKFLOW-INTEGRATION-ARCHITECTURE.md)**: Security integration patterns and architectural guidelines.
+  - **[107-SEC-PROMPTING-LIBRARY.md](./standards/security/107-SEC-PROMPTING-LIBRARY.md)**: Security-aware prompting templates and patterns.
+  - **[108-SEC-SPECIALIST-ENHANCEMENT.md](./standards/security/108-SEC-SPECIALIST-ENHANCEMENT.md)**: Security specialist role definitions and capabilities.
+  - **[109-SEC-IMPLEMENTATION-GUIDE.md](./standards/security/109-SEC-IMPLEMENTATION-GUIDE.md)**: Practical security implementation and deployment guide.
+
+---
+
+## Quick Navigation
+
+### New to HestAI?
+1. Start with [000-WORKFLOW-ENFORCEMENT-MATRIX.md](./workflow/000-WORKFLOW-ENFORCEMENT-MATRIX.md) to understand our quality enforcement
+2. Review [001-WORKFLOW-NORTH-STAR.md](./workflow/001-WORKFLOW-NORTH-STAR.md) for the complete project lifecycle
+3. Check [101-DOC-STRUCTURE-AND-NAMING-STANDARDS.md](./standards/101-DOC-STRUCTURE-AND-NAMING-STANDARDS.md) for naming conventions
+
+### Working on a Project?
+1. Use [001-WORKFLOW-NORTH-STAR.md](./workflow/001-WORKFLOW-NORTH-STAR.md) to identify your current phase (D1-B4)
+2. Consult [002-WORKFLOW-PROMPTS.md](./workflow/002-WORKFLOW-PROMPTS.md) for specialist agent interactions
+3. Reference [004-WORKFLOW-HOOKS-GUIDE.md](./workflow/004-WORKFLOW-HOOKS-GUIDE.md) for quality gate management
+
+### Setting up Infrastructure?
+1. Review [004-WORKFLOW-HOOKS-GUIDE.md](./workflow/004-WORKFLOW-HOOKS-GUIDE.md) for hook installation and management
+2. Check [104-DOC-ENFORCEMENT-GATES.md](./standards/104-DOC-ENFORCEMENT-GATES.md) for technical implementation
+3. Consult [/standards/security/](./standards/security/) for security integration requirements
+
+### Troubleshooting?
+1. Use [003-WORKFLOW-ERROR-HANDLING.md](./workflow/003-WORKFLOW-ERROR-HANDLING.md) for systematic error resolution
+2. Check [000-WORKFLOW-ENFORCEMENT-MATRIX.md](./workflow/000-WORKFLOW-ENFORCEMENT-MATRIX.md) for enforcement status
+3. Review [004-WORKFLOW-HOOKS-GUIDE.md](./workflow/004-WORKFLOW-HOOKS-GUIDE.md) for hook debugging
+
+---
+
+## Governance & Evolution
+
+This structure is governed by:
+- **[005-WORKFLOW-DIRECTORY-STRUCTURE.md](./workflow/005-WORKFLOW-DIRECTORY-STRUCTURE.md)**: Repository organization principles
+- **[006-WORKFLOW-LINK-STANDARDS.md](./workflow/006-WORKFLOW-LINK-STANDARDS.md)**: Cross-reference and link management
+
+The documentation evolves through the workflow processes defined in the `/workflow` directory, with quality enforcement managed through the mechanisms detailed in `/standards`.
+
+---
+
+*This documentation hub provides comprehensive coverage of the HestAI operational system. All standards are actively enforced through automated hooks and quality gates as detailed in the enforcement matrix.*
 
 

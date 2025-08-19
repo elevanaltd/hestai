@@ -59,6 +59,15 @@ Mechanisms that **guide** and **educate** about proper patterns
 | Context7 Library    | Claude gate hook | ✅ Library import block   | Git pre-commit nudge   | Context7 guidance     | Evidence required     |
 | Test Methodology    | Claude.md TRACED | ✅ Testguard triggers     | Test quality review    | Testing guidelines    | TRACED C component    |
 
+### Code Quality Standards
+
+| Rule Category | Source Doc | Primary Enforcement | Secondary Enforcement | Tertiary Enforcement | Notes |
+|---------------|------------|---------------------|----------------------|---------------------|-------|
+| ESLint Validation | 105-SYSTEM-CODE-QUALITY | ✅ CI consistency hook | Evidence verification | Command documentation | Must match CI exactly |
+| TypeScript Checking | 105-SYSTEM-CODE-QUALITY | ✅ CI consistency hook | Evidence verification | Error documentation | Zero tolerance policy |
+| Validation Claims | 105-SYSTEM-CODE-QUALITY | ✅ Evidence requirement | Quality review | Anti-theater examples | No empty checkmarks |
+| Error Resolution | 105-SYSTEM-CODE-QUALITY | ✅ Investigation triggers | Agent consultation | RCCAFP framework | Systematic analysis |
+
 ## Session Progress Summary
 
 **Today's Implementations:**
@@ -79,7 +88,13 @@ Mechanisms that **guide** and **educate** about proper patterns
 - **Bridge Content Boundaries** - Prevent content duplication between bridge/build docs
 - **Cross-repo Link Integrity** - Migration-safe link validation
 
+**Code Quality Gaps (Recently Identified)**
+- **CI Command Discrepancy** - Agents using different commands than CI/CD
+- **Validation Theater** - Claims without evidence, false positive success reports
+- **Test-First Violations** - Implementation without tests first
+
 ## Next Phase Priorities
+- **Code Quality Enforcement Implementation** - Create hooks for CI consistency and evidence requirements
 - Bridge content boundary enforcement
 - Cross-repo link checking with migration safety
 - Structure compliance validation
@@ -97,6 +112,10 @@ Mechanisms that **guide** and **educate** about proper patterns
 ├── suggest-octave-compression.sh  # 103-DOC-OCTAVE ✅ Active
 ├── validate-links.sh              # 006-WORKFLOW-LINK ✅ Active
 ├── enforce-archive-headers.sh     # 102-DOC-ARCHIVAL ✅ Active
+├── enforce-ci-consistency.sh      # 105-SYSTEM-CODE-QUALITY 📋 Planned
+├── require-validation-evidence.sh # 105-SYSTEM-CODE-QUALITY 📋 Planned
+├── enforce-test-first.sh          # 105-SYSTEM-CODE-QUALITY 📋 Planned
+├── enforce-error-resolution.sh    # 105-SYSTEM-CODE-QUALITY 📋 Planned
 └── enforce-bridge-boundaries.sh   # 005-WORKFLOW-DIRECTORY 📋 Planned
 
 ~/.githooks/

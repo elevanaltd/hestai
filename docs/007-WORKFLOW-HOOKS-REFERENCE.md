@@ -1,0 +1,162 @@
+# Workflow Hooks Reference
+
+**Status:** Final  
+**Purpose:** Complete inventory of all validation hooks and enforcement mechanisms  
+**Scope:** All automated checks, gates, and validators across the HestAI system  
+**Authority:** Single source of truth for hook locations and implementation status
+
+## Hook Inventory
+
+### Active Hooks ✅
+
+| Hook Name                     | Location         | Purpose                                                        |
+|-------------------------------|------------------|----------------------------------------------------------------|
+| enforce-doc-naming.sh         | ~/.claude/hooks/ | Blocks files with invalid naming patterns AND deep nesting    |
+| suggest-octave-compression.sh | ~/.claude/hooks/ | Suggests OCTAVE compression for large, pattern-heavy files    |
+
+### Git Hooks (Global) ✅
+
+| Hook Name  | Location      | Purpose                                           |
+|------------|---------------|---------------------------------------------------|
+| pre-commit | ~/.githooks/  | Enforces test-first requirement for code creation |
+| commit-msg | ~/.githooks/  | Suggests review evidence in commit messages      |
+
+### Planned Hooks 📋
+
+| Hook Name                     | Location         | Purpose                                                       |
+|-------------------------------|------------------|---------------------------------------------------------------|
+| validate-links.sh             | ~/.claude/hooks/ | Validates relative links exist and cross-repo references      |
+| enforce-archive-headers.sh    | ~/.claude/hooks/ | Ensures archived files have required Status/Date/Path headers |
+| enforce-bridge-boundaries.sh  | ~/.claude/hooks/ | Prevents content duplication between bridge and build docs    |
+
+### Configuration Files
+
+| File                    | Location            | Purpose                                           |
+|-------------------------|---------------------|---------------------------------------------------|
+| settings.local.json     | ~/.claude/          | Claude Code hook configuration and triggers       |
+| .pre-commit-config.yaml | Repository root     | Pre-commit hook integration for CI/CD             |
+| validate_docs.py        | Repository scripts/ | Python validator for batch documentation checking |
+
+## Quick Commands
+
+### Test Individual Hooks
+```bash
+# Test filename and depth validation (combined)
+echo '{"tool_name": "Write", "tool_input": {"file_path": "/path/to/test-file.md"}}' | ~/.claude/hooks/enforce-doc-naming.sh
+
+# Test OCTAVE compression suggestion
+echo '{"tool_name": "Write", "tool_input": {"file_path": "/path/to/large-file.md"}}' | ~/.claude/hooks/suggest-octave-compression.sh
+
+# Test git hooks (in a git repository)
+git commit -m "test commit" --dry-run
+```
+
+### List All Hooks
+```bash
+# Show all hook files
+ls -la ~/.claude/hooks/
+
+# Show executable hooks only
+find ~/.claude/hooks/ -name "*.sh" -executable -type f
+```
+
+### Hook Status Check
+```bash
+# Check which hooks are configured in Claude
+cat ~/.claude/settings.local.json | grep -A 10 "hooks"
+
+# Test pre-commit hooks
+pre-commit run --all-files
+```
+
+## Integration Points
+
+### Claude Code Integration
+- **Pre-write hooks:** Block file creation with invalid patterns
+- **Pre-commit hooks:** Validate before git commits
+- **Advisory hooks:** Suggest improvements without blocking
+
+### Git Integration
+- **Pre-commit:** Run validation before commits
+- **Pre-push:** Check cross-repository links before push
+- **CI/CD:** Full validation suite on pull requests
+
+### Documentation Enforcement
+- **101-DOC-STRUCTURE:** Filename and directory validation
+- **102-DOC-ARCHIVAL:** Archive header requirements  
+- **006-WORKFLOW-LINK:** Link validation and cross-references
+- **005-WORKFLOW-DIRECTORY:** Bridge/build boundary enforcement
+
+## Implementation Status
+
+### Blocking Enforcement (Active)
+- ✅ **Filename patterns** - Invalid names cannot be created
+- ✅ **Directory depth** - Deep nesting blocked in docs/
+- ✅ **Test-first** - Code requires accompanying test file
+
+### Advisory Enforcement (Planned)
+- 📋 **Link validation** - Broken links detected and reported
+- 📋 **Archive headers** - Missing headers flagged for correction
+- 📋 **OCTAVE compression** - Large files suggested for compression
+
+### Boundary Enforcement (Planned)  
+- 📋 **Bridge boundaries** - Content duplication prevented
+- 📋 **Cross-repo links** - Migration-safe link validation
+
+## Hook Locations
+
+### User Configuration
+```
+~/.claude/
+├── settings.local.json     # Hook configuration
+└── hooks/
+    ├── enforce-doc-naming.sh      ✅ Active
+    ├── enforce-doc-depth.sh       ✅ Active  
+    ├── enforce-test-first.sh      ✅ Active
+    ├── validate-links.sh          📋 Planned
+    ├── enforce-archive-headers.sh 📋 Planned
+    ├── enforce-bridge-boundaries.sh 📋 Planned
+    └── suggest-octave-compression.sh 📋 Planned
+```
+
+### Repository Configuration
+```
+Repository/
+├── .pre-commit-config.yaml    # Pre-commit integration
+├── scripts/
+│   └── validate_docs.py       # Batch validation
+└── .github/workflows/
+    └── documentation.yml      # CI/CD validation
+```
+
+## Troubleshooting
+
+### Hook Not Running
+```bash
+# Check hook permissions
+ls -la ~/.claude/hooks/hook-name.sh
+
+# Make executable if needed
+chmod +x ~/.claude/hooks/hook-name.sh
+```
+
+### Hook Failing
+```bash
+# Run hook manually to see errors
+~/.claude/hooks/hook-name.sh "test-file.md"
+
+# Check Claude settings
+cat ~/.claude/settings.local.json
+```
+
+### Bypass Hook (Emergency)
+```bash
+# Temporarily disable specific hook (edit settings.local.json)
+# Or use git commit --no-verify for pre-commit bypass
+```
+
+---
+
+**Implementation Priority:** Active hooks provide core protection, planned hooks add quality enhancement  
+**Maintenance:** Review hook effectiveness quarterly, update based on violation patterns  
+**Documentation:** See 104-DOC-ENFORCEMENT-GATES.md for detailed implementation examples

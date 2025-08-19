@@ -17,7 +17,7 @@ Top-level directories (intent)
 Naming pattern
 - {CATEGORY}{NN}-{CONTEXT[-QUALIFIER]-NAME}.{EXT}
   - CATEGORY{NN}: 3-digit range taxonomy (first digit family; next two sequence)
-  - CONTEXT: DOC, SYSTEM, PROJECT, SCRIPT, AUTH, UI, RUNTIME, DATA, SEC, OPS, BUILD, REPORT
+  - CONTEXT: DOC, SYSTEM, PROJECT, WORKFLOW, SCRIPT, AUTH, UI, RUNTIME, DATA, SEC, OPS, BUILD, REPORT
   - QUALIFIER: optional (single token) only to disambiguate
   - NAME: UPPERCASE-WITH-HYPHENS (hyphens only)
   - EXT: md or oct.md (compressed canonical)

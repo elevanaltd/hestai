@@ -12,7 +12,10 @@
 | Hook Name                     | Location         | Purpose                                                        |
 |-------------------------------|------------------|----------------------------------------------------------------|
 | enforce-doc-naming.sh         | ~/.claude/hooks/ | Blocks files with invalid naming patterns AND deep nesting    |
+| enforce-context7-consultation.sh | ~/.claude/hooks/ | Blocks external imports without Context7 consultation evidence |
 | suggest-octave-compression.sh | ~/.claude/hooks/ | Suggests OCTAVE compression for large, pattern-heavy files    |
+| validate-links.sh             | ~/.claude/hooks/ | Validates relative links exist and cross-repo references      |
+| enforce-archive-headers.sh    | ~/.claude/hooks/ | Ensures archived files have required Status/Date/Path headers |
 
 ### Git Hooks (Global) ✅
 
@@ -25,8 +28,6 @@
 
 | Hook Name                     | Location         | Purpose                                                       |
 |-------------------------------|------------------|---------------------------------------------------------------|
-| validate-links.sh             | ~/.claude/hooks/ | Validates relative links exist and cross-repo references      |
-| enforce-archive-headers.sh    | ~/.claude/hooks/ | Ensures archived files have required Status/Date/Path headers |
 | enforce-bridge-boundaries.sh  | ~/.claude/hooks/ | Prevents content duplication between bridge and build docs    |
 
 ### Configuration Files
@@ -46,6 +47,15 @@ echo '{"tool_name": "Write", "tool_input": {"file_path": "/path/to/test-file.md"
 
 # Test OCTAVE compression suggestion
 echo '{"tool_name": "Write", "tool_input": {"file_path": "/path/to/large-file.md"}}' | ~/.claude/hooks/suggest-octave-compression.sh
+
+# Test Context7 consultation enforcement
+echo '{"tool_name": "Write", "tool_input": {"file_path": "/test/file.js", "content": "import lodash from \"lodash\""}}' | ~/.claude/hooks/enforce-context7-consultation.sh
+
+# Test link validation
+echo '{"tool_name": "Write", "tool_input": {"file_path": "/test/doc.md", "content": "[broken link](nonexistent.md)"}}' | ~/.claude/hooks/validate-links.sh
+
+# Test archive header enforcement
+echo '{"tool_name": "Write", "tool_input": {"file_path": "/test/_archive/old.md", "content": "No headers"}}' | ~/.claude/hooks/enforce-archive-headers.sh
 
 # Test git hooks (in a git repository)
 git commit -m "test commit" --dry-run
@@ -93,11 +103,12 @@ pre-commit run --all-files
 - ✅ **Filename patterns** - Invalid names cannot be created
 - ✅ **Directory depth** - Deep nesting blocked in docs/
 - ✅ **Test-first** - Code requires accompanying test file
+- ✅ **Context7 consultation** - External imports require consultation evidence
+- ✅ **Link validation** - Broken links detected and blocked
+- ✅ **Archive headers** - Missing headers blocked for archived files
 
-### Advisory Enforcement (Planned)
-- 📋 **Link validation** - Broken links detected and reported
-- 📋 **Archive headers** - Missing headers flagged for correction
-- 📋 **OCTAVE compression** - Large files suggested for compression
+### Advisory Enforcement (Active)
+- ✅ **OCTAVE compression** - Large files suggested for compression
 
 ### Boundary Enforcement (Planned)  
 - 📋 **Bridge boundaries** - Content duplication prevented
@@ -110,13 +121,12 @@ pre-commit run --all-files
 ~/.claude/
 ├── settings.local.json     # Hook configuration
 └── hooks/
-    ├── enforce-doc-naming.sh      ✅ Active
-    ├── enforce-doc-depth.sh       ✅ Active  
-    ├── enforce-test-first.sh      ✅ Active
-    ├── validate-links.sh          📋 Planned
-    ├── enforce-archive-headers.sh 📋 Planned
-    ├── enforce-bridge-boundaries.sh 📋 Planned
-    └── suggest-octave-compression.sh 📋 Planned
+    ├── enforce-doc-naming.sh         ✅ Active (includes depth checking)
+    ├── enforce-context7-consultation.sh ✅ Active  
+    ├── suggest-octave-compression.sh ✅ Active
+    ├── validate-links.sh             ✅ Active
+    ├── enforce-archive-headers.sh    ✅ Active
+    └── enforce-bridge-boundaries.sh  📋 Planned
 ```
 
 ### Repository Configuration

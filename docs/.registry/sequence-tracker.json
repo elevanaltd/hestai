@@ -28,7 +28,7 @@
   },
   "last_sequences": {
     "docs/standards": 106,
-    "docs/workflow": 6,
+    "docs/workflow": 8,
     "docs/security": 403,
     "docs/future-phases": 201,
     "reports": 802
@@ -63,7 +63,7 @@
   ],
   "next_available": {
     "docs/standards": 107,
-    "docs/workflow": 7,
+    "docs/workflow": 9,
     "docs/security": 404,
     "docs/future-phases": 202,
     "reports": 803
@@ -74,9 +74,9 @@
     "structural_reorganization": "Security documents moved to proper directory structure 2025-08-19"
   },
   "metadata": {
-    "last_updated": "2025-08-19T00:00:00Z",
+    "last_updated": "2025-08-20T00:00:00Z",
     "updated_by": "system-steward",
-    "version": "2.0",
-    "schema_changes": "Added range_definitions, governance_notes, and security reorganization tracking"
+    "version": "2.1",
+    "schema_changes": "Updated workflow sequence to reflect 008-WORKFLOW-WORKSPACE-COORDINATION-SETUP.md creation"
   }
 }

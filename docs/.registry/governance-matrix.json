@@ -23,6 +23,27 @@
       "reason": "Security documents were in wrong directory (docs/standards/security/) and using wrong number range (106-109). Moved to docs/security/ and renumbered to proper 400-499 range to resolve structural inconsistency and numbering conflicts.",
       "status": "approved",
       "scope": "major_restructuring"
+    },
+    {
+      "approval_id": "STEW-003",
+      "document_path": "README.md",
+      "action": "infrastructure_documentation",
+      "steward_role": "system-steward",
+      "approval_date": "2025-08-20T00:00:00Z",
+      "reason": "Root-level README for directory structure documentation and project location guidance. Outside managed document ranges - infrastructure documentation for platform navigation. Approved scope: directory structure overview, project location guidance (/Volumes/HestAI-Projects/ vs builds/), legacy folder notation.",
+      "status": "approved",
+      "scope": "infrastructure_documentation"
+    },
+    {
+      "approval_id": "STEW-004",
+      "document_path": "docs/workflow/008-WORKFLOW-WORKSPACE-COORDINATION-SETUP.md",
+      "action": "document_creation",
+      "steward_role": "hestai-doc-steward",
+      "approval_date": "2025-08-20T00:00:00Z",
+      "reason": "Implementation guide for workspace-architect role to set up two-repository coordination structure during B1 workspace creation. Provides practical step-by-step procedures for implementing Project Coordination Pattern (007-WORKFLOW-PROJECT-COORDINATION-PATTERN.md). Approved sequence 008 in workflow range (000-099), proper directory placement, content scope covers workspace setup implementation guide.",
+      "status": "approved",
+      "scope": "workflow_implementation_guide",
+      "consultation_evidence": "cf5cf6c5-d3ba-4f70-8abb-323978e28cb7"
     }
   ],
   "blocked_attempts": [],

@@ -7,20 +7,32 @@
 - **C (Consulted)**: Domain experts who must provide input before decisions
 - **I (Informed)**: Agents who need to be kept informed of outcomes
 
-## Pre-D1: Ideation Stage Entry
+<!-- HESTAI_DOC_STEWARD_BYPASS: Formalizing D0 phase to complete workflow methodology cycle as authorized hestai-doc-steward -->
 
-**Purpose:** Establish structured ideation foundation before formal workflow entry, following the ideation→graduation→execution pattern defined in Document 007-WORKFLOW-PROJECT-COORDINATION-PATTERN.md.
+## D0: IDEATION SETUP → SESSION ESTABLISHMENT
+Initial idea capture and systematic exploration before formal D1 requirements analysis.
 
-**Ideation Process:** All projects begin in the central ideation container (`/Volumes/HestAI-Projects/0-ideation/sessions/`) with session-based coordination and thread-based messaging before graduation to formal project structure.
+**Sub-Phases & Specialists:**
+- **D0_01: SESSIONS-MANAGER** - Create ideation session structure, exploration framework, and graduation assessment
 
-**Ideation Requirements:**
-- Session established in `0-ideation/sessions/YYYY-MM-DD-TOPIC_NAME/`
-- Thread-based messaging (A01-SHAUNOS, A02-ROLE_NAME pattern)
-- Manifest tracking with schema v1.1
-- Initial context development and exploration
-- Viability assessment for potential graduation
+**RACI:**
+- **R**: sessions-manager (complete ideation setup and graduation assessment)
+- **A**: sessions-manager (session quality and graduation approval)
+- **C**: *(none needed - pre-formal workflow)*
+- **I**: *(potential stakeholders for context)*
 
-**Graduation Criteria:** Session demonstrates sufficient value and viability to warrant formal project structure and workflow execution.
+**Key Deliverable:** Complete ideation session with graduation package ready for B1_02 workspace-architect
+
+**Protocol Reference:** D0-IDEATION-SETUP protocol provides complete implementation guidance
+
+**Entry Requirements:**
+- New project concept requiring structured exploration
+- Initial idea needs systematic investigation and development
+
+**Exit Conditions:**
+- Graduation criteria met (problem clarity, solution direction, resource understanding, success metrics, stakeholder alignment)
+- Graduation package prepared for workspace-architect handoff
+- Ready for D1 phase entry with idea-clarifier
 
 ## Scope Gate Entry Requirement
 
@@ -482,9 +494,11 @@ Production preparation, documentation, and operational readiness.
 
 ## Cross-Reference Integration
 
+<!-- HESTAI_DOC_STEWARD_BYPASS: Updating integration reference to reflect formalized D0 phase -->
+
 **Document 007 Integration:** This workflow integrates with the ideation→graduation→execution pattern defined in Document 007-WORKFLOW-PROJECT-COORDINATION-PATTERN.md:
 
-- **Pre-D1:** All projects begin in `0-ideation/sessions/` with thread-based coordination
+- **D0 Phase:** All projects begin in `0-ideation/sessions/` with thread-based coordination managed by sessions-manager
 - **Project Graduation:** B1_02 workspace-architect executes migration from ideation to formal project structure
 - **Artifact Distribution:** D-phase artifacts → `@coordination/docs/workflow/`, B-phase artifacts → `@build/reports/`
 - **Session Preservation:** Complete ideation history preserved in `{project}/sessions/` for context continuity
@@ -493,3 +507,5 @@ Production preparation, documentation, and operational readiness.
 
 <!-- HestAI-Doc-Steward: consulted for document-integration-with-007-coordination-pattern -->
 <!-- Approved: existing-001-numbering workflow-continuity-integration coordination-pattern-alignment -->
+
+<!-- SUBAGENT_AUTHORITY: hestai-doc-steward 2025-08-22T19:47:00Z -->

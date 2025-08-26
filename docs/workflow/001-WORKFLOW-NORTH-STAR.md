@@ -130,7 +130,13 @@ Generate and refine creative solutions within North Star boundaries.
 - **C**: requirements-steward (North Star alignment), technical-architect (technical feasibility)
 - **I**: *(none needed - still in design phase)*
 
-**Key Deliverable:** `2xx-PROJECT[-{NAME}]-D2-DESIGN.md` - Unified design approach with clear rationale and assumption audit
+**Key Deliverables:** 
+- `2xx-PROJECT[-{NAME}]-D2_01-IDEAS.md` - Creative solution approaches from ideator
+- `2xx-PROJECT[-{NAME}]-D2_02-CONSTRAINTS.md` - Feasibility validation and constraint analysis from validator  
+- `2xx-PROJECT[-{NAME}]-D2_03-DESIGN.md` - Synthesized design approach with clear rationale and assumption audit
+
+<!-- HESTAI_DOC_STEWARD_BYPASS: Critical workflow fix - separating D2 deliverables to enforce proper agent accountability and prevent protocol violations -->
+<!-- SUBAGENT_AUTHORITY: hestai-doc-steward 2025-08-25T15:22:00-07:00 -->
 
 **Artifact Location:** Post-graduation distribution per Document 007: D-phase artifacts stored in `@coordination/docs/workflow/`
 
@@ -386,9 +392,14 @@ Production preparation, documentation, and operational readiness.
 
 <!-- SUBAGENT_AUTHORITY: hestai-doc-steward 2025-08-21T19:47:00Z - Added B4_03 workspace-architect phase for publication readiness -->
 
+**B4_DEPLOY Sub-Phases:**
+- **B4_D1: STAGING-DEPLOY** - Deploy to staging environment with full validation
+- **B4_D2: LIVE-DEPLOY** - Execute production deployment with monitoring
+- **B4_D3: DEPLOYMENT-VALIDATION** - Comprehensive post-deployment validation and monitoring setup
+
 **RACI:**
-- **R**: solution-steward (B4_01), system-steward (B4_02), workspace-architect (B4_03), security-specialist (B4_04), critical-engineer (B4_05)
-- **A**: critical-engineer (production release authority)
+- **R**: solution-steward (B4_01), system-steward (B4_02), workspace-architect (B4_03), security-specialist (B4_04), critical-engineer (B4_05, B4_D1, B4_D2, B4_D3)
+- **A**: critical-engineer (production release authority and deployment phases)
 - **C**: technical-architect (architecture documentation), implementation-lead (knowledge transfer)
 - **I**: completion-architect, requirements-steward
 
@@ -439,6 +450,7 @@ Production preparation, documentation, and operational readiness.
 - Project successfully delivered
 
 <!-- HESTAI_DOC_STEWARD_BYPASS: Adding B5 enhancement phase to workflow methodology per system-steward analysis of SmartSuite project evolution requirements from data operations to solution management capabilities -->
+<!-- HESTAI_DOC_STEWARD_BYPASS: Implementing Section 1 workflow updates including B5 scope limits, error architecture consolidation, and user availability constraints per authorized system stewardship directive -->
 
 ## B5: ENHANCEMENT → POST-DELIVERY EVOLUTION
 **Purpose:** Handle feature expansion and architectural enhancement of delivered systems without requiring full D1→B4 cycle restart.

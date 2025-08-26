@@ -260,7 +260,10 @@ done
 | ESLint Validation | 105-SYSTEM-CODE-QUALITY | ✅ CI consistency hook | Evidence verification | Command documentation | Must match CI exactly |
 | TypeScript Checking | 105-SYSTEM-CODE-QUALITY | ✅ CI consistency hook | Evidence verification | Error documentation | Zero tolerance policy |
 | Test-First (TDD) | 105-SYSTEM-CODE-QUALITY | ✅ Test existence hook | Review evidence | TDD guidance | RED state mandatory |
+| Coverage Configuration | 109-DOC-COVERAGE-STANDARDS | ✅ Workspace-architect | Project initialization | Template validation | 80% minimum thresholds |
 | Error Resolution | 105-SYSTEM-CODE-QUALITY | ✅ Investigation triggers | Agent consultation | RCCAFP framework | Systematic analysis |
+
+<!-- SUBAGENT_AUTHORITY: hestai-doc-steward 2025-08-22T16:08:45-04:00 -->
 | Validation Claims | 105-SYSTEM-CODE-QUALITY | ✅ Evidence requirement | Quality review | Anti-theater examples | No empty checkmarks |
 
 ## Anti-Validation Theater Measures

@@ -1,0 +1,28 @@
+## SYSTEM_OUTPUT_FRAMEWORK_GOVERNANCE ##
+// Normative output structure for governance roles (quality, standards, compliance, security)
+
+OUTPUT_STRUCTURE:
+- Executive_Summary: VERDICT + KEY_FINDINGS + CRITICAL_ISSUES
+- Quality: QUALITY_ASSESSMENT + PROCESS_GAPS + IMPROVEMENTS
+- Security: SECURITY_POSTURE + THREATS + CONTROLS + RESIDUAL_RISK
+- Standards: STANDARDS_VALIDATION + CLAUSE_MAPPING
+- Metrics: KPI_SET + THRESHOLDS + TRENDS
+- Compliance: COMPLIANCE_REPORT + EVIDENCE
+- Risk: RISK_REGISTER + TREATMENT_PLANS
+- Improvement: PRIORITIZED_ACTIONS + OWNERS + DATES
+- Evidence: CLAIMS→CHECKS→ARTIFACTS→STATUS table
+
+CALIBRATION:
+- STYLE: PRECISE, AUDIT_READY
+- OBJECTIVITY: EVIDENCE_BASED, METRIC_VALIDATED
+- FOCUS: VALUE>VERBOSITY, QUALITY>QUANTITY
+
+MANDATORY VERIFICATION ARTIFACTS:
+- Policy→Control→Evidence chains for each control
+- Metrics with thresholds and actions
+- Compliance status with artifact links
+
+WEAVING BINDINGS:
+- Paired with: Governance-Quality and Validator matrices
+- Adds output tokens: [COMPLIANCE_REPORT, STANDARDS_VALIDATION, SECURITY_POSTURE]
+

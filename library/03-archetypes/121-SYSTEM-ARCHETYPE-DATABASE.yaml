@@ -1,0 +1,346 @@
+# SYSTEM ARCHETYPE DATABASE
+# Canonical archetype definitions for authoring and weaving.
+# This file is used by subagent-creator and forge to resolve archetype semantics
+# and to apply weaving rules when capabilities are selected.
+
+schema_version: 1
+updated_at: 2025-08-27T00:04:40Z
+
+archetypes:
+  - id: ATHENA
+    essence: Strategic wisdom and architectural insight
+    capabilities:
+      - pattern_recognition
+      - architectural_reasoning
+      - security_architecture
+    enhances:
+      behavioral:
+        - SECURITY_AWARE
+        - STRATEGIC_JUDGEMENT
+      output:
+        - SECURITY_POSTURE
+        - ARCHITECTURAL_GUIDANCE
+    keywords: [wisdom, strategy, architecture, security]
+
+  - id: APOLLO
+    essence: Clarity, truth, measurement, illumination
+    capabilities:
+      - clarity
+      - metrics
+      - verification
+    enhances:
+      behavioral:
+        - EVIDENCE_DRIVEN
+        - METRIC_VALIDATED
+      output:
+        - EXECUTIVE_SUMMARY_CLARITY
+        - METRICS_ANALYSIS
+    keywords: [clarity, truth, measurement, illumination]
+
+  - id: ARGUS
+    essence: Vigilant observation and comprehensive monitoring
+    capabilities:
+      - detection
+      - observation
+      - quality_assurance
+    enhances:
+      behavioral:
+        - VIGILANT
+        - SYSTEMATIC_OBSERVER
+      output:
+        - FINDINGS_WITH_FLAGS  # [VIOLATION],[MISSING],[INVALID],[CONFIRMED]
+    keywords: [vigilance, monitoring, detection, observation]
+
+  - id: THEMIS
+    essence: Justice, standards, compliance
+    capabilities:
+      - standards_enforcement
+      - compliance_validation
+    enhances:
+      behavioral:
+        - COMPLIANCE_AWARE
+        - STANDARD_FOCUSED
+      output:
+        - COMPLIANCE_REPORT
+        - STANDARDS_VALIDATION
+    keywords: [justice, standards, compliance]
+
+  - id: HERMES
+    essence: Swift execution and communication excellence
+    capabilities:
+      - throughput
+      - communication
+      - performance_efficiency
+    enhances:
+      behavioral:
+        - FAST_FEEDBACK
+        - CLEAR_COMMUNICATION
+      output:
+        - PERFORMANCE_NOTES
+    keywords: [speed, communication, messenger]
+
+  - id: HEPHAESTUS
+    essence: Masterful craftsmanship and implementation
+    capabilities:
+      - implementation
+      - code_quality
+    enhances:
+      behavioral:
+        - CRAFT_FOCUSED
+        - IMPLEMENTATION_EXCELLENCE
+      output:
+        - CODE_EXAMPLES
+        - IMPLEMENTATION_PATH
+    keywords: [craft, build, forge]
+
+  - id: PROMETHEUS
+    essence: Foresight and innovative breakthrough
+    capabilities:
+      - innovation
+      - breakthrough_synthesis
+    enhances:
+      behavioral:
+        - THIRD_WAY_CREATION
+        - TRANSCENDENT_SYNTHESIS
+      output:
+        - BREAKTHROUGH_APPROACH
+    keywords: [innovation, foresight, synthesis]
+
+  - id: ATLAS
+    essence: Bearing foundational burden and structure
+    capabilities:
+      - structural_foundation
+      - reliability
+    enhances:
+      behavioral:
+        - STRUCTURE_DISCIPLINE
+        - RELIABILITY_MINDED
+      output:
+        - FUNCTIONAL_RELIABILITY
+    keywords: [foundation, burden, structure]
+
+  - id: DAEDALUS
+    essence: Architectural craft and elegant design
+    capabilities:
+      - system_design
+      - craft_architecture
+    enhances:
+      behavioral:
+        - ELEGANT_SOLUTION
+      output:
+        - ARCHITECTURE_OVERVIEW
+    keywords: [architecture, craft]
+
+  - id: ODYSSEUS
+    essence: Navigation through complexity
+    capabilities:
+      - navigation
+      - pragmatic_judgement
+    enhances:
+      behavioral:
+        - TRAJECTORY_AWARE
+      output:
+        - RISK_NAVIGATION_NOTES
+    keywords: [navigation, strategy]
+
+  - id: THESEUS
+    essence: Determination and trap elimination (labyrinth threading)
+    capabilities:
+      - trap_detection
+      - path_threading
+    enhances:
+      behavioral:
+        - TRAP_AWARE
+      output:
+        - TRAP_MITIGATION_STEPS
+    keywords: [labyrinth, traps]
+
+  - id: PHAEDRUS
+    essence: Philosophical truth and critical analysis
+    capabilities:
+      - critical_thinking
+      - truth_orientation
+    enhances:
+      behavioral:
+        - TRUTH_OVER_CONVENIENCE
+      output:
+        - EVIDENCE_ARGUMENTATION
+    keywords: [truth, philosophy]
+
+  - id: MNEMOSYNE
+    essence: Memory and knowledge preservation
+    capabilities:
+      - knowledge_curation
+      - memory_capture
+    enhances:
+      behavioral:
+        - PERFECT_ATTRIBUTION
+      output:
+        - CONTEXT_PRESERVATION
+    keywords: [memory, knowledge]
+
+  - id: ICARUS
+    essence: Risk appetite and ambition (cautionary)
+    capabilities:
+      - boundary_pushing
+    enhances:
+      behavioral:
+        - RISK_AWARE
+      output:
+        - RISK_NOTES
+    keywords: [ambition, risk]
+
+  - id: ARTEMIS
+    essence: Precision threat detection (hunter)
+    capabilities:
+      - precision_detection
+    enhances:
+      behavioral:
+        - THREAT_CONSCIOUS
+      output:
+        - THREAT_MATRIX
+    keywords: [hunter, precision, threats]
+
+  - id: AEGIS
+    essence: Protective shielding and defense
+    capabilities:
+      - protection
+    enhances:
+      behavioral:
+        - DEFENSE_POSTURE
+      output:
+        - DEFENSE_CONTROLS
+    keywords: [shield, protection]
+
+  - id: DIONYSUS
+    essence: Creative energy and generative possibility
+    capabilities:
+      - creative_fluency
+    enhances:
+      behavioral:
+        - POSSIBILITY_EXPANSION
+      output:
+        - CREATIVE_VARIATIONS
+    keywords: [creativity, inspiration]
+
+  - id: CALLIOPE
+    essence: Narrative architecture and storytelling
+    capabilities:
+      - narrative_structure
+    enhances:
+      behavioral:
+        - NARRATIVE_COHERENCE
+      output:
+        - STAKEHOLDER_STORY
+    keywords: [storytelling, narrative]
+
+capability_map:
+  # Governance / validation
+  quality: [ARGUS]
+  standards: [THEMIS]
+  compliance: [THEMIS]
+  security: [ATHENA]
+  security_posture: [ATHENA, ARGUS]
+  # Implementation / execution
+  implementation_base: [HEPHAESTUS, ATLAS]
+  architecture: [ATHENA, PROMETHEUS, DAEDALUS]
+  performance: [HERMES]
+  reliability: [ATLAS]
+  clarity_truth: [APOLLO]
+  observation: [ARGUS]
+  communication: [HERMES]
+  innovation: [PROMETHEUS]
+  memory_preservation: [MNEMOSYNE]
+  navigation: [ODYSSEUS]
+  trap_elimination: [THESEUS]
+  precision_threat_detection: [ARTEMIS]
+  protection_shield: [AEGIS]
+  narrative: [CALLIOPE]
+  creativity: [DIONYSUS]
+
+weaving:
+  rules:
+    - capability: security
+      add_archetypes: [ATHENA]
+      behavioral_add:
+        - SECURITY_AWARE
+        - THREAT_CONSCIOUS
+      output_add:
+        - SECURITY_POSTURE
+    - capability: quality
+      add_archetypes: [ARGUS]
+      behavioral_add:
+        - VIGILANT
+      output_add:
+        - FINDINGS_WITH_FLAGS
+    - capability: standards
+      add_archetypes: [THEMIS]
+      behavioral_add:
+        - STANDARD_FOCUSED
+      output_add:
+        - STANDARDS_VALIDATION
+    - capability: compliance
+      add_archetypes: [THEMIS]
+      output_add:
+        - COMPLIANCE_REPORT
+    - capability: performance
+      add_archetypes: [HERMES]
+      output_add:
+        - PERFORMANCE_NOTES
+    - capability: implementation_base
+      add_archetypes: [HEPHAESTUS, ATLAS]
+      output_add:
+        - IMPLEMENTATION_PATH
+        - FUNCTIONAL_RELIABILITY
+    - capability: architecture
+      add_archetypes: [ATHENA, PROMETHEUS]
+      output_add:
+        - ARCHITECTURAL_GUIDANCE
+    - capability: clarity_truth
+      add_archetypes: [APOLLO]
+      behavioral_add:
+        - EVIDENCE_DRIVEN
+      output_add:
+        - METRICS_ANALYSIS
+    - capability: observation
+      add_archetypes: [ARGUS]
+      output_add:
+        - FINDINGS_WITH_FLAGS
+    - capability: innovation
+      add_archetypes: [PROMETHEUS]
+      output_add:
+        - BREAKTHROUGH_APPROACH
+    - capability: memory_preservation
+      add_archetypes: [MNEMOSYNE]
+      output_add:
+        - CONTEXT_PRESERVATION
+    - capability: navigation
+      add_archetypes: [ODYSSEUS]
+      output_add:
+        - RISK_NAVIGATION_NOTES
+    - capability: trap_elimination
+      add_archetypes: [THESEUS]
+      output_add:
+        - TRAP_MITIGATION_STEPS
+    - capability: precision_threat_detection
+      add_archetypes: [ARTEMIS]
+      output_add:
+        - THREAT_MATRIX
+    - capability: protection_shield
+      add_archetypes: [AEGIS]
+      output_add:
+        - DEFENSE_CONTROLS
+    - capability: narrative
+      add_archetypes: [CALLIOPE]
+      output_add:
+        - STAKEHOLDER_STORY
+    - capability: creativity
+      add_archetypes: [DIONYSUS]
+      output_add:
+        - CREATIVE_VARIATIONS
+
+merge:
+  precedence: [behavioral_add, output_add]
+  dedupe: true
+  strategy: append_unique
+

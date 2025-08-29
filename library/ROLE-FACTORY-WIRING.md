@@ -4,10 +4,10 @@ PURPOSE:
 - Provide canonical import snippets so subagent-creator/forge can resolve capabilities, outputs, and enhancements via aliases.
 
 ALIASES TO USE IN ROLE DEFINITIONS:
-- Cognitions:
-  - lib://cognitions/logos
-  - lib://cognitions/ethos
-  - lib://cognitions/pathos
+- Cognitions (preferred singular; plural kept for compatibility):
+  - lib://cognition/logos  (alias: lib://cognitions/logos)
+  - lib://cognition/ethos  (alias: lib://cognitions/ethos)
+  - lib://cognition/pathos (alias: lib://cognitions/pathos)
 - Archetypes:
   - lib://archetypes/db
   - lib://archetypes/weaving

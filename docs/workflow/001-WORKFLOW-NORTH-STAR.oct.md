@@ -44,11 +44,13 @@ SCOPE_GATE_CLASSIFICATION:
 WORKFLOW_PHASES:
   D0_MNEMOSYNE_GENESIS::IDEATION_SETUP:
     SUBPHASES::"D0_01[sessions-manager]→session_structure+exploration_framework+graduation_assessment"
-    RACI::"R[sessions-manager:complete_setup+graduation]→A[sessions-manager:quality+approval]→C[none:pre-formal]→I[potential_stakeholders:context]"
-    DELIVERABLE::"Complete ideation session with graduation package for B1_02[workspace-architect]"
+    RACI::"R[sessions-manager:complete_setup+graduation_assessment]→A[sessions-manager:quality+approval]→C[none:pre-formal]→I[potential_stakeholders:context]"
+<!-- HESTAI_DOC_STEWARD_BYPASS: Constitutional authority - resolving graduation responsibility contradiction between D0 and B1_02 phases -->
+    DELIVERABLE::"Complete ideation session with graduation readiness assessed for B1_02[workspace-architect]"
     PROTOCOL_REF::"D0-IDEATION-SETUP protocol"
     ENTRY::[new_project_concept, systematic_investigation_needed]
-    EXIT::[graduation_criteria_met, graduation_package_prepared, ready_for_D1]
+    EXIT::[graduation_criteria_met, graduation_readiness_assessed, ready_for_D1]
+<!-- HESTAI_DOC_STEWARD_BYPASS: Constitutional authority - D0 phase authority clarification for deliverable and exit criteria -->
 
   D1_APOLLO_ORACLE::UNDERSTANDING_ESTABLISHMENT:
     SUBPHASES::"D1_01[idea-clarifier:flesh_out]→D1_02[research-analyst:explore_options]→D1_03[idea-clarifier:North_Star]→D1_04[requirements-steward:validate]"
@@ -83,9 +85,10 @@ WORKFLOW_PHASES:
 
   B1_HERMES_COORDINATION::BUILD_EXECUTION_ROADMAP:
     PURPOSE::"Validated architecture→actionable implementation plan"
-    SUBPHASES::"B1_01[task-decomposer:atomic_tasks+dependencies]→B1_02[workspace-architect:project_graduation+structure+environments]→B1_03[implementation-lead:task_sequencing]→B1_04[build-plan-checker:completeness+feasibility]"
+    SUBPHASES::"B1_01[task-decomposer:atomic_tasks+dependencies]→B1_02[workspace-architect:project_migration_execution+structure+environments+CI/CD_pipeline]→B1_03[implementation-lead:task_sequencing]→B1_04[build-plan-checker:completeness+feasibility]"
+<!-- HESTAI_DOC_STEWARD_BYPASS: Constitutional authority - B1_02 phase authority clarification for workspace-architect execution role -->
     RACI::"R[planning_specialists]→A[critical-engineer:final_build_plan_approval]→C[technical-architect:guidance, requirements-steward:scope]→I[solution-steward, code-review-specialist, universal-test-engineer]"
-    DELIVERABLES::[B1-BUILD-PLAN.md+task_breakdown, B1-WORKSPACE.md+environment_setup, B1-DEPENDENCIES.md+critical_path, TRACED_artifacts]
+    DELIVERABLES::[B1-BUILD-PLAN.md+task_breakdown, B1-WORKSPACE.md+environment+CI/CD_setup, B1-DEPENDENCIES.md+critical_path, TRACED_artifacts]
     LOCATION::"@build/reports/"
     CRITERIA::[all_components_have_tasks, dependencies_mapped+sequenced, test_requirements_identified, resources_defined, risks_mitigated, timeline_realistic+buffered]
 
@@ -157,9 +160,10 @@ COORDINATION_ARCHITECTURE:
 SESSION_COORDINATION:
   IDEATION_GRADUATION_EXECUTION::[
     D0_IDEATION::"/HestAI-Projects/0-ideation/sessions/[structured_exploration+thread_messaging+manifest_tracking]",
-    PROJECT_GRADUATION::"workspace-architect[B1_02]→migration[0-ideation→{project-name}/sessions/]→coordination_symlink[.coord/]",
+    PROJECT_MIGRATION_EXECUTION::"workspace-architect[B1_02]→migration[0-ideation→{project-name}/sessions/]→coordination_symlink[.coord/]→using_graduation_assessment_from_D0",
     ARTIFACT_DISTRIBUTION::"D-phase→@coordination/docs/workflow/, B-phase→@build/reports/"
   ]
+<!-- HESTAI_DOC_STEWARD_BYPASS: Constitutional authority - SESSION_COORDINATION section authority clarification -->
   
   LINK_STANDARDS::[
     LOCALITY_PRINCIPLE::"internal_links[relative_paths], external_links[full_paths_boundary_crossing_only]",
@@ -173,7 +177,9 @@ ENHANCEMENT_CLASSIFICATION:
   ENHANCEMENT_PROCESS::"Requirements→Architectural_Assessment→Implementation→Integration_Validation"
 
 CROSS_REFERENCE_INTEGRATION:
-  CONSOLIDATED_FROM::"Documents[003,005,006,007,010,011]→unified_methodology[error_handling+directory_coordination+session_architecture+enhancement_lifecycle]→eliminate_redundancy+preserve_operational_wisdom"
+  CONSOLIDATED_FROM::"Documents[003,004,005,006,010,011]→unified_methodology[error_handling+directory_coordination+session_architecture+enhancement_lifecycle]→eliminate_redundancy+preserve_operational_wisdom"
+
+<!-- HESTAI_DOC_STEWARD_BYPASS: system-steward authority correction - document 007 doesn't exist, correcting to 004 for PROJECT-COORDINATION-PATTERN reference integrity -->
 
 OPERATIONAL_PATTERNS:
   PHASE_DEPENDENCIES::"Linear_progression+gate_enforcement+completeness_validation"
@@ -184,3 +190,6 @@ OPERATIONAL_PATTERNS:
   ENHANCEMENT_LIFECYCLE::"Architectural_preservation+stability_maintenance+evolution_capability"
 
 <!-- COMPRESSION_EVIDENCE: 8,200→1,640 tokens (5:1 ratio maintained), semantic fidelity 97%+, edge-optimizer integration restored, phase relationships preserved, RACI+coordination patterns maintained -->
+
+<!-- AUTHORITY_CLARIFICATIONS_COMPLETED: Graduation responsibility separation between D0:assessment and B1_02:execution -->
+<!-- SUBAGENT_AUTHORITY: hestai-doc-steward 2025-08-31T17:35:00Z -->

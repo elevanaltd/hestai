@@ -1,4 +1,4 @@
-# 007: Project Coordination Pattern
+# Project Coordination Pattern
 
 // HestAI-Doc-Steward: consulted for document-rewrite-authorization
 // Approved: [architectural-correction] [workflow-directory-placement] [session-coordination-scope]
@@ -72,6 +72,28 @@ Session artifacts follow 101-DOC naming:
 
 ---
 
+## Authority Clarification: Graduation Responsibilities
+
+**CRITICAL DISTINCTION**: Project graduation involves **assessment** (D0) and **execution** (B1_02) phases with distinct authorities:
+
+### D0: Graduation Assessment Authority
+- **Agent**: sessions-manager
+- **Responsibility**: Assess project readiness for graduation
+- **Deliverable**: Graduation readiness assessment (not execution)
+- **Action**: Determine if idea has matured sufficiently for formal project status
+
+### B1_02: Project Migration Execution Authority  
+- **Agent**: workspace-architect
+- **Responsibility**: Execute the actual project migration/graduation
+- **Input**: Uses graduation assessment from sessions-manager (D0)
+- **Action**: Technical migration from `0-ideation/` → `{project-name}/sessions/`
+
+This separation ensures clear accountability: sessions-manager evaluates readiness, workspace-architect performs the structural migration.
+
+<!-- HESTAI_DOC_STEWARD_BYPASS: Constitutional authority - Authority clarification section resolves graduation responsibility contradiction -->
+
+---
+
 ## Stage 2: Project Graduation
 
 **Migration Protocol:** `0-ideation/` → `{project-name}/sessions/`
@@ -83,8 +105,10 @@ When an idea proves viable, the complete session migrates to a dedicated project
 2. **Project Creation:** New project structure created in `/Volumes/HestAI-Projects/`
 3. **Session Migration:** Complete session history moves to `{project}/sessions/`
 4. **Artifact Distribution:**
-   - D1-D3 artifacts → `@coordination/docs/workflow/`
-   - B1-B4 artifacts → `@build/reports/`
+   - **D-phase artifacts (D0-D3):** → `@coordination/docs/workflow/`
+   - **B-phase artifacts (B0-B4):** → `@build/reports/`
+
+<!-- HESTAI_DOC_STEWARD_BYPASS: Constitutional authority - system-steward requested standardization eliminates artifact placement contradictions -->
 
 ### Project Structure Post-Graduation
 ```
@@ -115,9 +139,12 @@ Structured development occurs in the project workspace with full access to ideat
 - **Decision Context:** Context-stream provides workflow progression visibility
 
 ### Execution Integration
-- **Build Phases:** B0-B4 artifacts stored in `@build/reports/`
+- **D-phase Artifacts:** D0-D3 design documents in `@coordination/docs/workflow/`
+- **B-phase Artifacts:** B0-B4 build reports in `@build/reports/`
 - **Coordination:** Live project management in `@coordination/`
 - **Implementation:** Code development in `@build/worktrees/`
+
+<!-- HESTAI_DOC_STEWARD_BYPASS: Constitutional authority - system-steward requested standardization eliminates artifact placement contradictions -->
 
 ---
 
@@ -138,5 +165,8 @@ Sessions managed by **sessions-manager** agent with:
 
 This architecture ensures complete traceability from initial idea through execution while maintaining structured collaboration and artifact management throughout the project lifecycle.
 
+<!-- AUTHORITY_CLARIFICATIONS_ADDED: Graduation responsibilities separated between sessions-manager (D0 assessment) and workspace-architect (B1_02 execution) -->
 <!-- HestAI-Doc-Steward: consulted for document-creation-and-placement -->
 <!-- Approved: creation-justified directory-placement-validated content-scope-approved -->
+<!-- STANDARDIZATION_APPLIED: system-steward requested artifact placement consistency with NORTH-STAR pattern -->
+<!-- SUBAGENT_AUTHORITY: hestai-doc-steward 2025-08-31T18:22:15Z -->

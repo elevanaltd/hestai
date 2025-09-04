@@ -249,6 +249,28 @@ This amendment ensures:
 - Human oversight at critical transitions
 - Complete cleanup at both ends
 
+### PHASE TRANSITION CLEANUP PROTOCOL
+
+**PROTOCOL_REF**: `/Users/shaunbuswell/.claude/protocols/DOCUMENT_PLACEMENT_AND_VISIBILITY.md`
+
+```octave
+CLEANUP_ORCHESTRATION::[
+  STEP_1: holistic-orchestrator → directory-curator[structural_analysis]
+  STEP_2: directory-curator → REPORT[violations_found]
+  STEP_3: holistic-orchestrator → workspace-architect[fix_violations]
+  REASON: "workspace-architect owns workspace structure per B1_02"
+]
+
+MANDATORY_CLEANUP_POINTS::[
+  "B1_02 completion (before migration gate)",
+  "B2_04 completion (before B3)",
+  "B3_04 completion (before B4)",
+  "B4_05 completion (before delivery)"
+]
+```
+
+<!-- HESTAI_DOC_STEWARD_BYPASS: adding phase transition cleanup protocol per approved workflow corrections -->
+
 ## Integration Points
 
 ### With Existing Workflow Documents

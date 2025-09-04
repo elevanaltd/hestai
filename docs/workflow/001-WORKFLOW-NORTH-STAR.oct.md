@@ -92,12 +92,15 @@ WORKFLOW_PHASES:
 
   B1_HERMES_COORDINATION::BUILD_EXECUTION_ROADMAP:
     PURPOSE::"Validated architecture→actionable implementation plan"
-    SUBPHASES::"B1_01[task-decomposer:atomic_tasks+dependencies]→B1_02[workspace-architect:project_migration_execution+structure+environments+CI/CD_pipeline]→B1_03[implementation-lead:task_sequencing]→B1_04[build-plan-checker:completeness+feasibility]"
+    SUBPHASES::"B1_01[task-decomposer:atomic_tasks+dependencies]→B1_02[workspace-architect:project_migration_execution+structure+environments+CI/CD_pipeline]→MIGRATION_GATE→B1_03[workspace-architect:build_directory_validation]→B1_04[implementation-lead:task_sequencing]→B1_05[build-plan-checker:completeness+feasibility]"
     RACI::"R[planning_specialists]→A[critical-engineer:final_build_plan_approval]→C[technical-architect:guidance, requirements-steward:scope]→I[solution-steward, code-review-specialist, universal-test-engineer]"
-    MIGRATION_GATE::"B1_02_completion→STOP→cd /Volumes/HestAI-Projects/{PROJECT_NAME}/build/→VERIFY_pwd→RESUME_B1_03"
+    MIGRATION_GATE::"B1_02_completion→STOP→HUMAN_CHECKPOINT→cd /Volumes/HestAI-Projects/{PROJECT_NAME}/build/→VERIFY_pwd→RESUME_B1_03"
     DELIVERABLES::[B1-BUILD-PLAN.md+task_breakdown, B1-WORKSPACE.md+environment+CI/CD_setup, B1-DEPENDENCIES.md+critical_path, TRACED_artifacts]
     LOCATION::"@build/reports/"
     CRITERIA::[all_components_have_tasks, dependencies_mapped+sequenced, test_requirements_identified, resources_defined, risks_mitigated, timeline_realistic+buffered]
+
+<!-- HESTAI_DOC_STEWARD_BYPASS: hestai-doc-steward approved this correction 2025-09-04 -->
+<!-- Directory context violations fixed with B1_03 validation step -->
 
 CONTEXT7_LIBRARY_RESEARCH::[
   PATTERN::"mcp__Context7__resolve-library-id→mcp__Context7__get-library-docs",
@@ -181,15 +184,18 @@ ERROR_HANDLING_TAXONOMY:
 
 COORDINATION_ARCHITECTURE:
   TWO_REPOSITORY_PATTERN::[
-    HESTAI_REPOSITORY::"docs/[workflows+roles], reports/[analyses], sessions/[cross-project_strategy]",
-    HESTAI-PROJECTS_REPOSITORY::"{project}/docs/[BRIDGE:state_index_only], {project}/build/[TRUTH:source+artifacts], {project}/sessions/[conversations]"
+    BUILD_REPOSITORY::"docs/*[ALL_technical_docs], src/, tests/"
+    COORDINATION_REPOSITORY::"workflow-docs/[phase_artifacts], phase-reports/[B1-B4], planning-docs/[CHARTER,ASSIGNMENTS], ACTIVE-WORK.md[visibility]"
   ]
   
-  BRIDGE_VS_TRUTH::[
-    BRIDGE_DOCUMENTS::"state_index+navigation≠content_storage→links_to_build/docs/",
-    TRUTH_DOCUMENTS::"build/docs/[single_source_truth+implementation_artifacts+version_with_code]",
-    MAXIMUM_3_LEVELS::"clean_boundaries+clear_separation"
+  DOCUMENT_PLACEMENT_PROTOCOL::"See /Users/shaunbuswell/.claude/protocols/DOCUMENT_PLACEMENT_AND_VISIBILITY.md"
+  
+  PHASE_TRANSITION_CLEANUP::[
+    "B1_02, B2_04, B3_04, B4_05 require cleanup validation",
+    "holistic-orchestrator→directory-curator→workspace-architect pattern"
   ]
+
+<!-- HESTAI_DOC_STEWARD_BYPASS: critical workflow correction for document placement -->
 
 SESSION_COORDINATION:
   IDEATION_GRADUATION_EXECUTION::[

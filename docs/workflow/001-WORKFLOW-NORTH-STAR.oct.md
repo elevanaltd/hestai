@@ -92,15 +92,14 @@ WORKFLOW_PHASES:
 
   B1_HERMES_COORDINATION::BUILD_EXECUTION_ROADMAP:
     PURPOSE::"Validated architecture→actionable implementation plan"
-    SUBPHASES::"B1_01[task-decomposer:atomic_tasks+dependencies]→B1_02[workspace-architect:project_migration_execution+structure+environments+CI/CD_pipeline]→MIGRATION_GATE→B1_03[workspace-architect:build_directory_validation]→B1_04[implementation-lead:task_sequencing]→B1_05[build-plan-checker:completeness+feasibility]"
+    SUBPHASES::"B1_01[task-decomposer:atomic_tasks+dependencies]→B1_02[workspace-architect:project_migration_execution+structure+environments+CI/CD_pipeline+QUALITY_GATES_MANDATORY]→MIGRATION_GATE→B1_03[workspace-architect:build_directory_validation]→B1_04[implementation-lead:task_sequencing]→B1_05[build-plan-checker:completeness+feasibility]"
     RACI::"R[planning_specialists]→A[critical-engineer:final_build_plan_approval]→C[technical-architect:guidance, requirements-steward:scope]→I[solution-steward, code-review-specialist, universal-test-engineer]"
-    MIGRATION_GATE::"B1_02_completion→STOP→HUMAN_CHECKPOINT→cd /Volumes/HestAI-Projects/{PROJECT_NAME}/build/→VERIFY_pwd→RESUME_B1_03"
-    DELIVERABLES::[B1-BUILD-PLAN.md+task_breakdown, B1-WORKSPACE.md+environment+CI/CD_setup, B1-DEPENDENCIES.md+critical_path, TRACED_artifacts]
+    MIGRATION_GATE::"B1_02_completion→STOP→HUMAN_MIGRATION_POINT"
+    RESTART_IN_NEW_LOCATION:: "cd /Volumes/HestAI-Projects/{PROJECT_NAME}/build/VERIFY_pwd→RESUME_B1_03"
+    QUALITY_GATE_MANDATORY::"⚠️ SEE /Users/shaunbuswell/.claude/protocols/WORKSPACE-SETUP.md - NO src/ FILES WITHOUT PASSING: npm run lint && npm run typecheck && npm run test"
+    DELIVERABLES::[B1-BUILD-PLAN.md+task_breakdown, B1-WORKSPACE.md+environment+CI/CD_setup+QUALITY_GATE_EVIDENCE, B1-DEPENDENCIES.md+critical_path, TRACED_artifacts]
     LOCATION::"@build/reports/"
-    CRITERIA::[all_components_have_tasks, dependencies_mapped+sequenced, test_requirements_identified, resources_defined, risks_mitigated, timeline_realistic+buffered]
-
-<!-- HESTAI_DOC_STEWARD_BYPASS: hestai-doc-steward approved this correction 2025-09-04 -->
-<!-- Directory context violations fixed with B1_03 validation step -->
+    CRITERIA::[all_components_have_tasks, dependencies_mapped+sequenced, test_requirements_identified, QUALITY_GATES_OPERATIONAL, resources_defined, risks_mitigated, timeline_realistic+buffered]
 
 CONTEXT7_LIBRARY_RESEARCH::[
   PATTERN::"mcp__Context7__resolve-library-id→mcp__Context7__get-library-docs",

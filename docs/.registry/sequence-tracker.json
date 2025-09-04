@@ -3,29 +3,39 @@
     "docs/workflow": {
       "range": "000-099",
       "purpose": "Project lifecycle processes and operational workflows",
-      "context_types": ["WORKFLOW", "SCRIPT"]
+      "context_types": [
+        "WORKFLOW",
+        "SCRIPT"
+      ]
     },
     "docs/standards": {
-      "range": "100-199", 
+      "range": "100-199",
       "purpose": "Documentation standards and quality enforcement rules",
-      "context_types": ["DOC", "SYSTEM"]
+      "context_types": [
+        "DOC",
+        "SYSTEM"
+      ]
     },
     "docs/security": {
       "range": "400-499",
       "purpose": "Security architecture and integration patterns",
-      "context_types": ["SEC"]
+      "context_types": [
+        "SEC"
+      ]
     },
     "reports": {
       "range": "800-899",
       "purpose": "Analysis reports and system observations",
-      "context_types": ["REPORT"]
+      "context_types": [
+        "REPORT"
+      ]
     }
   },
   "last_sequences": {
     "docs/standards": 106,
     "docs/workflow": 9,
     "docs/security": 403,
-    "reports": 802
+    "reports": 803
   },
   "active_conflicts": [
     {
@@ -42,7 +52,7 @@
     },
     {
       "sequence": "106-109",
-      "directory": "docs/security", 
+      "directory": "docs/security",
       "files": [
         "106-SEC-WORKFLOW-INTEGRATION-ARCHITECTURE.md (RESOLVED: moved and renumbered to 400)",
         "107-SEC-PROMPTING-LIBRARY.md (RESOLVED: moved and renumbered to 401)",
@@ -59,7 +69,7 @@
     "docs/standards": 107,
     "docs/workflow": 10,
     "docs/security": 404,
-    "reports": 803
+    "reports": 804
   },
   "governance_notes": {
     "range_enforcement": "All hooks now validate sequence numbers against directory ranges",

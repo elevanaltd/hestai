@@ -76,6 +76,13 @@
       "reason": "Quality gates prevent regression - TRACED protocol enforcement",
       "category": "standards",
       "path": "docs/standards/"
+    },
+    "803-REPORT-2025-01-06-B1-INFRASTRUCTURE-FAILURE.md": {
+      "approved_date": "2025-09-04",
+      "approved_by": "hestai-doc-steward",
+      "reason": "Critical B1 infrastructure failure retrospective - preserves system wisdom and corrective actions preventing future workspace-architect omissions",
+      "category": "retrospective",
+      "path": "reports/retrospectives/"
     }
   },
 
@@ -230,18 +237,18 @@
       "consolidation_target": "Project security requirements",
       "path": "docs/security/",
       "bloat_type": "wrong_location"
-    },
+    }
   },
 
   "statistics": {
-    "total_approved": 10,
+    "total_approved": 11,
     "total_legacy_bloat": 20,
     "total_pending": 0,
     "bloat_lines_documented": 1307,
     "bloat_lines_estimated": 2693,
     "total_bloat_lines": 4000,
     "bloat_prevented_estimate": 58,
-    "documentation_efficiency_ratio": "10_approved_vs_20_bloat",
+    "documentation_efficiency_ratio": "11_approved_vs_20_bloat",
     "consolidation_opportunities": 12,
     "bloat_by_type": {
       "speculative_content": 0,
@@ -282,16 +289,16 @@
     "approval_workflow": "All new docs must go through hestai-doc-steward approval",
     "bloat_analysis": "20 of 30 existing documents classified as legacy bloat (67% bloat rate)",
     "consolidation_required": "Major cleanup needed to reduce 4,000 lines of documentation debt",
-    "quality_threshold": "Only 10 documents meet operational value requirements",
+    "quality_threshold": "Only 11 documents meet operational value requirements",
     "research_relocation": "Moved 2,801 lines of speculation to /research/future-concepts/ - no longer operational documentation",
     "evidence_base": "Analysis based on line counts and content examination"
   },
 
   "quality_assessment": {
     "assessment_complete": "2025-09-04T15:30:00-05:00",
-    "value_density": "33% (10 valuable docs of 30 total)",
+    "value_density": "35% (11 valuable docs of 31 total)",
     "evidence_ratio": "95% (registry entries backed by file examination)",
-    "redundancy": "67% (20 documents identified as bloat)",
+    "redundancy": "65% (20 documents identified as bloat)",
     "decision": "APPROVED with massive consolidation required",
     "subagent_authority": "hestai-doc-steward"
   }

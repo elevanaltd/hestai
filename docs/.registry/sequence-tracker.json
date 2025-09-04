@@ -10,11 +10,6 @@
       "purpose": "Documentation standards and quality enforcement rules",
       "context_types": ["DOC", "SYSTEM"]
     },
-    "docs/future-phases": {
-      "range": "200-299",
-      "purpose": "Planned developments and architectural evolution",
-      "context_types": ["WORKFLOW", "SYSTEM", "PROJECT"]
-    },
     "docs/security": {
       "range": "400-499",
       "purpose": "Security architecture and integration patterns",
@@ -30,7 +25,6 @@
     "docs/standards": 106,
     "docs/workflow": 9,
     "docs/security": 403,
-    "docs/future-phases": 201,
     "reports": 802
   },
   "active_conflicts": [
@@ -65,13 +59,13 @@
     "docs/standards": 107,
     "docs/workflow": 10,
     "docs/security": 404,
-    "docs/future-phases": 202,
     "reports": 803
   },
   "governance_notes": {
     "range_enforcement": "All hooks now validate sequence numbers against directory ranges",
     "conflict_resolution": "System-steward approval required for all document creation",
-    "structural_reorganization": "Security documents moved to proper directory structure 2025-08-19"
+    "structural_reorganization": "Security documents moved to proper directory structure 2025-08-19",
+    "future_phases_relocation": "Speculative content moved to /research/future-concepts/ 2025-09-04 - no longer operational docs"
   },
   "metadata": {
     "last_updated": "2025-08-21T00:00:00Z",

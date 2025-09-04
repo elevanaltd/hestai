@@ -7,9 +7,6 @@ META:
   PURPOSE::"Consolidated D0→B5 workflow methodology with RACI+coordination+error handling"
   ESSENCE::"PHASE_PROGRESSION+SPECIALIST_ACCOUNTABILITY+COORDINATION_PATTERNS"
 
-<!-- HESTAI_DOC_STEWARD_BYPASS: Authorized restoration of edge-optimizer integration points in D2 and B3 phases to align with source document 001-WORKFLOW-NORTH-STAR.md. This is a structural consistency update, not new functionality. -->
-<!-- HESTAI_DOC_STEWARD_BYPASS: Authorized OCTAVE compression of consolidated workflow north star per systematic optimization initiative -->
-
 RACI_FOUNDATION:
   R_RESPONSIBLE::"Agent performs work+owns execution"
   A_ACCOUNTABLE::"Agent with final decision authority+overall accountability" 
@@ -31,8 +28,9 @@ WORKFLOW_MYTHOLOGY:
   ]
 
 SCOPE_GATE_CLASSIFICATION:
-  ENTRY_REQUIREMENT::"Successful ideation+graduation→formal D1 requires scope classification"
+  ENTRY_REQUIREMENT::"Successful ideation+graduation→formal D1 requires scope classification"  
   AUTHORITY::"R[idea-clarifier:initial]→A[critical-engineer:final]→C[requirements-steward:alignment]"
+  CALIBRATION_CHECKPOINTS::"MANDATORY workflow-scope-calibrator invocation at: D1_start, B0_00, B1_00, B2_00, B3_00, B4_00, ANY >20_task_threshold"
   
   SCOPE_MATRIX::[
     SIMPLE::[<100_users, single_component, low_risk, minimal_integrations]→[consolidated_docs, bullet_specs, informal_reviews, essential_testing],
@@ -44,23 +42,32 @@ SCOPE_GATE_CLASSIFICATION:
 WORKFLOW_PHASES:
   D0_MNEMOSYNE_GENESIS::IDEATION_SETUP:
     SUBPHASES::"D0_01[sessions-manager]→session_structure+exploration_framework+graduation_assessment"
+    NATURAL_ENTRY_PATTERN::[
+      ENTRY::"User→idea-clarifier for natural conversation",
+      FLOW::"idea-clarifier engages naturally→calls sessions-manager when structure needed",
+      SESSIONS_MANAGER::"Creates session structure via D0-IDEATION-SETUP protocol",
+      CONTINUATION::"idea-clarifier continues within established session"
+    ]
     RACI::"R[sessions-manager:complete_setup+graduation_assessment]→A[sessions-manager:quality+approval]→C[none:pre-formal]→I[potential_stakeholders:context]"
-<!-- HESTAI_DOC_STEWARD_BYPASS: Constitutional authority - resolving graduation responsibility contradiction between D0 and B1_02 phases -->
+
     DELIVERABLE::"Complete ideation session with graduation readiness assessed for B1_02[workspace-architect]"
     PROTOCOL_REF::"D0-IDEATION-SETUP protocol"
     ENTRY::[new_project_concept, systematic_investigation_needed]
     EXIT::[graduation_criteria_met, graduation_readiness_assessed, ready_for_D1]
-<!-- HESTAI_DOC_STEWARD_BYPASS: Constitutional authority - D0 phase authority clarification for deliverable and exit criteria -->
 
   D1_APOLLO_ORACLE::UNDERSTANDING_ESTABLISHMENT:
     SUBPHASES::"D1_01[idea-clarifier:flesh_out]→D1_02[research-analyst:explore_options]→D1_03[idea-clarifier:North_Star]→D1_04[requirements-steward:validate]"
+    NATURAL_FLOW::"D1 maintains natural conversational flow rather than artificial subdivisions"
     RACI::"R[phase_specialists]→A[critical-engineer:North_Star_complete+correct]→C[none:not_building_yet]→I[none:no_implementation_teams]"
-    DELIVERABLE::"2xx-PROJECT[-NAME]-NORTH-STAR.md+immutable_requirements+assumption_audit"
+
+    DELIVERABLE::"0xx-PROJECT[-NAME]-NORTH-STAR.md+immutable_requirements+assumption_audit"
     LOCATION::"@coordination/docs/workflow/[post-graduation_distribution]"
 
   D2_ATHENA_INNOVATION::SOLUTION_APPROACHES:
-    SUBPHASES::"D2_01[ideator:creative_solutions]→D2_02[validator:feasibility_constraints]→D2_02B[edge-optimizer:boundary_exploration:OPTIONAL]→D2_03[synthesizer:unified_approach]"
-    RACI::"R[phase_specialists, edge-optimizer:D2_02B_optional]→A[critical-engineer:synthesis_completeness+feasibility]→C[requirements-steward:North_Star, technical-architect:feasibility]→I[none:design_phase]"
+    SUBPHASES::"D2_01[ideator+edge-optimizer:creative_breakthrough]→D2_02[validator:feasibility_constraints]→D2_02B[edge-optimizer:additional_exploration:OPTIONAL]→D2_03[synthesizer:unified_approach]"
+    DUAL_ROLE_EDGE::"edge-optimizer contributes to D2_01 for breakthrough creative exploration AND D2_02B for boundary exploration"
+    RACI::"R[phase_specialists, edge-optimizer:D2_01+D2_02B_optional]→A[critical-engineer:synthesis_completeness+feasibility]→C[requirements-steward:North_Star, technical-architect:feasibility]→I[none:design_phase]"
+
     DELIVERABLES::[D2_01-IDEAS.md, D2_02-CONSTRAINTS.md, D2_02B-EDGE_DISCOVERIES.md:optional, D2_03-DESIGN.md]
     EDGE_INTEGRATION::"D2_02B_discoveries→optional_input_to_D2_03_synthesis"
     LOCATION::"@coordination/docs/workflow/"
@@ -86,15 +93,42 @@ WORKFLOW_PHASES:
   B1_HERMES_COORDINATION::BUILD_EXECUTION_ROADMAP:
     PURPOSE::"Validated architecture→actionable implementation plan"
     SUBPHASES::"B1_01[task-decomposer:atomic_tasks+dependencies]→B1_02[workspace-architect:project_migration_execution+structure+environments+CI/CD_pipeline]→B1_03[implementation-lead:task_sequencing]→B1_04[build-plan-checker:completeness+feasibility]"
-<!-- HESTAI_DOC_STEWARD_BYPASS: Constitutional authority - B1_02 phase authority clarification for workspace-architect execution role -->
     RACI::"R[planning_specialists]→A[critical-engineer:final_build_plan_approval]→C[technical-architect:guidance, requirements-steward:scope]→I[solution-steward, code-review-specialist, universal-test-engineer]"
+    MIGRATION_GATE::"B1_02_completion→STOP→cd /Volumes/HestAI-Projects/{PROJECT_NAME}/build/→VERIFY_pwd→RESUME_B1_03"
     DELIVERABLES::[B1-BUILD-PLAN.md+task_breakdown, B1-WORKSPACE.md+environment+CI/CD_setup, B1-DEPENDENCIES.md+critical_path, TRACED_artifacts]
     LOCATION::"@build/reports/"
     CRITERIA::[all_components_have_tasks, dependencies_mapped+sequenced, test_requirements_identified, resources_defined, risks_mitigated, timeline_realistic+buffered]
 
+CONTEXT7_LIBRARY_RESEARCH::[
+  PATTERN::"mcp__Context7__resolve-library-id→mcp__Context7__get-library-docs",
+  D1_USAGE::"Research for problem understanding and existing solutions",
+  B0_USAGE::"Architecture validation against current library capabilities",
+  B1_USAGE::"Dependency versions and integration patterns",
+  B2_USAGE::"API references and implementation examples during TDD",
+  B3_USAGE::"Integration best practices and compatibility validation"
+]
+
+MCP_TOOL_PATTERNS::[
+  THINKING_TOOLS::[
+    "mcp__hestai__planner→planning and task breakdown",
+    "mcp__hestai__thinkdeep→deep investigation and analysis",
+    "mcp__hestai__consensus→multi-model perspective synthesis",
+    "mcp__hestai__debug→systematic error investigation",
+    "mcp__hestai__analyze→comprehensive system analysis"
+  ],
+  VALIDATION_TOOLS::[
+    "mcp__hestai__critical-engineer→technical validation",
+    "mcp__hestai__testguard→test methodology enforcement",
+    "mcp__hestai__secaudit→security audit analysis"
+  ],
+  DEEP_RESEARCH::[
+    "mcp__deep-research__deep-research→autonomous market/problem research"
+  ]
+]
+
   B2_HEPHAESTUS_FORGE::CODE_CONSTRUCTION:
     PURPOSE::"Execute build plan through disciplined development+quality validation"
-    SUBPHASES::"B2_00[testguard:test_strategy+methodology]→B2_01[implementation-lead:coordinate_development]→B2_02[universal-test-engineer:test_suites]→B2_03[code-review-specialist:quality_review]→B2_04[error-resolver:integration_issues]"
+    SUBPHASES::"B2_00[mcp__hestai__testguard:test_strategy+methodology]→B2_01[implementation-lead:coordinate_development]→B2_02[universal-test-engineer:test_suites]→B2_03[code-review-specialist:quality_review]→B2_04[error-resolver:integration_issues]"
     RACI::"R[development_specialists]→A[critical-engineer:production_standards]→C[technical-architect:compliance, Context7:libraries, testguard:methodology]→I[solution-steward, completion-architect, security-specialist]"
     B2_00_REQUIREMENTS::[test_strategy_aligned, coverage_requirements_defined, compliance_validation_setup, frameworks_approved, integrity_monitoring]
     IMPLEMENTATION_STANDARDS::[TESTGUARD_FIRST→TEST_FIRST→TRACED_METHODOLOGY, Context7_consultation_libraries, code_review_every_change, CI_immediate_failure_resolution, architecture_compliance, security_scanning]
@@ -160,10 +194,9 @@ COORDINATION_ARCHITECTURE:
 SESSION_COORDINATION:
   IDEATION_GRADUATION_EXECUTION::[
     D0_IDEATION::"/HestAI-Projects/0-ideation/sessions/[structured_exploration+thread_messaging+manifest_tracking]",
-    PROJECT_MIGRATION_EXECUTION::"workspace-architect[B1_02]→migration[0-ideation→{project-name}/sessions/]→coordination_symlink[.coord/]→using_graduation_assessment_from_D0",
+    PROJECT_MIGRATION_EXECUTION::"workspace-architect[B1_02]→migration[0-ideation→{project-name}/sessions/]→MIGRATION_GATE[directory_change_required]→coordination_symlink[.coord/]→using_graduation_assessment_from_D0",
     ARTIFACT_DISTRIBUTION::"D-phase→@coordination/docs/workflow/, B-phase→@build/reports/"
   ]
-<!-- HESTAI_DOC_STEWARD_BYPASS: Constitutional authority - SESSION_COORDINATION section authority clarification -->
   
   LINK_STANDARDS::[
     LOCALITY_PRINCIPLE::"internal_links[relative_paths], external_links[full_paths_boundary_crossing_only]",
@@ -179,8 +212,6 @@ ENHANCEMENT_CLASSIFICATION:
 CROSS_REFERENCE_INTEGRATION:
   CONSOLIDATED_FROM::"Documents[003,004,005,006,010,011]→unified_methodology[error_handling+directory_coordination+session_architecture+enhancement_lifecycle]→eliminate_redundancy+preserve_operational_wisdom"
 
-<!-- HESTAI_DOC_STEWARD_BYPASS: system-steward authority correction - document 007 doesn't exist, correcting to 004 for PROJECT-COORDINATION-PATTERN reference integrity -->
-
 OPERATIONAL_PATTERNS:
   PHASE_DEPENDENCIES::"Linear_progression+gate_enforcement+completeness_validation"
   RACI_ACCOUNTABILITY::"Clear_responsibility_chains+coordination_failures_prevention"  
@@ -192,4 +223,5 @@ OPERATIONAL_PATTERNS:
 <!-- COMPRESSION_EVIDENCE: 8,200→1,640 tokens (5:1 ratio maintained), semantic fidelity 97%+, edge-optimizer integration restored, phase relationships preserved, RACI+coordination patterns maintained -->
 
 <!-- AUTHORITY_CLARIFICATIONS_COMPLETED: Graduation responsibility separation between D0:assessment and B1_02:execution -->
-<!-- SUBAGENT_AUTHORITY: hestai-doc-steward 2025-08-31T17:35:00Z -->
+<!-- CONSTITUTIONAL_UPDATE_2025-09-03: workflow-scope-calibrator direct reading compliance - phase invocation patterns, migration gates, tool precision -->
+<!-- DOCUMENT_ALIGNMENT_2025-09-03: Updated per 000-DOC-PRACTICAL-WORKFLOW-EXECUTION-CHAINS.md discrepancy analysis - Context7 integration, MCP tool patterns, natural flow clarifications, edge-optimizer dual role documentation -->

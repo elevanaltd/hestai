@@ -44,90 +44,120 @@ This document covers **both patterns** - direct specialist execution and orchest
 
 ---
 
-## D0: IDEATION SETUP - Practical Execution
+## D0: NATURAL IDEATION ENTRY - Practical Execution
 
-**Context**: User has an idea, needs formal project setup
+**Context**: User has an idea and wants to explore it naturally
 
-**Lead Agent**: `sessions-manager`
-1. User runs `/role sessions-manager` in `/Volumes/HestAI-Projects/0-ideation/`
-2. sessions-manager creates session structure:
+**Natural Entry Pattern**: User focuses on idea discussion rather than session mechanics
+
+**Lead Agent**: `idea-clarifier` (natural conversational entry point)
+1. User runs `/role idea-clarifier` and presents their idea naturally
+2. idea-clarifier engages in natural conversation to understand the concept
+3. idea-clarifier calls `sessions-manager` via Task tool when session structure is needed:
    ```
-   Task(subagent_type="directory-curator", prompt="Create session directory structure YYYY-MM-DD-TOPIC_NAME with manifest.json, messages/, context-stream/, artifacts/")
+   Task(subagent_type="sessions-manager", prompt="Set up ideation session structure for {TOPIC} following D0-IDEATION-SETUP protocol")
    ```
-3. sessions-manager initializes `manifest.json` with schema v1.1
-4. User presents initial idea in `A01-SHAUNOS-initial-requirements.md`
-5. sessions-manager assesses graduation readiness criteria
-6. sessions-manager documents graduation assessment (not execution)
+4. sessions-manager follows `/Users/shaunbuswell/.claude/protocols/D0-IDEATION-SETUP.md` protocol
+5. sessions-manager uses direct Bash/Write tools to create session structure (no directory-curator delegation)
+6. sessions-manager initializes `manifest.json` with schema v1.1
+7. idea-clarifier continues natural conversation within established session
+8. sessions-manager assesses graduation readiness criteria
 
-**Documents Produced**: Session structure, manifest.json, graduation readiness assessment
+**Documents Produced**: Session structure, manifest.json, natural conversational clarification
+
+<!-- SUBAGENT_AUTHORITY: hestai-doc-steward 2025-09-01T00:00:00-00:00 -->
 
 ---
 
-## D1: UNDERSTANDING ESTABLISHMENT - Practical Execution
+## D1: NATURAL UNDERSTANDING FLOW - Practical Execution
 
-### D1_01: idea-clarifier
+**Context**: Natural conversational flow to establish project understanding
 
-**Lead Agent**: `idea-clarifier`
-1. Reads initial user requirements from session
-2. Engages user directly to flesh out the idea:
-   - Asks clarifying questions
-   - Identifies assumptions
-   - Documents scope boundaries
-3. Creates problem statement with user validation
-4. Documents requirements outline with flagged assumptions
-5. Validates understanding with user
-6. Produces message: `A02-IDEA-CLARIFIER-clarification-response.md`
+**Natural Flow Pattern**: Single integrated conversation rather than artificial subdivisions
 
-### D1_02: research-analyst
+**Lead Agent**: `idea-clarifier` (continues from D0, maintains conversational continuity)
 
-**Lead Agent**: `research-analyst`
-1. Reads clarified requirements from D1_01
-2. Calls `mcp__Context7__resolve-library-id` for relevant technologies
-3. Calls `mcp__Context7__get-library-docs` for technical research
-4. Uses `WebSearch` for existing solutions and approaches
-5. Calls `mcp__hestai__chat` for technical feasibility discussions
-6. Consults `technical-architect` via Task tool for architectural feasibility
-7. Produces comprehensive research analysis
-8. Documents: `A03-RESEARCH-ANALYST-feasibility-analysis.md`
+**Natural D1 Conversation Flow**:
+1. **Idea Exploration** (continues naturally from D0):
+   - Asks clarifying questions in natural dialogue
+   - Identifies assumptions and scope boundaries
+   - Documents evolving understanding throughout conversation
+   - Validates understanding with user iteratively
 
-### D1_03: idea-clarifier (North Star creation)
+2. **Autonomous Research Integration** (if needed for problem understanding):
+   - Uses `mcp__deep-research__deep-research` for autonomous market and problem research
+   - Calls `mcp__Context7__resolve-library-id` and `mcp__Context7__get-library-docs` for domain knowledge
+   - Uses `WebSearch` for existing solutions and market landscape
+   - Research focuses on PROBLEM SPACE (who else has this problem, current solutions, why they fail)
+   - NO technical feasibility analysis at this stage
+   - Integrates research findings naturally into conversation flow
 
-**Lead Agent**: `idea-clarifier`
-1. Reads research analysis from D1_02
-2. Synthesizes user requirements + technical research
-3. Calls `critical-engineer` via Task tool for completeness validation
-4. Creates `200-PROJECT-{TOPIC}-D1-NORTH-STAR.md` in session artifacts/
-5. Documents immutable requirements and success criteria
-6. Produces message: `A04-IDEA-CLARIFIER-north-star-synthesis.md`
+3. **Problem-Space Requirements Synthesis** (NO technical validation):
+   - Synthesizes user needs + research into CORE REQUIREMENTS (WHAT, not HOW)
+   - Focuses on problem definition, user value, and success outcomes
+   - Creates SYSTEM-AGNOSTIC requirements (capabilities, not implementations)
+   - NO technical validation at this stage (no architects, no engineers)
+   - Only validates with user: "Does this capture the problem you want solved?"
+   - Creates problem statement through natural conversation
 
-### D1_04: requirements-steward
+4. **North Star Creation** (Problem-focused, not solution-focused):
+   - Creates `200-PROJECT-{TOPIC}-D1-NORTH-STAR.md` following `/Users/shaunbuswell/.claude/protocols/D1-NORTH-STAR.md` protocol
+   - Documents PROBLEM STATEMENT, TARGET USERS, CORE REQUIREMENTS (system-agnostic)
+   - Defines VALUE PROPOSITIONS and SUCCESS CRITERIA (user outcomes, not technical metrics)
+   - **Milestone**: Sessions-manager records North Star creation as `A04-IDEA-CLARIFIER-north-star.md`:
+     ```
+     Task(subagent_type="sessions-manager", prompt="Record North Star synthesis as A04-IDEA-CLARIFIER-north-star.md and update context-stream")
+     ```
 
-**Lead Agent**: `requirements-steward`
-1. Reviews entire D1 conversation thread
-2. Validates North Star against user intent
-3. Performs assumption risk assessment
-4. Calls `critical-engineer` via Task tool for requirement integrity validation
-5. Flags any assumption risks or gaps
-6. Approves D1→D2 transition
-7. Documents: `A05-REQUIREMENTS-STEWARD-validation-report.md`
+5. **Requirements Validation** (Problem-space validation only):
+   - Calls `requirements-steward` via Task tool for problem clarity validation:
+     ```
+     Task(subagent_type="requirements-steward", prompt="Validate D1 North Star for problem clarity, user value, and requirement completeness - NO technical validation")
+     ```
+   - Requirements-steward validates PROBLEM is well-defined (not solution)
+   - Confirms North Star captures user need and business value
+   - **Milestone**: Sessions-manager records validation as `A05-REQUIREMENTS-STEWARD-validation.md`:
+     ```
+     Task(subagent_type="sessions-manager", prompt="Record requirements validation as A05-REQUIREMENTS-STEWARD-validation.md and approve D1→D2 transition")
+     ```
 
-**Documents Produced**: 200-PROJECT-{TOPIC}-D1-NORTH-STAR.md, comprehensive requirements validation
+6. **Graduation Assessment**:
+   - requirements-steward performs assumption risk assessment
+   - Validates North Star against user intent and technical feasibility
+   - Approves D1→D2 transition when understanding is complete
+
+**Documents Produced**: 
+- Session messages: A01-SHAUNOS-initial-idea.md through A05-REQUIREMENTS-STEWARD-validation.md
+- Context-stream: Workflow progression with phase tracking
+- Artifacts: 200-PROJECT-{TOPIC}-D1-NORTH-STAR.md (PROBLEM-FOCUSED, SYSTEM-AGNOSTIC)
+- Manifest: Updated with thread counts and message tracking
+
+<!-- SUBAGENT_AUTHORITY: hestai-doc-steward 2025-09-01T00:00:00-00:00 -->
 
 ---
 
 ## D2: IDEATION - Practical Execution
 
-### D2_01: ideator
+### D2_01: ideator (with edge-optimizer enhancement)
 
 **Lead Agent**: `ideator`
-1. Reads approved North Star from D1_04
-2. Calls `mcp__hestai__chat` for creative brainstorming on solutions
+1. Reads approved North Star from D1 (problem-focused requirements)
+2. Calls `edge-optimizer` via Task tool for breakthrough creative exploration:
+   ```
+   Task(subagent_type="edge-optimizer", prompt="Explore breakthrough creative solutions for {problem} - find innovative approaches beyond conventional thinking")
+   ```
 3. Uses `mcp__hestai__planner` for solution approach planning
-4. Generates multiple creative approaches within North Star boundaries
+4. Generates multiple creative approaches that:
+   - Solve the core problem in unexpected ways
+   - Challenge conventional solution patterns
+   - Explore edges of what's possible
 5. Documents innovative enhancements beyond minimum requirements
 6. Consults `requirements-steward` via Task tool for North Star alignment verification
-7. Creates `D2_01-IDEAS.md` in session artifacts/
-8. Produces message: `A06-IDEATOR-creative-solutions.md`
+7. **Milestone**: Sessions-manager records ideation as `A06-IDEATOR-creative-solutions.md`:
+   ```
+   Task(subagent_type="sessions-manager", prompt="Record creative solutions as A06-IDEATOR-creative-solutions.md and update context-stream")
+   ```
+8. Creates `D2_01-IDEAS.md` in session artifacts/
 
 ### D2_02: validator
 
@@ -141,17 +171,21 @@ This document covers **both patterns** - direct specialist execution and orchest
 7. Creates `D2_02-CONSTRAINTS.md` in session artifacts/
 8. Produces message: `A07-VALIDATOR-feasibility-analysis.md`
 
-### D2_02B: edge-optimizer (OPTIONAL)
+### D2_02B: edge-optimizer (OPTIONAL - Additional Breakthrough Exploration)
 
-**Lead Agent**: `edge-optimizer` (triggered if breakthrough potential identified)
-1. Reads validated approaches from D2_02
-2. Uses `mcp__hestai__thinkdeep` for boundary exploration analysis
-3. Calls `mcp__hestai__chat` for breakthrough innovation discussions
-4. Explores constraint boundaries for breakthrough opportunities
-5. Consults `critical-engineer` via Task tool for breakthrough feasibility
+**Lead Agent**: `edge-optimizer` (triggered if validator identifies additional breakthrough potential)
+**Note**: Edge-optimizer already contributed to D2_01 ideation, this is for ADDITIONAL exploration if needed
+1. Reads validated approaches from D2_02 that show untapped potential
+2. Uses `mcp__hestai__thinkdeep` for deep boundary exploration analysis
+3. Explores specific constraint boundaries identified by validator
+4. Focuses on turning constraints into opportunities
+5. Consults `critical-engineer` via Task tool for breakthrough feasibility:
+   ```
+   Task(subagent_type="critical-engineer", prompt="Validate breakthrough approach feasibility for {specific edge innovation}")
+   ```
 6. Documents edge discoveries and optimization beyond standard constraints
-7. Creates `D2_02B-EDGE_DISCOVERIES.md` in session artifacts/ (if triggered)
-8. Produces message: `A08-EDGE-OPTIMIZER-breakthrough-analysis.md` (if triggered)
+7. **Milestone**: Sessions-manager records additional breakthroughs as `A08-EDGE-OPTIMIZER-breakthrough-analysis.md` (if triggered)
+8. Creates `D2_02B-EDGE_DISCOVERIES.md` in session artifacts/ (if triggered)
 
 ### D2_03: synthesiser
 
@@ -182,7 +216,8 @@ This document covers **both patterns** - direct specialist execution and orchest
 4. Consults `technical-architect` via Task tool for architectural validation
 5. Creates detailed technical architecture specification
 6. Documents component specifications and interface definitions
-7. Produces message: `A10-DESIGN-ARCHITECT-technical-architecture.md`
+7. Create `D3-BLUEPRINT.md` in session artifacts/
+8. Produces message: `A10-DESIGN-ARCHITECT-technical-architecture.md`
 
 ### D3_02: visual-architect
 
@@ -235,11 +270,10 @@ This document covers **both patterns** - direct specialist execution and orchest
 1. **holistic-orchestrator** reads design.md command protocol
 2. **holistic-orchestrator** executes D1→D3 design sequence:
    ```
-   # D1 Understanding
-   Task(subagent_type="idea-clarifier", prompt="D1_01: Clarify social media platform requirements")
-   Task(subagent_type="research-analyst", prompt="D1_02: Research technical possibilities and approaches")
-   Task(subagent_type="idea-clarifier", prompt="D1_03: Create immutable North Star document")
-   Task(subagent_type="requirements-steward", prompt="D1_04: Validate requirements completeness")
+   # D1 Natural Understanding Flow
+   Task(subagent_type="idea-clarifier", prompt="D1: Engage in natural conversation to establish understanding, conduct autonomous research, and create North Star")
+   
+   <!-- SUBAGENT_AUTHORITY: hestai-doc-steward 2025-09-01T00:00:00-00:00 -->
    
    # D2 Ideation  
    Task(subagent_type="ideator", prompt="D2_01: Generate creative solutions within boundaries")
@@ -401,10 +435,12 @@ This document covers **both patterns** - direct specialist execution and orchest
 1. **holistic-orchestrator** reads workflow.md command protocol
 2. **holistic-orchestrator** executes complete D0→B5 sequence:
    ```
-   # D0: Ideation Setup
-   Task(subagent_type="sessions-manager", prompt="D0: Set up ideation session structure")
+   # D0: Natural Ideation Entry
+   Task(subagent_type="idea-clarifier", prompt="D0: Natural ideation entry - engage user and set up session structure as needed")
    
-   # D1-D3: Design Phases (same as HO-DESIGN above)
+   # D1-D3: Design Phases (natural flow pattern)
+   
+   <!-- SUBAGENT_AUTHORITY: hestai-doc-steward 2025-09-01T00:00:00-00:00 -->
    
    # B0: Validation Gate
    Task(subagent_type="critical-design-validator", prompt="B0_01: Validate design completeness")
@@ -1133,7 +1169,23 @@ This document covers **both patterns** - direct specialist execution and orchest
 mcp__Context7__resolve-library-id(libraryName="technology-name")
 → mcp__Context7__get-library-docs(context7CompatibleLibraryID="/org/project", tokens=10000, topic="specific-area")
 ```
-Used by: research-analyst, validator, design-architect, universal-test-engineer
+Used by: idea-clarifier (D1), research-analyst, validator, design-architect, universal-test-engineer
+
+**Deep Research MCP (Autonomous Research)**:
+```
+mcp__deep-research__deep-research({
+  query: "Research topic with specific focus areas",
+  depth: 2,    // iterative research depth (1-5)
+  breadth: 3,  // search query variety (1-5)
+  model: "openai:gpt-5", // or anthropic:claude-3.5-sonnet, google:gemini-pro, xai:grok
+  sourcePreferences: "avoid forums and listicles, prioritize technical documentation",
+  tokenBudget: 50000 // optional soft cap for research phase tokens
+})
+```
+Used by: idea-clarifier (D1 natural flow), research-analyst, design-architect, technical-architect
+Implementation: `/Volumes/HestAI-Tools/deep-research-mcp/` - Multi-step autonomous research with source reliability evaluation
+
+<!-- SUBAGENT_AUTHORITY: hestai-doc-steward 2025-09-01T00:00:00-00:00 -->
 
 **HestAI Thinking Tools**:
 ```

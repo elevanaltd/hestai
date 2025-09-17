@@ -24,7 +24,7 @@ TASK_TO_AGENT_MAPPING:
   
   VALIDATE_AND_PREVENT:
     test_integrity::test-methodology-guardian // "fix the test" → NO
-    code_quality::code-review-specialist // Post-implementation review
+    code_quality::code-review-specialist // Post-implementation review [See: 106-SYSTEM-CODE-QUALITY-ENFORCEMENT-GATES.md]
     production_readiness::critical-engineer // "Will this break?"
     design_hardening::critical-design-validator // B0 gate
     architecture_assessment::critical-implementation-validator // VAD compliance
@@ -40,7 +40,7 @@ TASK_TO_AGENT_MAPPING:
     
   BUILD_AND_EXECUTE:
     coordinate_build::implementation-lead // B2_01 hub role
-    create_workspace::workspace-architect // B1_02 setup
+    create_workspace::workspace-architect // B1_02 setup [Quality gates: 106-SYSTEM-CODE-QUALITY-ENFORCEMENT-GATES.md]
     decompose_tasks::task-decomposer // VAD→atomic tasks
     generate_tests::universal-test-engineer // Test creation
     integrate_systems::completion-architect // B3_01 unification
@@ -56,8 +56,7 @@ TASK_TO_AGENT_MAPPING:
     assess_architecture::mcp__hestai__analyze // Comprehensive review
     security_audit::mcp__hestai__secaudit // OWASP compliance
     measure_compression::compression-analyst // Measure OCTAVE effectiveness
-    resolve_architectural_errors::error-architect // Systemic error resolution
-    resolve_component_errors::error-resolver // Component-level error resolution
+    resolve_all_errors::error-architect // Unified error resolution (simple to complex)
     retrieve_workflow_facts::workflow-engine // Pure workflow fact retrieval
     
   CREATE_AND_SYNTHESIZE:
@@ -97,7 +96,7 @@ PHASE_OPTIMAL_AGENTS:
   D3_ARCHITECTURE::[design-architect, technical-architect, critical-engineer, visual-architect]
   B0_QUALITY_GATE::[critical-design-validator, requirements-steward, octave-validator, security-specialist]
   B1_PLANNING::[task-decomposer, workspace-architect, build-plan-checker, task-decomposer-validator]
-  B2_IMPLEMENTATION::[implementation-lead, universal-test-engineer, error-resolver, error-architect + SPECIALIST_SPOKES]
+  B2_IMPLEMENTATION::[implementation-lead, universal-test-engineer, error-architect + SPECIALIST_SPOKES]
   B3_INTEGRATION::[completion-architect, quality-observer]
   B4_DELIVERY::[solution-steward, compression-fidelity-validator]
   B5_ENHANCEMENT::[requirements-steward, technical-architect, implementation-lead, critical-engineer]
@@ -131,7 +130,7 @@ SELECTION_HEURISTICS:
   
   IF_STUCK::[ideator-catalyst, mcp__hestai__chat]
   IF_COMPLEX::[implementation-lead, mcp__hestai__consensus]
-  IF_BROKEN::[error-resolver, error-architect, mcp__hestai__debug, critical-engineer]
+  IF_BROKEN::[error-architect, mcp__hestai__debug, critical-engineer]
   IF_TESTING::[test-methodology-guardian, universal-test-engineer]
   IF_SECURITY::[security-specialist, code-review-specialist, mcp__hestai__secaudit]
   IF_ARCHITECTURE::[technical-architect, mcp__hestai__analyze]
@@ -151,7 +150,7 @@ AGENT_COMBINATIONS:
   COMPRESSION_SAFETY::octave-specialist + compression-fidelity-validator
   BUILD_COORDINATION::implementation-lead + quality-observer
   PATTERN_PRESERVATION::research-curator + system-steward
-  ERROR_RESOLUTION::error-resolver + error-architect
+  ERROR_RESOLUTION::error-architect[unified_simple_to_complex]
   WORKFLOW_PLANNING::workflow-engine + workflow-scope-calibrator
   SYSTEM_COHERENCE::coherence-oracle + holistic-orchestrator
   SECURE_CODE::code-review-specialist + security-specialist
@@ -184,8 +183,7 @@ QUICK_LOOKUP_EXAMPLES:
   "validate architecture"::mcp__hestai__analyze + critical-implementation-validator
   "prevent scope creep"::requirements-steward + complexity-guard
   "compress documentation"::documentation-compressor + semantic-optimizer
-  "fix architectural errors"::error-architect
-  "fix component error"::error-resolver
+  "fix any errors"::error-architect
   "reorganize my project"::directory-curator
   "check system coherence"::coherence-oracle
   "what are the workflow rules"::workflow-engine

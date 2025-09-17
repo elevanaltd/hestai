@@ -86,7 +86,7 @@ WORKFLOW_PHASES:
     RACI::"R[validation_specialists]→A[critical-engineer:final_GO/NO-GO_authority]→C[security-specialist:security, error-architect:failure_modes]→I[implementation-lead, solution-steward, task-decomposer]"
     ENTRY_REQUIREMENTS::[NORTH-STAR.md+approved+immutable, D2-DESIGN.md+validated, D3-BLUEPRINT.md+complete, assumption_audits_complete]
     DELIVERABLE::"B0-VALIDATION.md+GO/NO-GO_decision"
-    LOCATION::"@build/reports/"
+    LOCATION::"@dev/reports/"
     VALIDATION_CRITERIA::[North_Star_alignment, architecture_sound+scalable+implementable, security_addressed, assumptions_validated, resources_realistic, no_blocking_risks]
     EXIT::"GO[proceed_B1] | NO-GO[return_D-phase]"
 
@@ -98,7 +98,7 @@ WORKFLOW_PHASES:
     RESTART_IN_NEW_LOCATION:: "cd /Volumes/HestAI-Projects/{PROJECT_NAME}/build/VERIFY_pwd→RESUME_B1_03"
     QUALITY_GATE_MANDATORY::"⚠️ SEE /Users/shaunbuswell/.claude/protocols/WORKSPACE-SETUP.md - NO src/ FILES WITHOUT PASSING: npm run lint && npm run typecheck && npm run test"
     DELIVERABLES::[B1-BUILD-PLAN.md+task_breakdown, B1-WORKSPACE.md+environment+CI/CD_setup+QUALITY_GATE_EVIDENCE, B1-DEPENDENCIES.md+critical_path, TRACED_artifacts]
-    LOCATION::"@build/reports/"
+    LOCATION::"@dev/reports/"
     CRITERIA::[all_components_have_tasks, dependencies_mapped+sequenced, test_requirements_identified, QUALITY_GATES_OPERATIONAL, resources_defined, risks_mitigated, timeline_realistic+buffered]
 
 CONTEXT7_LIBRARY_RESEARCH::[
@@ -136,7 +136,7 @@ MCP_TOOL_PATTERNS::[
     IMPLEMENTATION_STANDARDS::[TESTGUARD_FIRST→TEST_FIRST→TRACED_METHODOLOGY, Context7_consultation_libraries, code_review_every_change, CI_immediate_failure_resolution, architecture_compliance, security_scanning]
     QUALITY_GATES::[coverage_80%+, tests_passing_CI, code_review_approval, no_critical_vulnerabilities, performance_benchmarks_met, docs_updated]
     DELIVERABLES::[B2-IMPLEMENTATION-LOG.md, B2-TEST-STRATEGY.md, source_code+tests, CI_pipeline+quality_gates, TRACED_compliance_artifacts]
-    LOCATION::"@build/reports/"
+    LOCATION::"@dev/reports/"
 
   B3_HARMONIA_UNIFICATION::SYSTEM_UNIFICATION:
     PURPOSE::"Unify components→cohesive system+validate end-to-end functionality+production readiness"
@@ -146,7 +146,7 @@ MCP_TOOL_PATTERNS::[
     SYSTEM_TESTING::[integration_tests_all_interactions, E2E_user_journey_validation, performance_benchmarks_achieved, security_penetration_passed, disaster_recovery_validated, monitoring+observability_confirmed]
     DELIVERABLES::[B3-INTEGRATION-REPORT.md, B3-PERFORMANCE.md, B3-BREAKTHROUGH_OPTIMIZATIONS.md:optional, B3-SECURITY.md, fully_integrated_system+E2E_tests]
     BREAKTHROUGH_INTEGRATION::"B3_02B_optimizations→evaluated_by_completion-architect_for_system_integration"
-    LOCATION::"@build/reports/"
+    LOCATION::"@dev/reports/"
 
   B4_IRIS_HANDOFF::PRODUCTION_HANDOFF:
     PURPOSE::"Complete solution preparation for production deployment+comprehensive documentation+operational readiness"
@@ -154,7 +154,7 @@ MCP_TOOL_PATTERNS::[
     DEPLOY_PHASES::"B4_D1[staging+validation]→B4_D2[live+production]→B4_D3[post-deployment+monitoring]"
     RACI::"R[delivery_specialists, critical-engineer:deployment_phases]→A[critical-engineer:production_release+deployment_authority]→C[technical-architect:architecture_docs, implementation-lead:knowledge_transfer]→I[completion-architect, requirements-steward]"
     DELIVERABLES::[B4-HANDOFF.md, B4-OPERATIONS.md+runbooks, B4-USER-GUIDE.md, B4-MAINTENANCE.md, B4-WORKSPACE.md+publication_ready, deployment_packages+config, training_materials]
-    LOCATION::"@build/reports/"
+    LOCATION::"@dev/reports/"
     PRODUCTION_READINESS::[infrastructure_provisioned+tested, deployment_procedures_validated, rollback_tested, monitoring+alerting_active, security_scanning_complete, load_testing_passed, docs_approved, support_trained]
 
   B5_PROMETHEUS_EVOLUTION::POST_DELIVERY_ENHANCEMENT:
@@ -183,7 +183,7 @@ ERROR_HANDLING_TAXONOMY:
 
 COORDINATION_ARCHITECTURE:
   TWO_REPOSITORY_PATTERN::[
-    BUILD_REPOSITORY::"docs/*[ALL_technical_docs], src/, tests/"
+    DEV_REPOSITORY::"docs/*[ALL_technical_docs], src/, tests/"
     COORDINATION_REPOSITORY::"workflow-docs/[phase_artifacts], phase-reports/[B1-B4], planning-docs/[CHARTER,ASSIGNMENTS], ACTIVE-WORK.md[visibility]"
   ]
   
@@ -200,7 +200,7 @@ SESSION_COORDINATION:
   IDEATION_GRADUATION_EXECUTION::[
     D0_IDEATION::"/HestAI-Projects/0-ideation/sessions/[structured_exploration+thread_messaging+manifest_tracking]",
     PROJECT_MIGRATION_EXECUTION::"workspace-architect[B1_02]→migration[0-ideation→{project-name}/sessions/]→MIGRATION_GATE[directory_change_required]→coordination_symlink[.coord/]→using_graduation_assessment_from_D0",
-    ARTIFACT_DISTRIBUTION::"D-phase→@coordination/docs/workflow/, B-phase→@build/reports/"
+    ARTIFACT_DISTRIBUTION::"D-phase→@coordination/docs/workflow/, B-phase→@dev/reports/"
   ]
   
   LINK_STANDARDS::[

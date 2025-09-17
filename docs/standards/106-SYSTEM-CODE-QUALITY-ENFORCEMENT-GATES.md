@@ -251,6 +251,81 @@ done
 }
 ```
 
+## Violation Handling Matrix
+
+### Type 1: Unnecessary Type Assertions
+**Pattern**: `as Type` when type already matches
+**Decision**: Remove assertion or add proper type guard
+```typescript
+// WRONG - unnecessary assertion
+const user = getUser() as User;
+
+// CORRECT - rely on proper typing
+const user = getUser();
+// OR with proper guard
+function isUser(x: unknown): x is User {
+  return typeof (x as any)?.id === "string";
+}
+if (!isUser(value)) throw new Error("Invalid user shape");
+```
+
+### Type 2: Await in Loop
+**Pattern**: Sequential `await` inside iteration
+**Decision Tree**:
+- Independent operations? → Use `Promise.all()`
+- Order critical? → Keep with inline disable + reason
+- Rate limited? → Use `p-limit` pattern
+- Test determinism? → Document and suppress locally
+
+```typescript
+// CONCURRENT (preferred for independent)
+await Promise.all(ids.map(id => store.write(id)));
+
+// SEQUENTIAL (when order matters)
+for (const step of steps) {
+  // eslint-disable-next-line no-await-in-loop -- preserve audit order
+  await pipeline.run(step);
+}
+
+// BOUNDED CONCURRENCY (rate limits)
+import pLimit from "p-limit";
+const limit = pLimit(5);
+await Promise.all(ids.map(id => limit(() => store.write(id))));
+```
+
+### Type 3: Async Without Await
+**Pattern**: `async` function with no `await`
+**Fix**: Remove `async` or add missing `await`
+```typescript
+// WRONG
+const handler = async () => { syncOperation(); };
+
+// CORRECT
+const handler = () => { syncOperation(); };
+// OR if truly async
+const handler = async () => { await asyncOperation(); };
+```
+
+## Suppression Protocol
+
+### Valid Suppression Cases
+1. **Order-dependent operations** (audit logs, state machines)
+2. **Rate-limited APIs** (external service quotas)
+3. **Test determinism** (shared fixtures, sequential assertions)
+4. **Legacy interop** (untyped third-party code with verified shape)
+
+### Suppression Requirements
+```typescript
+// MANDATORY FORMAT
+// eslint-disable-next-line rule-name -- REASON: specific justification
+// @todo: migration plan if applicable
+```
+
+### Tracking Suppressions
+- PR template: "Exceptions introduced: [count] + justification"
+- CI metrics: Track exception count and trend
+- Exception count must trend downward over time
+
 ## Updated Enforcement Matrix
 
 ### Code Quality Standards
@@ -265,6 +340,7 @@ done
 
 <!-- SUBAGENT_AUTHORITY: hestai-doc-steward 2025-08-22T16:08:45-04:00 -->
 | Validation Claims | 105-SYSTEM-CODE-QUALITY | ✅ Evidence requirement | Quality review | Anti-theater examples | No empty checkmarks |
+| Warning Suppression | 106-CODE-QUALITY-GATES | ✅ Inline justification | PR tracking | Trend analysis | Exceptions must decrease |
 
 ## Anti-Validation Theater Measures
 
@@ -282,6 +358,50 @@ done
 - ✅ Use error-resolver for complex issues
 - ✅ Document validation steps taken
 
+## Workflow Integration at B1_02
+
+### Workspace Setup Requirements
+At B1_02 (workspace-architect phase), ensure:
+```json
+{
+  "package.json": {
+    "scripts": {
+      "lint": "eslint . --max-warnings 0",
+      "typecheck": "tsc --noEmit",
+      "test": "jest --coverage --coverageThreshold=80",
+      "quality": "npm run lint && npm run typecheck && npm run test"
+    }
+  },
+  "pre-commit-hooks": ["lint", "typecheck", "test"],
+  "ci-pipeline": "fail-fast on any violation"
+}
+```
+
+### Quality Gate Evidence at B1_02
+- CI configuration file created
+- Pre-commit hooks installed and tested
+- Coverage thresholds configured
+- All scripts match CI commands exactly
+
+## Migration Path for Existing Projects
+
+### Phase 1: Assessment (1-2 days)
+1. Run full quality check: `npm run lint && npm run typecheck`
+2. Document all violations by type
+3. Categorize: Quick fixes vs. Complex issues vs. Valid suppressions
+
+### Phase 2: Remediation (3-5 days)
+1. Fix type errors first (cascading benefits)
+2. Address async/await patterns systematically
+3. Remove unnecessary type assertions
+4. Document remaining suppressions with justification
+
+### Phase 3: Enforcement (ongoing)
+1. Enable pre-commit hooks
+2. Configure CI gates with zero-warning policy
+3. Track exception metrics in PR template
+4. Review suppression count monthly
+
 ## Success Metrics
 
 ### Immediate
@@ -298,9 +418,11 @@ done
 - Reduced validation failures in CI/CD
 - Improved test-driven development practices
 - Elimination of validation theater
+- Suppression count trending downward
 
 ---
 
-**Authority:** Code Quality Enforcement  
-**Implementation:** Hooks + Pre-commit + Agent Integration  
+**Authority:** Code Quality Enforcement
+**Implementation:** Hooks + Pre-commit + Agent Integration
 **Validation:** Evidence-based quality gates
+**Workflow Reference:** B1_02 workspace setup mandatory enforcement

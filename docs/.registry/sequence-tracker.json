@@ -33,7 +33,7 @@
   },
   "last_sequences": {
     "docs/standards": 106,
-    "docs/workflow": 9,
+    "docs/workflow": 10,
     "docs/security": 403,
     "reports": 803
   },
@@ -67,7 +67,7 @@
   ],
   "next_available": {
     "docs/standards": 107,
-    "docs/workflow": 10,
+    "docs/workflow": 11,
     "docs/security": 404,
     "reports": 804
   },

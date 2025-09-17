@@ -1,0 +1,60 @@
+{
+  "scripts": {
+    "// Quality Enforcement Scripts": "Commands that must match CI/CD exactly",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx --max-warnings 0",
+    "lint:check": "eslint . --ext .ts,.tsx,.js,.jsx",
+    "lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write . && eslint --fix .",
+    "format:check": "prettier --check .",
+
+    "// Testing Scripts": "Comprehensive test execution",
+    "test": "jest --coverage --watchAll=false",
+    "test:watch": "jest --watch",
+    "test:integration": "jest --testMatch='**/*.integration.test.ts'",
+    "test:unit": "jest --testMatch='**/*.test.ts' --testPathIgnorePatterns='**/*.integration.test.ts'",
+    "test:validation": "jest --testMatch='**/*validation*.test.ts'",
+
+    "// Integration Quality Gates": "Verify complete validation-to-execution flow",
+    "ci": "npm run format && npm run lint && npm run typecheck && npm run test",
+    "ci:strict": "npm run format:check && npm run lint && npm run typecheck && npm run test && npm run test:integration",
+    "quality:check": "npm run lint:check && npm run typecheck && npm run format:check",
+    "quality:validate": "npm run test:validation && npm run test:integration",
+
+    "// Pre-commit Integration": "Hooks and validation",
+    "prepare": "husky install",
+    "pre-commit": "lint-staged",
+
+    "// Build and Deploy": "Production readiness",
+    "build": "npm run ci && tsc",
+    "build:check": "tsc --noEmit && npm run test",
+    "deploy:check": "npm run ci:strict && npm run build"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!src/**/*.test.{ts,tsx}",
+      "!src/**/*.integration.test.{ts,tsx}",
+      "!src/**/*.d.ts"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
+      }
+    }
+  }
+}

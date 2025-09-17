@@ -3,9 +3,7 @@
   "last_updated": "2025-09-04T15:30:00Z",
   "updated_by": "hestai-doc-steward",
   "purpose": "Registry-based approval system for HestAI documentation",
-
   "sequence": 813,
-
   "approved_docs": {
     "README.md": {
       "approved_date": "2025-08-20",
@@ -83,13 +81,17 @@
       "reason": "Critical B1 infrastructure failure retrospective - preserves system wisdom and corrective actions preventing future workspace-architect omissions",
       "category": "retrospective",
       "path": "reports/retrospectives/"
+    },
+    "010-WORKFLOW-CONTEXT-PRESERVATION-IN-DELEGATION.md": {
+      "approved_date": "2025-09-15",
+      "approved_by": "hestai-doc-steward",
+      "reason": "Essential pattern for preventing context loss in agent delegation - system steward observation with concrete solution",
+      "category": "workflow",
+      "path": "docs/workflow/"
     }
   },
-
   "pending_requests": {},
-
   "denied_requests": {},
-
   "legacy_bloat": {
     "104-DOC-WORKFLOW-QUICK-REFERENCE.md": {
       "reason": "Redundant with 102-AGENT-CAPABILITY-LOOKUP - same information in inferior format",
@@ -239,7 +241,6 @@
       "bloat_type": "wrong_location"
     }
   },
-
   "statistics": {
     "total_approved": 11,
     "total_legacy_bloat": 20,
@@ -259,7 +260,6 @@
       "theoretical_content": 3
     }
   },
-
   "consolidation_plan": {
     "immediate_deletions": [
       "105-DOC-MCP-DEPLOYMENT-GUIDE.md",
@@ -282,7 +282,6 @@
       "401-403-security-docs → Project security requirements"
     ]
   },
-
   "notes": {
     "audit_complete": "Initial registry population completed 2025-09-04",
     "enforcement": "Dual hooks check this registry before allowing any document creation",
@@ -293,7 +292,6 @@
     "research_relocation": "Moved 2,801 lines of speculation to /research/future-concepts/ - no longer operational documentation",
     "evidence_base": "Analysis based on line counts and content examination"
   },
-
   "quality_assessment": {
     "assessment_complete": "2025-09-04T15:30:00-05:00",
     "value_density": "35% (11 valuable docs of 31 total)",

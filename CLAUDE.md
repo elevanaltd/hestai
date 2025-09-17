@@ -1,5 +1,28 @@
 # HestAI Quick Reference
 
+## Build Quality Policy
+**Reference**: `/Volumes/HestAI/docs/standards/106-SYSTEM-CODE-QUALITY-ENFORCEMENT-GATES.md`
+- Zero-tolerance for warnings/errors
+- Suppressions require inline justification
+- Enforced at B1_02 workspace setup
+- See violation handling matrix in doc
+
+## FILE_STANDARDS (B2→B3 Integration Enhancement)
+**Purpose**: Prevent incomplete integration patterns that cause build failures
+- **ALWAYS_ADD_FINAL_NEWLINE**: true (EOF consistency)
+- **IMPORT_ORDERING**: external→internal→types (dependency clarity)
+- **NO_ANY_TYPE**: use unknown or specific types (type safety preservation)
+- **COMPLETE_INTEGRATIONS**: no unused validation declarations (validation-to-execution flow)
+- **TYPE_SAFETY_PRESERVATION**: validated types flow through execution without casting
+- **STRUCTURED_ERROR_HANDLING**: preserve error structure, never flatten to strings
+- **INTEGRATION_TESTING**: every validation layer must have execution flow test
+
+### Integration Validation Requirements
+- **Pre-commit Hook**: Check for unused validation variables
+- **TypeScript Config**: `noUnusedLocals: true`, `noUnusedParameters: true`
+- **Integration Tests**: Verify validation-to-execution flow completeness
+- **Error Pattern Detection**: Scan for TYPE_SAFETY_THEATER anti-patterns
+
 ## What is HestAI?
 **Multi-agent workflow orchestration system** - coordinates specialized AI agents through D1→B4 phases to deliver systematic project results.
 
@@ -53,11 +76,13 @@
 - **Architecture questions?** → `mcp__hestai__critical-engineer`
 
 ## Error Handling
-- **Single component/module failing** → `error-resolver`
-- **Multiple systems/cascade failures** → `error-architect`
+- **ERROR TRIAGE PROTOCOL** → `/Users/shaunbuswell/.claude/protocols/ERROR-TRIAGE-LOOP.md`
+- **ANY errors** → `error-architect` (unified handler for simple to complex)
+- **CI failures** → Run triage loop: Fix Build→Types→Unused→Async→Logic→Tests
+- **Error classification** → error-architect self-classifies: SIMPLE/COMPLEX/ESCALATION
 - **12+ errors from one source** → `error-architect`
 - **CI/CD pipeline issues** → `error-architect`
-- **Config/environment errors** → `error-resolver`
+- **Config/environment errors** → `error-architect`
 - **Framework integration problems** → `error-architect`
 
 ## Authority Chain

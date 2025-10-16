@@ -32,47 +32,36 @@
     }
   },
   "last_sequences": {
-    "docs/standards": 103,
+    "docs/standards": 109,
     "docs/workflow": 10,
     "docs/security": 403,
-    "reports": 804
+    "reports": 803
   },
   "active_conflicts": [],
   "next_available": {
-    "docs/standards": 104,
+    "docs/standards": 110,
     "docs/workflow": 11,
     "docs/security": 404,
-    "reports": 805
+    "reports": 804
   },
   "consolidation_record": {
     "consolidation_date": "2025-09-17",
-    "consolidated_sequences": [
-      102,
-      103,
-      104,
-      105,
-      107,
-      108,
-      110
-    ],
+    "consolidated_sequences": [102, 103, 104, 105, 107, 108, 110],
     "sequences_freed": 7,
-    "renumbering_completed": "2025-09-17",
-    "post_consolidation_numbering": "100-103 sequential clean numbering",
-    "next_allocation": "Sequential from 104",
-    "gaps_created": "None - consolidated sequences archived, clean sequential order maintained"
+    "next_allocation": "Sequential from 110",
+    "gaps_created": "None - consolidated sequences archived, not reused"
   },
   "governance_notes": {
     "range_enforcement": "All hooks now validate sequence numbers against directory ranges",
     "conflict_resolution": "System-steward approval required for all document creation",
     "structural_reorganization": "Security documents moved to proper directory structure 2025-08-19",
     "consolidation_complete": "Major standards directory consolidation completed 2025-09-17 - 67% reduction achieved",
-    "renumbering_complete": "Post-consolidation renumbering to 100-103 sequential completed 2025-09-17",
     "quality_enforcement": "Only operational documents retained - 100% value density achieved"
   },
   "metadata": {
     "last_updated": "2025-09-17T15:16:00Z",
     "updated_by": "hestai-doc-steward",
-    "version": "2.4",
-    "schema_changes": "Updated for post-consolidation renumbering to clean 100-103 sequential order"
+    "version": "2.3",
+    "schema_changes": "Added consolidation_record section to track major cleanup operations"
   }
 }

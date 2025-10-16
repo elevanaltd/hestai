@@ -1,0 +1,499 @@
+[
+  {
+    "id": "audit-1758632376300-8723615f",
+    "timestamp": "2025-09-23T12:59:36.300Z",
+    "operation": "update",
+    "tableId": "68c24591b7d2aad485e8f781",
+    "recordId": "68d297d646caa024a521aaca",
+    "payload": {
+      "dependency": {
+        "predecessors": [
+          "68c7d062cd8d7fc61d73d46d"
+        ],
+        "successors": [
+          "68c7d062cd8d7fc61d73d46e"
+        ]
+      }
+    },
+    "result": {
+      "title": "EAV015: 11b-VO Rework |",
+      "description": {
+        "data": {},
+        "html": "",
+        "preview": "",
+        "yjsData": "AAA="
+      },
+      "assigned_to": [],
+      "status": {
+        "value": "not_started",
+        "updated_on": "2025-09-23T12:51:34.915000Z"
+      },
+      "due_date": {
+        "from_date": {
+          "date": null,
+          "include_time": false
+        },
+        "to_date": {
+          "date": null,
+          "include_time": false
+        },
+        "status_is_completed": false,
+        "status_updated_on": null
+      },
+      "priority": "",
+      "first_created": {
+        "on": "2025-09-23T12:51:34.769000Z",
+        "by": "659beecfbbef5efee3a27544"
+      },
+      "last_updated": {
+        "on": "2025-09-23T12:51:34.769000Z",
+        "by": "659beecfbbef5efee3a27544"
+      },
+      "followed_by": [],
+      "comments_count": 0,
+      "autonumber": 742,
+      "task12code": "11b_vo_review_rework",
+      "taskvar890": [],
+      "projid1234": [
+        "68acac24271c120f1c9f1f01"
+      ],
+      "checklist99": {
+        "items": [],
+        "total_items": 0,
+        "completed_items": 0
+      },
+      "dependency": {
+        "predecessor": [],
+        "successor": []
+      },
+      "proj_due_dt": [
+        [
+          {
+            "from_date": {
+              "date": null,
+              "include_time": false
+            },
+            "to_date": {
+              "date": "2025-10-27T00:00:00Z",
+              "include_time": false
+            },
+            "status_is_completed": false,
+            "status_updated_on": "2025-09-17T09:49:54.419000Z"
+          }
+        ]
+      ],
+      "project_eav_code": [
+        [
+          "EAV015"
+        ]
+      ],
+      "sb4608abff": [],
+      "sd0cb2a7df": [],
+      "resdays123": "1.0",
+      "wkldstat99": "🟢 Normal",
+      "hourscalc8": "7.5",
+      "s43e3d4614": [
+        [
+          "14"
+        ]
+      ],
+      "sb8a857bda": [
+        [
+          "2"
+        ]
+      ],
+      "s8a9d77b9e": [
+        [
+          "13"
+        ]
+      ],
+      "sw6yt3ij": [],
+      "firstwk456": {
+        "date": null,
+        "include_time": false
+      },
+      "winbreach7": "✅ OK",
+      "actcomp890": {
+        "date": null,
+        "include_time": false
+      },
+      "s4d21555be": [
+        [
+          [
+            "659beecfbbef5efee3a27544"
+          ]
+        ]
+      ],
+      "lastwk999": {
+        "date": null,
+        "include_time": false
+      },
+      "sfkm58hd": null,
+      "wrkblk789": {
+        "from_date": {
+          "date": null,
+          "include_time": false
+        },
+        "to_date": {
+          "date": null,
+          "include_time": false
+        }
+      },
+      "workblk123": {
+        "from_date": {
+          "date": null,
+          "include_time": false
+        },
+        "to_date": {
+          "date": null,
+          "include_time": false
+        },
+        "status_is_completed": false,
+        "status_updated_on": null
+      },
+      "s8j73x1x": null,
+      "782b382620": null,
+      "s5597f27e5": [
+        [
+          {
+            "value": "5b6c7d8e-9f0a-1b2c-3d4e-5f6a7b8c9d0e",
+            "updated_on": "2025-09-17T09:49:54.419000Z"
+          }
+        ]
+      ],
+      "id": "68d297d646caa024a521aaca",
+      "application_slug": "sqiwq37m",
+      "application_id": "68c24591b7d2aad485e8f781",
+      "ranking": {
+        "default": "aaaaanqtjs"
+      },
+      "deleted_date": {
+        "date": null,
+        "include_time": false
+      },
+      "deleted_by": null
+    },
+    "beforeData": {
+      "title": "EAV015: 11b-VO Rework |",
+      "description": {
+        "data": {},
+        "html": "",
+        "preview": "",
+        "yjsData": "AAA="
+      },
+      "assigned_to": [],
+      "status": {
+        "value": "not_started",
+        "updated_on": "2025-09-23T12:51:34.915000Z"
+      },
+      "due_date": {
+        "from_date": {
+          "date": null,
+          "include_time": false
+        },
+        "to_date": {
+          "date": null,
+          "include_time": false
+        },
+        "status_is_completed": false,
+        "status_updated_on": null
+      },
+      "priority": "",
+      "first_created": {
+        "on": "2025-09-23T12:51:34.769000Z",
+        "by": "659beecfbbef5efee3a27544"
+      },
+      "last_updated": {
+        "on": "2025-09-23T12:51:34.769000Z",
+        "by": "659beecfbbef5efee3a27544"
+      },
+      "followed_by": [],
+      "comments_count": 0,
+      "autonumber": 742,
+      "task12code": "11b_vo_review_rework",
+      "taskvar890": [],
+      "projid1234": [
+        "68acac24271c120f1c9f1f01"
+      ],
+      "checklist99": {
+        "items": [],
+        "total_items": 0,
+        "completed_items": 0
+      },
+      "dependency": {
+        "predecessor": [],
+        "successor": []
+      },
+      "proj_due_dt": [
+        [
+          {
+            "from_date": {
+              "date": null,
+              "include_time": false
+            },
+            "to_date": {
+              "date": "2025-10-27T00:00:00Z",
+              "include_time": false
+            },
+            "status_is_completed": false,
+            "status_updated_on": "2025-09-17T09:49:54.419000Z"
+          }
+        ]
+      ],
+      "project_eav_code": [
+        [
+          "EAV015"
+        ]
+      ],
+      "sb4608abff": [],
+      "sd0cb2a7df": [],
+      "resdays123": "1.0",
+      "wkldstat99": "🟢 Normal",
+      "hourscalc8": "7.5",
+      "s43e3d4614": [
+        [
+          "14"
+        ]
+      ],
+      "sb8a857bda": [
+        [
+          "2"
+        ]
+      ],
+      "s8a9d77b9e": [
+        [
+          "13"
+        ]
+      ],
+      "sw6yt3ij": [],
+      "firstwk456": {
+        "date": null,
+        "include_time": false
+      },
+      "winbreach7": "✅ OK",
+      "actcomp890": {
+        "date": null,
+        "include_time": false
+      },
+      "s4d21555be": [
+        [
+          [
+            "659beecfbbef5efee3a27544"
+          ]
+        ]
+      ],
+      "lastwk999": {
+        "date": null,
+        "include_time": false
+      },
+      "sfkm58hd": null,
+      "wrkblk789": {
+        "from_date": {
+          "date": null,
+          "include_time": false
+        },
+        "to_date": {
+          "date": null,
+          "include_time": false
+        }
+      },
+      "workblk123": {
+        "from_date": {
+          "date": null,
+          "include_time": false
+        },
+        "to_date": {
+          "date": null,
+          "include_time": false
+        },
+        "status_is_completed": false,
+        "status_updated_on": null
+      },
+      "s8j73x1x": null,
+      "782b382620": null,
+      "s5597f27e5": [
+        [
+          {
+            "value": "5b6c7d8e-9f0a-1b2c-3d4e-5f6a7b8c9d0e",
+            "updated_on": "2025-09-17T09:49:54.419000Z"
+          }
+        ]
+      ],
+      "id": "68d297d646caa024a521aaca",
+      "application_slug": "sqiwq37m",
+      "application_id": "68c24591b7d2aad485e8f781",
+      "ranking": {
+        "default": "aaaaanqtjs"
+      },
+      "deleted_date": {
+        "date": null,
+        "include_time": false
+      },
+      "deleted_by": null
+    },
+    "reversalInstructions": {
+      "operation": "update",
+      "tableId": "68c24591b7d2aad485e8f781",
+      "recordId": "68d297d646caa024a521aaca",
+      "payload": {
+        "title": "EAV015: 11b-VO Rework |",
+        "description": {
+          "data": {},
+          "html": "",
+          "preview": "",
+          "yjsData": "AAA="
+        },
+        "assigned_to": [],
+        "status": {
+          "value": "not_started",
+          "updated_on": "2025-09-23T12:51:34.915000Z"
+        },
+        "due_date": {
+          "from_date": {
+            "date": null,
+            "include_time": false
+          },
+          "to_date": {
+            "date": null,
+            "include_time": false
+          },
+          "status_is_completed": false,
+          "status_updated_on": null
+        },
+        "priority": "",
+        "first_created": {
+          "on": "2025-09-23T12:51:34.769000Z",
+          "by": "659beecfbbef5efee3a27544"
+        },
+        "last_updated": {
+          "on": "2025-09-23T12:51:34.769000Z",
+          "by": "659beecfbbef5efee3a27544"
+        },
+        "followed_by": [],
+        "comments_count": 0,
+        "autonumber": 742,
+        "task12code": "11b_vo_review_rework",
+        "taskvar890": [],
+        "projid1234": [
+          "68acac24271c120f1c9f1f01"
+        ],
+        "checklist99": {
+          "items": [],
+          "total_items": 0,
+          "completed_items": 0
+        },
+        "dependency": {
+          "predecessor": [],
+          "successor": []
+        },
+        "proj_due_dt": [
+          [
+            {
+              "from_date": {
+                "date": null,
+                "include_time": false
+              },
+              "to_date": {
+                "date": "2025-10-27T00:00:00Z",
+                "include_time": false
+              },
+              "status_is_completed": false,
+              "status_updated_on": "2025-09-17T09:49:54.419000Z"
+            }
+          ]
+        ],
+        "project_eav_code": [
+          [
+            "EAV015"
+          ]
+        ],
+        "sb4608abff": [],
+        "sd0cb2a7df": [],
+        "resdays123": "1.0",
+        "wkldstat99": "🟢 Normal",
+        "hourscalc8": "7.5",
+        "s43e3d4614": [
+          [
+            "14"
+          ]
+        ],
+        "sb8a857bda": [
+          [
+            "2"
+          ]
+        ],
+        "s8a9d77b9e": [
+          [
+            "13"
+          ]
+        ],
+        "sw6yt3ij": [],
+        "firstwk456": {
+          "date": null,
+          "include_time": false
+        },
+        "winbreach7": "✅ OK",
+        "actcomp890": {
+          "date": null,
+          "include_time": false
+        },
+        "s4d21555be": [
+          [
+            [
+              "659beecfbbef5efee3a27544"
+            ]
+          ]
+        ],
+        "lastwk999": {
+          "date": null,
+          "include_time": false
+        },
+        "sfkm58hd": null,
+        "wrkblk789": {
+          "from_date": {
+            "date": null,
+            "include_time": false
+          },
+          "to_date": {
+            "date": null,
+            "include_time": false
+          }
+        },
+        "workblk123": {
+          "from_date": {
+            "date": null,
+            "include_time": false
+          },
+          "to_date": {
+            "date": null,
+            "include_time": false
+          },
+          "status_is_completed": false,
+          "status_updated_on": null
+        },
+        "s8j73x1x": null,
+        "782b382620": null,
+        "s5597f27e5": [
+          [
+            {
+              "value": "5b6c7d8e-9f0a-1b2c-3d4e-5f6a7b8c9d0e",
+              "updated_on": "2025-09-17T09:49:54.419000Z"
+            }
+          ]
+        ],
+        "id": "68d297d646caa024a521aaca",
+        "application_slug": "sqiwq37m",
+        "application_id": "68c24591b7d2aad485e8f781",
+        "ranking": {
+          "default": "aaaaanqtjs"
+        },
+        "deleted_date": {
+          "date": null,
+          "include_time": false
+        },
+        "deleted_by": null
+      }
+    },
+    "hash": "63dc995436fb05e95a3a2b690bd3add3a1620516fe914cbfbfb8405d2452d9be"
+  }
+]

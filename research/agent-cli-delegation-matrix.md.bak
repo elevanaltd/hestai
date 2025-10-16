@@ -1,0 +1,193 @@
+# Agent CLI Delegation Matrix
+
+<!-- HESTAI_DOC_STEWARD_BYPASS: Research directory exemption per /Volumes/HestAI/research/README.md line 12: "No registry approval needed (not operational docs)" -->
+
+**Research Status:** Active empirical data collection
+**Purpose:** Track agent performance across execution platforms (Claude Code, Gemini CLI, Codex CLI)
+**Started:** 2025-10-10
+**Maintained By:** User feedback integration
+
+## Overview
+
+This document tracks empirical results from agent role activations across different CLI platforms to optimize the three-tier agent architecture for quota preservation and capability matching.
+
+### Three-Tier Architecture Reference
+
+- **Tier 1 (Exploration):** Gemini CLI (free 1000 req/day) - autonomous file operations, 1M context
+- **Tier 2 (Validation):** Codex CLI (flat-rate) + Gemini CLI - constitutional authority, focused validation
+- **Tier 3 (Implementation):** Claude Code subagents - execution authority, quota-critical
+
+## Agent Platform Mappings
+
+### Workflow Agents
+
+#### D0 - Ideation Setup
+| Agent | Primary Platform | Status | Notes |
+|-------|-----------------|--------|-------|
+| sessions-manager | Claude Code | ✅ Operational | Session establishment, directory creation |
+
+#### D1 - Problem Understanding
+| Agent | Primary Platform | Status | Notes |
+|-------|-----------------|--------|-------|
+| idea-clarifier | Claude Code | ✅ Operational | Concept refinement, problem essence |
+| north-star-architect | Claude Code | ✅ Operational | Multi-platform tested: Claude most complete/decision-ready; Gemini concise; Codex strong CI/ESM focus. **Recommendation: Claude Code confirmed** |
+
+#### D2 - Solution Generation
+| Agent | Primary Platform | Status | Notes |
+|-------|-----------------|--------|-------|
+| ideator | Multi-platform | ✅ Operational | Tested across 3 platforms: Claude (deep architectural patterns: event-sourcing, optimistic locking); Gemini (UX-oriented: Wizard, Board, Tabbed); Codex (collaboration: section capsules, isolation envelope). **Context-dependent selection** |
+| validator | Claude Code | ✅ Operational | **Constitutional D2_02 validation confirmed**: Claude delivered exemplary constraint enforcement (12 evidence gaps, 7 artifact requirements, forcing function choice framework). Codex provided stricter blocking authority (marked Approach 5 IMPOSSIBLE vs Claude's conditional feasibility). Both executed TRUE D2_02 role: brutal reality checks, hard constraint identification, evidence gap cataloging, uncomfortable truths. **Recommendation: Claude Code primary** (comprehensive), Codex CLI secondary (stricter blocking). Gemini CLI failed (permission errors). |
+| synthesizer | Claude Code | ✅ Operational | Breakthrough synthesis, third-way solutions |
+
+#### D3 - Blueprint Creation
+| Agent | Primary Platform | Status | Notes |
+|-------|-----------------|--------|-------|
+| design-architect | Claude Code | ✅ Operational | Blueprint refinement, implementation specs |
+| technical-architect | Claude Code | ✅ Operational | System design, architectural decisions |
+| visual-architect | Claude Code | ✅ Operational | UI/UX design, mockup creation |
+
+#### B0 - Design Validation
+| Agent | Primary Platform | Status | Notes |
+|-------|-----------------|--------|-------|
+| critical-design-validator | Claude Code | ✅ Operational | GO/NO-GO authority, feasibility assessment |
+
+#### B1 - Build Planning
+| Agent | Primary Platform | Status | Notes |
+|-------|-----------------|--------|-------|
+| task-decomposer | Claude Code | ✅ Operational | Implementation planning, task sequencing |
+| workspace-architect | Claude Code | ✅ Operational | Project structure, workspace creation |
+
+#### B2 - Implementation
+| Agent | Primary Platform | Status | Notes |
+|-------|-----------------|--------|-------|
+| implementation-lead | Claude Code | ✅ Operational | Build execution hub, task coordination |
+| error-architect | Claude Code | ✅ Operational | Systematic error resolution |
+| code-review-specialist | Codex CLI | 🔄 Testing | Code quality enforcement, review standards |
+
+#### B3 - Integration
+| Agent | Primary Platform | Status | Notes |
+|-------|-----------------|--------|-------|
+| completion-architect | Claude Code | ✅ Operational | Final integration, system unification |
+| universal-test-engineer | Claude Code | ✅ Operational | 90% coverage across all languages |
+
+#### B4 - Delivery
+| Agent | Primary Platform | Status | Notes |
+|-------|-----------------|--------|-------|
+| solution-steward | Claude Code | ✅ Operational | Delivery handoff, knowledge synthesis |
+| system-steward | Claude Code | ✅ Operational | Meta-observation, documentation preservation |
+
+#### B5 - Enhancement
+| Agent | Primary Platform | Status | Notes |
+|-------|-----------------|--------|-------|
+| requirements-steward | Claude Code | ✅ Operational | Requirements alignment, process adherence |
+| edge-optimizer | Claude Code | 🔄 Testing | Boundary exploration, breakthrough optimization |
+
+### Specialist Agents (Non-Workflow)
+
+#### Exploration & Analysis (Tier 1 - Gemini CLI)
+| Agent | Primary Platform | Status | Notes |
+|-------|-----------------|--------|-------|
+| surveyor | Gemini CLI | ✅ Operational | Scanned 5707 files in 50s, 237K tokens, ZERO Claude quota |
+| quality-observer | Gemini CLI | 🔄 Testing | Code quality assessment, standards compliance |
+| research-analyst | Gemini CLI | 🔄 Testing | Fact finding, reality validation |
+| coherence-oracle | Gemini CLI | 🔄 Testing | Cross-boundary pattern recognition |
+
+#### Validation & Authority (Tier 2)
+| Agent | Primary Platform | Status | Notes |
+|-------|-----------------|--------|-------|
+| critical-engineer | Codex CLI | ✅ Operational | Production readiness, domain accountability |
+| testguard | Gemini CLI | ✅ Operational | Test integrity guardian, anti-manipulation |
+| security-specialist | Codex CLI | 🔄 Testing | Auth validation, secrets management |
+| test-methodology-guardian | Claude Code | ✅ Operational | TEST_INFRASTRUCTURE accountability |
+
+#### Orchestration & Coordination
+| Agent | Primary Platform | Status | Notes |
+|-------|-----------------|--------|-------|
+| holistic-orchestrator | Claude Code | ✅ Operational | Constitutional authority, cross-boundary coherence |
+| directory-curator | Claude Code | ✅ Operational | Safe reorganization with git-first safety |
+
+#### Specialized Tools (MCP/CLI)
+| Agent | Primary Platform | Status | Notes |
+|-------|-----------------|--------|-------|
+| documentation-researcher | Claude Code (MCP) | ✅ Operational | Context7 library documentation retrieval |
+| smartsuite-expert | Claude Code (MCP) | ✅ Operational | SmartSuite API operations, field format mastery |
+
+## Feedback Integration Template
+
+### Agent Performance Report
+```markdown
+**Agent:** [agent-name]
+**Platform Tested:** [Claude Code | Gemini CLI | Codex CLI]
+**Date:** YYYY-MM-DD
+**Task Context:** [brief description]
+
+**Results:**
+- Performance: [observations]
+- Token Usage: [if measurable]
+- Quality: [output assessment]
+- Issues: [any problems encountered]
+
+**Recommendation:**
+- [ ] Keep on current platform
+- [ ] Switch to: [alternative platform]
+- [ ] Needs optimization: [details]
+```
+
+## Platform Selection Criteria
+
+### When to Use Gemini CLI (Tier 1)
+- ✅ Autonomous exploration (no file modification needed)
+- ✅ Large codebase scanning (1M context advantage)
+- ✅ Pattern recognition across many files
+- ✅ Initial reconnaissance/survey work
+- ✅ Non-authoritative analysis
+
+### When to Use Codex CLI (Tier 2)
+- ✅ Code review and quality assessment
+- ✅ Constitutional authority decisions (GO/NO-GO)
+- ✅ Security validation
+- ✅ Architecture evaluation
+- ✅ Pre-filtered validation tasks
+
+### When to Use Claude Code (Tier 3)
+- ✅ File modification/creation required
+- ✅ Execution authority needed
+- ✅ Complex orchestration tasks
+- ✅ Human-in-the-loop workflows
+- ✅ MCP tool integration needed
+
+## Empirical Findings
+
+### Proven Successes
+1. **surveyor (Gemini CLI)** - 5707 files scanned, 50s execution, zero Claude quota usage
+2. **critical-engineer (Codex CLI)** - Constitutional authority via CLI delegation working
+3. **testguard (Gemini CLI)** - Test integrity guardian operational via CLI
+4. **north-star-architect (Claude Code)** - Tested across 3 platforms (Claude/Gemini/Codex) for D1 North Star creation. Claude produced most complete, decision-ready output with schema sketches, RLS outline, success metrics. Gemini: concise with clear immutables. Codex: strong CI/ESM constraints. Recommendation: Claude Code primary platform confirmed.
+5. **ideator (Multi-platform)** - D2 ideation tested across 3 platforms. Claude: Deep architectural patterns (event-sourcing, optimistic locking, temporal validity). Gemini: Clear UX models (Structured Document, Wizard, technology-agnostic). Codex: Structured collaboration patterns (section capsules, reference pulse). All platforms viable - select based on architectural depth vs UX clarity vs collaboration focus needs.
+6. **validator (Claude Code)** - D2 constraint validation tested across 3 platforms. Claude: Balanced thoroughness with clear constraint identification and GO/NO-GO framing. Codex: Strict evidence enforcement, hard-nosed on governance gaps and compliance. Gemini: UX-pragmatic with concise constraint framing. Recommendation: Claude Code primary platform. **Constitutional Analysis**: Validator's D2 workflow role is feasibility gatekeeping and reality-grounding BEFORE synthesis (providing validated constraints as synthesizer inputs), distinct from B0 GO/NO-GO validation. Assessment feedback may reflect B0-style validation quality vs D2 constraint enforcement function.
+
+### Platform Migration Candidates
+*[To be populated based on user feedback]*
+
+### Known Issues
+*[To be populated based on user feedback]*
+
+## Update Protocol
+
+**Trigger:** User provides feedback/results for agent role activation
+**Action:** Update relevant agent entry with empirical data
+**Maintainer:** system-steward or user direct edits
+**Format:** Use feedback integration template above
+
+---
+
+**Status Legend:**
+- ✅ Operational - Proven working in production
+- 🔄 Testing - Under evaluation
+- ⚠️ Issues - Known problems, use with caution
+- 🚫 Deprecated - No longer recommended
+- 📝 Planned - Not yet implemented
+
+**Last Updated:** 2025-10-10
+
+<!-- SUBAGENT_AUTHORITY: hestai-doc-steward 2025-10-10T11:45:00-04:00 -->

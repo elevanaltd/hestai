@@ -56,11 +56,16 @@ WORKFLOW_PHASES:
     EXIT::[graduation_criteria_met, graduation_readiness_assessed, ready_for_D1]
 
   D1_APOLLO_ORACLE::UNDERSTANDING_ESTABLISHMENT:
-    SUBPHASES::"D1_01[idea-clarifier:flesh_out]→D1_02[research-analyst:explore_options]→D1_03[idea-clarifier:North_Star]→D1_04[requirements-steward:validate]"
+    SUBPHASES::"D1_01[idea-clarifier:exploration]:OPTIONAL→D1_02[research-analyst:investigation]:OPTIONAL→D1_03[requirements-architect:North_Star_formalization]:MANDATORY→D1_04[requirements-steward:validate]"
+    ENTRY_PATTERNS::[
+      FULL_DISCOVERY::"idea-clarifier→research-analyst→requirements-architect (user needs exploration)",
+      DIRECT_ENTRY::"requirements-architect only (user knows requirements, skip exploration)"
+    ]
     NATURAL_FLOW::"D1 maintains natural conversational flow rather than artificial subdivisions"
     RACI::"R[phase_specialists]→A[critical-engineer:North_Star_complete+correct]→C[none:not_building_yet]→I[none:no_implementation_teams]"
 
-    DELIVERABLE::"0xx-PROJECT[-NAME]-NORTH-STAR.md+immutable_requirements+assumption_audit"
+    DELIVERABLE::"0xx-PROJECT[-NAME]-NORTH-STAR.md+immutable_requirements[7±2]+assumption_audit+commitment_ceremony_approval"
+    NORTH_STAR_ARCHITECTURE::"4-layer structure: immutable_core[5-9] + constrained_variables + assumption_register + explicit_non-requirements"
     LOCATION::"@coordination/docs/workflow/[post-graduation_distribution]"
 
   D2_ATHENA_INNOVATION::SOLUTION_APPROACHES:

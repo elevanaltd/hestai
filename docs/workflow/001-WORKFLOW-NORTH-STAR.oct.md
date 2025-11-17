@@ -28,8 +28,8 @@ WORKFLOW_MYTHOLOGY:
   ]
 
 SCOPE_GATE_CLASSIFICATION:
-  ENTRY_REQUIREMENT::"Successful ideation+graduation→formal D1 requires scope classification"  
-  AUTHORITY::"R[idea-clarifier:initial]→A[critical-engineer:final]→C[requirements-steward:alignment]"
+  ENTRY_REQUIREMENT::"Successful ideation+graduation→formal D1 requires scope classification"
+  AUTHORITY::"R[idea-clarifier:initial]→A[critical-engineer:final]→C[requirements-steward:alignment, principal-engineer:long_term_viability_for_COMPLEX+ENTERPRISE]"
   CALIBRATION_CHECKPOINTS::"MANDATORY workflow-scope-calibrator invocation at: D1_start, B0_00, B1_00, B2_00, B3_00, B4_00, ANY >20_task_threshold"
   
   SCOPE_MATRIX::[
@@ -88,7 +88,7 @@ WORKFLOW_PHASES:
   B0_THEMIS_JUDGMENT::VALIDATION_GATE:
     PURPOSE::"Critical design validation→GO/NO-GO decision for build phase"
     SUBPHASES::"B0_01[critical-design-validator:completeness+failure_modes]→B0_02[requirements-steward:North_Star_alignment]→B0_03[technical-architect:feasibility+scalability]→B0_04[critical-engineer:GO/NO-GO_decision]"
-    RACI::"R[validation_specialists]→A[critical-engineer:final_GO/NO-GO_authority]→C[security-specialist:security, error-architect:failure_modes]→I[implementation-lead, solution-steward, task-decomposer]"
+    RACI::"R[validation_specialists]→A[critical-engineer:final_GO/NO-GO_authority]→C[security-specialist:security, error-architect:failure_modes, principal-engineer:long_term_viability]→I[implementation-lead, solution-steward, task-decomposer]"
     ENTRY_REQUIREMENTS::[NORTH-STAR.md+approved+immutable, D2-DESIGN.md+validated, D3-BLUEPRINT.md+complete, assumption_audits_complete]
     DELIVERABLE::"B0-VALIDATION.md+GO/NO-GO_decision"
     LOCATION::"@dev/reports/"
@@ -98,7 +98,7 @@ WORKFLOW_PHASES:
   B1_HERMES_COORDINATION::BUILD_EXECUTION_ROADMAP:
     PURPOSE::"Validated architecture→actionable implementation plan"
     SUBPHASES::"B1_01[task-decomposer:atomic_tasks+dependencies]→B1_02[workspace-architect:project_migration_execution+structure+environments+CI/CD_pipeline+QUALITY_GATES_MANDATORY]→MIGRATION_GATE→B1_03[workspace-architect:build_directory_validation]→B1_04[implementation-lead:task_sequencing]→B1_05[build-plan-checker:completeness+feasibility]"
-    RACI::"R[planning_specialists]→A[critical-engineer:final_build_plan_approval]→C[technical-architect:guidance, requirements-steward:scope]→I[solution-steward, code-review-specialist, universal-test-engineer]"
+    RACI::"R[planning_specialists]→A[critical-engineer:final_build_plan_approval]→C[technical-architect:guidance, requirements-steward:scope, principal-engineer:tech_debt_strategy_at_B1_01]→I[solution-steward, code-review-specialist, universal-test-engineer]"
     MIGRATION_GATE::"B1_02_completion→STOP→HUMAN_MIGRATION_POINT"
     RESTART_IN_NEW_LOCATION:: "cd /Volumes/HestAI-Projects/{PROJECT_NAME}/build/VERIFY_pwd→RESUME_B1_03"
     QUALITY_GATE_MANDATORY::"⚠️ SEE /Users/shaunbuswell/.claude/protocols/WORKSPACE-SETUP.md - NO src/ FILES WITHOUT PASSING: npm run lint && npm run typecheck && npm run test"
@@ -124,9 +124,12 @@ MCP_TOOL_PATTERNS::[
     "mcp__hestai__analyze→comprehensive system analysis"
   ],
   VALIDATION_TOOLS::[
-    "mcp__hestai__critical-engineer→technical validation",
+    "mcp__hestai__critical-engineer→tactical production validation (Is this code ready RIGHT NOW?)",
     "mcp__hestai__testguard→test methodology enforcement",
     "mcp__hestai__secaudit→security audit analysis"
+  ],
+  CLI_SPECIALISTS::[
+    "mcp__hestai__clink[cli_name:codex,role:principal-engineer]→strategic architectural validation (Will this survive 6 months?)"
   ],
   DEEP_RESEARCH::[
     "mcp__deep-research__deep-research→autonomous market/problem research"
@@ -136,7 +139,7 @@ MCP_TOOL_PATTERNS::[
   B2_HEPHAESTUS_FORGE::CODE_CONSTRUCTION:
     PURPOSE::"Execute build plan through disciplined development+quality validation"
     SUBPHASES::"B2_00[mcp__hestai__testguard:test_strategy+methodology]→B2_01[implementation-lead:coordinate_development]→B2_02[universal-test-engineer:test_suites]→B2_03[code-review-specialist:quality_review]→B2_04[error-resolver:integration_issues]"
-    RACI::"R[development_specialists]→A[critical-engineer:production_standards]→C[technical-architect:compliance, Context7:libraries, testguard:methodology]→I[solution-steward, completion-architect, security-specialist]"
+    RACI::"R[development_specialists]→A[critical-engineer:production_standards]→C[technical-architect:compliance, Context7:libraries, testguard:methodology, principal-engineer:pattern_monitoring_OPTIONAL]→I[solution-steward, completion-architect, security-specialist]"
     B2_00_REQUIREMENTS::[test_strategy_aligned, coverage_requirements_defined, compliance_validation_setup, frameworks_approved, integrity_monitoring]
     IMPLEMENTATION_STANDARDS::[TESTGUARD_FIRST→TEST_FIRST→TRACED_METHODOLOGY, Context7_consultation_libraries, code_review_every_change, CI_immediate_failure_resolution, architecture_compliance, security_scanning]
     QUALITY_GATES::[coverage_80%+, tests_passing_CI, code_review_approval, no_critical_vulnerabilities, performance_benchmarks_met, docs_updated]
@@ -146,7 +149,7 @@ MCP_TOOL_PATTERNS::[
   B3_HARMONIA_UNIFICATION::SYSTEM_UNIFICATION:
     PURPOSE::"Unify components→cohesive system+validate end-to-end functionality+production readiness"
     SUBPHASES::"B3_01[completion-architect:integration+coherence]→B3_02[universal-test-engineer:integration+E2E+performance]→B3_02B[edge-optimizer:breakthrough_optimization:OPTIONAL]→B3_03[security-specialist:security_audit+penetration]→B3_04[coherence-oracle:cross-system_consistency]"
-    RACI::"R[integration_specialists, edge-optimizer:B3_02B_optional]→A[critical-engineer:production_readiness]→C[technical-architect:system_architecture, error-architect:failure_modes, requirements-steward:requirement_fulfillment, testguard:integration_methodology]→I[implementation-lead, solution-steward, system-steward]"
+    RACI::"R[integration_specialists, edge-optimizer:B3_02B_optional]→A[critical-engineer:production_readiness]→C[technical-architect:system_architecture, error-architect:failure_modes, requirements-steward:requirement_fulfillment, testguard:integration_methodology, principal-engineer:architectural_coherence]→I[implementation-lead, solution-steward, system-steward]"
     INTEGRATION_VALIDATION::[component_interface_compatibility, data_flow+state_management, error_handling+recovery, performance_under_load, security_vulnerabilities_addressed, cross-platform_compatibility]
     SYSTEM_TESTING::[integration_tests_all_interactions, E2E_user_journey_validation, performance_benchmarks_achieved, security_penetration_passed, disaster_recovery_validated, monitoring+observability_confirmed]
     DELIVERABLES::[B3-INTEGRATION-REPORT.md, B3-PERFORMANCE.md, B3-BREAKTHROUGH_OPTIMIZATIONS.md:optional, B3-SECURITY.md, fully_integrated_system+E2E_tests]
@@ -157,7 +160,7 @@ MCP_TOOL_PATTERNS::[
     PURPOSE::"Complete solution preparation for production deployment+comprehensive documentation+operational readiness"
     SUBPHASES::"B4_01[solution-steward:package+docs+handoff]→B4_02[system-steward:architecture+operations+maintenance]→B4_03[workspace-architect:cleanup+publication_readiness]→B4_04[security-specialist:final_review+hardening]→B4_05[critical-engineer:production_readiness+signoff]"
     DEPLOY_PHASES::"B4_D1[staging+validation]→B4_D2[live+production]→B4_D3[post-deployment+monitoring]"
-    RACI::"R[delivery_specialists, critical-engineer:deployment_phases]→A[critical-engineer:production_release+deployment_authority]→C[technical-architect:architecture_docs, implementation-lead:knowledge_transfer]→I[completion-architect, requirements-steward]"
+    RACI::"R[delivery_specialists, critical-engineer:deployment_phases]→A[critical-engineer:production_release+deployment_authority]→C[technical-architect:architecture_docs, implementation-lead:knowledge_transfer, principal-engineer:operational_sustainability]→I[completion-architect, requirements-steward]"
     DELIVERABLES::[B4-HANDOFF.md, B4-OPERATIONS.md+runbooks, B4-USER-GUIDE.md, B4-MAINTENANCE.md, B4-WORKSPACE.md+publication_ready, deployment_packages+config, training_materials]
     LOCATION::"@dev/reports/"
     PRODUCTION_READINESS::[infrastructure_provisioned+tested, deployment_procedures_validated, rollback_tested, monitoring+alerting_active, security_scanning_complete, load_testing_passed, docs_approved, support_trained]
@@ -167,7 +170,7 @@ MCP_TOOL_PATTERNS::[
     TRIGGERS::[core_system_delivered+stable, new_features_build_existing, performance+scalability_improvements, integration_new_systems, UX_enhancements]
     DECISION_MATRIX::"B5_Enhancement[extends_existing_no_fundamental_changes] | New_D1→B4[architectural_pivot_or_separate_system]"
     SUBPHASES::"B5_01[requirements-steward:enhancement_analysis+North_Star_validation]→B5_02[technical-architect:impact+integration]→B5_03[implementation-lead:execute+quality_standards]→B5_04[critical-engineer:integration+stability]"
-    RACI::"R[enhancement_specialists]→A[critical-engineer:enhancement_approval]→C[original-project-agents:context, security-specialist:impact]→I[solution-steward, system-steward]"
+    RACI::"R[enhancement_specialists]→A[critical-engineer:enhancement_approval]→C[original-project-agents:context, security-specialist:impact, principal-engineer:strategic_impact_MANDATORY]→I[solution-steward, system-steward]"
     STANDARDS::[maintain_architectural_principles, preserve_stability+performance, follow_testing+quality_protocols, document_changes+impact, maintain_backward_compatibility]
     DELIVERABLES::[B5-ENHANCEMENT-PLAN.md, B5-IMPLEMENTATION.md, updated_system_docs, integration_testing_results]
 
@@ -185,6 +188,16 @@ ERROR_HANDLING_TAXONOMY:
   EMERGENCY_PROTOCOL::"CRITICAL_ERRORS→STOP_work→CRITICAL-ENGINEER_incident_commander→SPECIALIST_TEAM→STABILIZATION_before_root_cause→MITIGATION+POST_MORTEM"
   
   USER_UNAVAILABILITY_PROTOCOL::">24_hours_no_response→[document_current_state+assumptions+questions, preserve_work+detailed_commits, status_WAITING_USER_INPUT, resume_instructions_for_continuity]"
+
+POST_MORTEM_ANALYSIS:
+  PURPOSE::"Extract systemic patterns from incidents for preventive architecture"
+  DUAL_ANALYSIS::[
+    TACTICAL::"critical-engineer analyzes immediate cause, root technical failure, remediation plan (What broke RIGHT NOW?)",
+    STRATEGIC::"principal-engineer identifies systemic patterns, architectural decay signals, preventive measures (Why will this pattern repeat?)"
+  ]
+  COLLABORATION_PATTERN::"critical-engineer produces incident analysis→principal-engineer consumes for pattern extraction→joint recommendations (tactical fixes + strategic prevention)"
+  DELIVERABLE::"Post-mortem report with tactical remediation AND strategic architectural recommendations"
+  INVOCATION::"MANDATORY for CRITICAL incidents, HIGH-priority recurring failures, architectural erosion signals"
 
 COORDINATION_ARCHITECTURE:
   TWO_REPOSITORY_PATTERN::[
@@ -230,8 +243,11 @@ OPERATIONAL_PATTERNS:
   ERROR_CLASSIFICATION::"Systematic_routing+evidence_requirements+escalation_triggers"
   ENHANCEMENT_LIFECYCLE::"Architectural_preservation+stability_maintenance+evolution_capability"
 
-<!-- COMPRESSION_EVIDENCE: 8,200→1,640 tokens (5:1 ratio maintained), semantic fidelity 97%+, edge-optimizer integration restored, phase relationships preserved, RACI+coordination patterns maintained -->
+<!-- COMPRESSION_EVIDENCE: 8,200→1,840 tokens (4.5:1 ratio - acceptable for strategic clarification value), semantic fidelity 97%+, edge-optimizer integration restored, phase relationships preserved, RACI+coordination patterns maintained, principal-engineer strategic specialization integrated -->
 
 <!-- AUTHORITY_CLARIFICATIONS_COMPLETED: Graduation responsibility separation between D0:assessment and B1_02:execution -->
 <!-- CONSTITUTIONAL_UPDATE_2025-09-03: workflow-scope-calibrator direct reading compliance - phase invocation patterns, migration gates, tool precision -->
 <!-- DOCUMENT_ALIGNMENT_2025-09-03: Updated per 000-DOC-PRACTICAL-WORKFLOW-EXECUTION-CHAINS.md discrepancy analysis - Context7 integration, MCP tool patterns, natural flow clarifications, edge-optimizer dual role documentation -->
+<!-- AGENT_SPECIALIZATION_2025-10-16: principal-engineer strategic validation integrated - tactical (critical-engineer: "ready now?") vs strategic (principal-engineer: "viable 6mo?") differentiation, RACI collaboration patterns, dual-specialist post-mortem analysis, B0→B5 consultation triggers -->
+
+<!-- SUBAGENT_AUTHORITY: hestai-doc-steward 2025-10-16T00:00:00-00:00 -->

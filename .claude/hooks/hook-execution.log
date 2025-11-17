@@ -1,0 +1,274 @@
+[2025-11-13 15:49:26] Skill hook invoked
+HOOKS_DIR: /Volumes/HestAI-Projects/eav-monorepo/.claude/hooks
+API_KEY_LOADED: no
+[2025-11-13 15:49:27] Exit code: 1
+[2025-11-13 15:49:47] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI-Projects/eav-monorepo
+HOOKS_DIR: /Volumes/HestAI-Projects/eav-monorepo/.claude/hooks
+API_KEY_LOADED: no
+[2025-11-13 15:49:47] Exit code: 0
+[2025-11-13 15:49:52] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI-Projects/eav-monorepo
+HOOKS_DIR: /Volumes/HestAI-Projects/eav-monorepo/.claude/hooks
+API_KEY_LOADED: no
+[2025-11-13 15:49:53] Exit code: 0
+[2025-11-13 15:50:16] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI-Projects/eav-monorepo
+HOOKS_DIR: /Volumes/HestAI-Projects/eav-monorepo/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-13 15:50:17] Exit code: 0
+[2025-11-13 15:56:40] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-13 15:56:41] Exit code: 0
+[2025-11-13 15:58:23] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-13 15:58:24] Exit code: 0
+[2025-11-13 15:59:27] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-13 15:59:27] Exit code: 0
+[2025-11-13 16:26:10] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-13 16:26:11] Exit code: 0
+[2025-11-13 16:27:02] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-13 16:27:03] Exit code: 0
+[2025-11-13 16:46:26] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-13 16:46:27] Exit code: 0
+[2025-11-13 16:48:42] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-13 16:48:49] Exit code: 0
+[2025-11-13 16:53:02] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-13 16:53:10] Exit code: 0
+[2025-11-13 16:53:51] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-13 16:53:58] Exit code: 0
+[2025-11-13 16:57:40] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-13 16:57:48] Exit code: 0
+[2025-11-13 18:55:57] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-13 18:56:05] Exit code: 0
+[2025-11-13 19:12:08] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-13 19:12:16] Exit code: 0
+[2025-11-13 21:56:38] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-13 21:56:38] Exit code: 0
+[2025-11-13 23:49:22] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-13 23:49:29] Exit code: 0
+[2025-11-14 01:16:01] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-14 01:16:07] Exit code: 0
+[2025-11-14 01:20:32] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-14 01:20:38] Exit code: 0
+[2025-11-14 01:23:34] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-14 01:23:34] Exit code: 0
+[2025-11-14 01:27:47] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-14 01:27:53] Exit code: 0
+[2025-11-14 01:32:17] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-14 01:32:21] Exit code: 0
+[2025-11-14 01:33:58] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-14 01:34:02] Exit code: 0
+[2025-11-14 01:37:52] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-14 01:37:59] Exit code: 0
+[2025-11-14 01:46:50] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-14 01:46:57] Exit code: 0
+[2025-11-14 01:47:18] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-14 01:47:25] Exit code: 0
+[2025-11-14 01:48:52] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-14 01:48:52] Exit code: 0
+[2025-11-14 01:49:19] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-14 01:49:19] Exit code: 0
+[2025-11-14 01:52:41] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-14 01:52:42] Exit code: 0
+[2025-11-14 01:53:44] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-14 01:53:49] Exit code: 0
+[2025-11-15 21:18:53] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-15 21:19:00] Exit code: 0
+[2025-11-15 21:20:01] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-15 21:20:01] Exit code: 0
+[2025-11-15 21:20:52] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-15 21:20:52] Exit code: 0
+[2025-11-15 21:22:27] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-15 21:22:34] Exit code: 0
+[2025-11-15 21:48:33] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-15 21:48:33] Exit code: 0
+[2025-11-15 22:01:54] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-15 22:02:02] Exit code: 0
+[2025-11-15 22:33:52] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-15 22:33:58] Exit code: 0
+[2025-11-15 22:35:10] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-15 22:35:17] Exit code: 0
+[2025-11-15 22:59:08] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-15 22:59:18] Exit code: 0
+[2025-11-15 23:04:02] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-15 23:04:09] Exit code: 0
+[2025-11-15 23:28:06] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-15 23:28:13] Exit code: 0
+[2025-11-15 23:57:12] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-15 23:57:20] Exit code: 0
+[2025-11-16 03:42:48] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-16 03:42:54] Exit code: 0
+[2025-11-16 03:48:23] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-16 03:48:23] Exit code: 0
+[2025-11-16 03:51:57] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-16 03:52:03] Exit code: 0
+[2025-11-16 04:04:52] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-16 04:04:52] Exit code: 0
+[2025-11-16 04:05:58] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-16 04:05:58] Exit code: 0
+[2025-11-16 04:07:36] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-16 04:07:37] Exit code: 0
+[2025-11-16 04:08:23] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-16 04:08:30] Exit code: 0
+[2025-11-16 04:10:09] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-16 04:10:15] Exit code: 0
+[2025-11-16 04:11:08] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-16 04:11:15] Exit code: 0
+[2025-11-16 04:19:42] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-16 04:19:48] Exit code: 0
+[2025-11-16 04:27:07] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-16 04:27:15] Exit code: 0
+[2025-11-16 04:31:05] Skill hook invoked
+PROJECT_DIR: /Volumes/HestAI
+HOOKS_DIR: /Volumes/HestAI/.claude/hooks
+API_KEY_LOADED: yes
+[2025-11-16 04:31:12] Exit code: 0

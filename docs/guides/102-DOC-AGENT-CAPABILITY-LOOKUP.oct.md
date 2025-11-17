@@ -6,9 +6,10 @@
 // Query pattern: "I need to [task]" → Agent recommendation
 
 META:
-  VERSION::"1.1"
+  VERSION::"1.2"
   PURPOSE::"Rapid agent selection via task matching"
-  AGENTS_COUNT::64
+  AGENTS_COUNT::56
+  LAST_AUDIT::"2025-10-19"
   OPTIMIZATION::"OCTAVE semantic compression for instant lookup"
 
 0.DEF:
@@ -49,58 +50,64 @@ TASK_TO_AGENT_MAPPING:
     
   ANALYZE_AND_INVESTIGATE:
     research_feasibility::research-analyst // Evidence-based validation
-    extract_patterns::research-analyst-pattern-extractor // Reusability
     discover_needs::idea-clarifier // Problem essence
     trace_code::mcp__hestai__tracer // Execution flow analysis
     debug_complex::mcp__hestai__debug // Root cause analysis
     assess_architecture::mcp__hestai__analyze // Comprehensive review
     security_audit::mcp__hestai__secaudit // OWASP compliance
-    measure_compression::compression-analyst // Measure OCTAVE effectiveness
     resolve_all_errors::error-architect // Unified error resolution (simple to complex)
-    retrieve_workflow_facts::workflow-engine // Pure workflow fact retrieval
+    triage_simple_errors::error-architect-surface // Fast surface-level error triage
+    survey_codebase::surveyor // Autonomous file discovery and structural exploration
     
   CREATE_AND_SYNTHESIZE:
     design_architecture::technical-architect + design-architect // D2-D3
     generate_ideas::ideator + ideator-catalyst // Bounded creativity
-    transcend_tensions::synthesiser // Both-and solutions
+    transcend_tensions::synthesizer // Both-and solutions
     compress_docs::documentation-compressor + octave-specialist // Optimization
-    convert_data::data-converter // Format transformation
     create_agents::subagent-creator + octave-forge-master // Agent generation
     enhance_semantics::semantic-optimizer // Mythological patterns
     create_visual_designs::visual-architect // Create UI/UX mockups
+    establish_north_star::north-star-architect // Immutable requirements extraction
+    validate_octave::octave-validator // OCTAVE specification compliance
     
   PRESERVE_AND_OBSERVE:
     system_patterns::system-steward // Meta-observation
-    curate_knowledge::research-curator + research-curator-subagent // Pattern preservation
+    curate_knowledge::research-curator // Pattern preservation
     manage_sessions::sessions-manager + session-briefer // Context continuity
     test_stewardship::test-curator // Empirical preservation
     monitor_quality::quality-observer // Continuous assessment
     check_progress::build-plan-checker // Gap analysis
+    validate_principal_decisions::principal-engineer // Senior validation authority
     
   ORCHESTRATION_AND_GOVERNANCE:
     system_orchestration::holistic-orchestrator // Ultimate system orchestrator
+    orchestrator_analysis::ho-liaison // Advisory analysis for holistic-orchestrator
     directory_organization::directory-curator // Reorganize directories safely
     documentation_governance::hestai-doc-steward // Govern HestAI documentation
+    validate_decomposition::task-decomposer-validator // Build plan quality validation
     
   DOMAIN_SPECIFIC:
     smartsuite_integration::eav-admin // Platform mastery
     eav_coherence::eav-coherence-oracle // EAV-specific coherence
     documentation_lookup::documentation-researcher // Context7 real-time
+    supabase_integration::supabase-expert // Supabase platform expertise
+    smartsuite_expertise::smartsuite-expert // SmartSuite platform expertise
+    accounting_guidance::accounting-partner // EAV financial and accounting operations
 
 ---
 
 PHASE_OPTIMAL_AGENTS:
-  D0_IDEATION_SETUP::[sessions-manager]
-  D1_UNDERSTANDING::[idea-clarifier, research-analyst, validator, workflow-scope-calibrator]
-  D2_IDEATION::[ideator, synthesiser, complexity-guard]
-  D3_ARCHITECTURE::[design-architect, technical-architect, critical-engineer, visual-architect]
-  B0_QUALITY_GATE::[critical-design-validator, requirements-steward, octave-validator, security-specialist]
+  D0_IDEATION_SETUP::[sessions-manager, session-briefer]
+  D1_UNDERSTANDING::[idea-clarifier, research-analyst, validator, workflow-scope-calibrator, north-star-architect, surveyor]
+  D2_IDEATION::[ideator, ideator-catalyst, synthesizer, complexity-guard]
+  D3_ARCHITECTURE::[design-architect, technical-architect, critical-engineer, visual-architect, principal-engineer]
+  B0_QUALITY_GATE::[critical-design-validator, requirements-steward, octave-validator, security-specialist, critical-implementation-validator]
   B1_PLANNING::[task-decomposer, workspace-architect, build-plan-checker, task-decomposer-validator]
-  B2_IMPLEMENTATION::[implementation-lead, universal-test-engineer, error-architect + SPECIALIST_SPOKES]
-  B3_INTEGRATION::[completion-architect, quality-observer]
+  B2_IMPLEMENTATION::[implementation-lead, universal-test-engineer, error-architect, error-architect-surface + SPECIALIST_SPOKES]
+  B3_INTEGRATION::[completion-architect, quality-observer, edge-optimizer]
   B4_DELIVERY::[solution-steward, compression-fidelity-validator]
   B5_ENHANCEMENT::[requirements-steward, technical-architect, implementation-lead, critical-engineer]
-  ADMIN_CONTINUOUS::[system-steward, sessions-manager, test-curator, coherence-oracle, compression-analyst, directory-curator, hestai-doc-steward, holistic-orchestrator, subagent-system-tester, workflow-engine]
+  ADMIN_CONTINUOUS::[system-steward, sessions-manager, test-curator, coherence-oracle, directory-curator, hestai-doc-steward, holistic-orchestrator, ho-liaison, subagent-creator]
 
 ---
 
@@ -142,7 +149,7 @@ SELECTION_HEURISTICS:
 
 AGENT_COMBINATIONS:
   // Proven complementary pairs
-  
+
   CREATIVE_VALIDATION::ideator + validator
   ARCHITECTURE_HARDENING::technical-architect + critical-engineer
   TEST_INTEGRITY::universal-test-engineer + test-methodology-guardian
@@ -150,11 +157,15 @@ AGENT_COMBINATIONS:
   COMPRESSION_SAFETY::octave-specialist + compression-fidelity-validator
   BUILD_COORDINATION::implementation-lead + quality-observer
   PATTERN_PRESERVATION::research-curator + system-steward
-  ERROR_RESOLUTION::error-architect[unified_simple_to_complex]
-  WORKFLOW_PLANNING::workflow-engine + workflow-scope-calibrator
+  ERROR_RESOLUTION::error-architect[unified_simple_to_complex] + error-architect-surface[fast_triage]
   SYSTEM_COHERENCE::coherence-oracle + holistic-orchestrator
   SECURE_CODE::code-review-specialist + security-specialist
   BUILD_PLANNING::task-decomposer + task-decomposer-validator
+  ORCHESTRATION_INTELLIGENCE::holistic-orchestrator + ho-liaison
+  IDEATION_AMPLIFICATION::ideator + ideator-catalyst
+  IMMUTABLE_REQUIREMENTS::north-star-architect + requirements-steward
+  AGENT_CREATION::subagent-creator + octave-forge-master
+  CODEBASE_EXPLORATION::surveyor + critical-engineer
 
 ---
 
@@ -184,15 +195,13 @@ QUICK_LOOKUP_EXAMPLES:
   "prevent scope creep"::requirements-steward + complexity-guard
   "compress documentation"::documentation-compressor + semantic-optimizer
   "fix any errors"::error-architect
+  "quick error triage"::error-architect-surface
   "reorganize my project"::directory-curator
   "check system coherence"::coherence-oracle
-  "what are the workflow rules"::workflow-engine
   "is this project scope too big?"::workflow-scope-calibrator
   "create mockups"::visual-architect
-  "test the agent system"::subagent-system-tester
   "is this documentation good enough?"::hestai-doc-steward
   "who is in charge of everything?"::holistic-orchestrator
-  "how well is this compressed?"::compression-analyst
   "is this secure?"::security-specialist, mcp__hestai__secaudit
   "think deeper"::mcp__hestai__thinkdeep // Extended reasoning
   "create a plan"::mcp__hestai__planner // Sequential planning
@@ -201,5 +210,16 @@ QUICK_LOOKUP_EXAMPLES:
   "refactor this code"::mcp__hestai__refactor // Code refactoring
   "list models"::mcp__hestai__listmodels // List available models
   "get version"::mcp__hestai__version // Get server version
+  "find files in codebase"::surveyor // Autonomous file discovery
+  "establish immutable requirements"::north-star-architect // North Star creation
+  "create new agent"::subagent-creator // Agent generation
+  "analyze for orchestrator"::ho-liaison // HO advisory analysis
+  "accounting guidance"::accounting-partner // EAV financial operations
+  "smartsuite integration"::smartsuite-expert // SmartSuite expertise
+  "supabase integration"::supabase-expert // Supabase expertise
+  "session management"::sessions-manager + session-briefer // Context continuity
+  "validate senior decisions"::principal-engineer // Senior authority
 
-===END_LOOKUP_v1.1
+===END_LOOKUP_v1.2===
+
+<!-- SUBAGENT_AUTHORITY: hestai-doc-steward 2025-10-19T14:30:00-04:00 -->

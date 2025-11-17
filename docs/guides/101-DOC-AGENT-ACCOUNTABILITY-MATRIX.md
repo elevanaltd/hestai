@@ -26,7 +26,8 @@ This matrix establishes clear ownership and responsibility chains for critical d
 |--------|-------------|-------------|-----------|----------|
 | **AUTH_DOMAIN** | security-specialist | critical-engineer | requirements-steward | implementation-lead |
 | **CRDT_PROVIDER** | technical-architect | critical-engineer | universal-test-engineer | quality-observer |
-| **DB_MIGRATIONS** | implementation-lead | critical-engineer | technical-architect | system-steward |
+| **DB_MIGRATIONS** | implementation-lead | critical-engineer | supabase-expert, technical-architect | system-steward |
+| **DB_OPERATIONS** | supabase-expert | critical-engineer | technical-architect | implementation-lead |
 | **SECRETS_MANAGEMENT** | security-specialist | critical-engineer | eav-admin | system-steward |
 | **DEPLOYMENT_PIPELINE** | implementation-lead | critical-engineer | solution-steward | eav-admin |
 

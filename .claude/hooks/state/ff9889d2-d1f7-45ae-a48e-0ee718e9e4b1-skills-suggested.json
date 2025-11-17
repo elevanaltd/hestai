@@ -1,0 +1,12 @@
+{
+  "timestamp": 1763077769306,
+  "acknowledgedSkills": [
+    "code-extraction",
+    "documentation-placement"
+  ],
+  "injectedSkills": [
+    "code-extraction",
+    "documentation-placement"
+  ],
+  "injectionTimestamp": 1763077769306
+}

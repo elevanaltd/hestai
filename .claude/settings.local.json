@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Volumes/HestAI-Projects/eav-ops/coordination/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -3,3 +3,7 @@
 /worktrees/
 /builds/
 /_archive/
+/.cache
+/.claude/hooks/node_modules
+constitution.txt
+.claude/hooks/.env

@@ -1,0 +1,14 @@
+{
+  "timestamp": 1763241540022,
+  "acknowledgedSkills": [
+    "error-triage",
+    "workspace-setup",
+    "build-execution"
+  ],
+  "injectedSkills": [
+    "error-triage",
+    "workspace-setup",
+    "build-execution"
+  ],
+  "injectionTimestamp": 1763241540022
+}

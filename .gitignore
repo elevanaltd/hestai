@@ -1,9 +1,14 @@
-# gitignore 
+# gitignore
 
 /worktrees/
 /builds/
 /_archive/
 /.cache
-/.claude/hooks/node_modules
 constitution.txt
+
+# Claude hooks - operational runtime data
+.claude/hooks/node_modules
 .claude/hooks/.env
+.claude/hooks/state/
+.claude/hooks/hook-execution.log
+.claude/hooks/*.log

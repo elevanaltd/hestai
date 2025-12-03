@@ -1,0 +1,12 @@
+# Worktree Write Validation Hook
+# Prevents agents in worktrees from writing to main repo or other worktrees
+# Version: 1.0.0
+# Authority: holistic-orchestrator
+# Reference: CLAUDE.md WORKTREE_DISCIPLINE section
+
+matchers:
+  - Write
+  - Edit
+  - NotebookEdit
+
+description: "Block file writes that escape worktree boundaries. Enforces isolated context for parallel worktree development."

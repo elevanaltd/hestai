@@ -35,14 +35,22 @@
     "docs/standards": 103,
     "docs/workflow": 10,
     "docs/security": 403,
-    "reports": 804
+    "reports": 854
   },
   "active_conflicts": [],
   "next_available": {
     "docs/standards": 104,
     "docs/workflow": 11,
     "docs/security": 404,
-    "reports": 805
+    "reports": 855
+  },
+  "project_allocations": {
+    "eav-monorepo": {
+      "reports": {
+        "ranges_used": ["805-817", "818", "819-823", "830-835", "836-837", "838-839", "840-841", "842", "850-854"],
+        "last_updated": "2025-11-26"
+      }
+    }
   },
   "consolidation_record": {
     "consolidation_date": "2025-09-17",
@@ -70,9 +78,9 @@
     "quality_enforcement": "Only operational documents retained - 100% value density achieved"
   },
   "metadata": {
-    "last_updated": "2025-09-17T15:16:00Z",
-    "updated_by": "hestai-doc-steward",
-    "version": "2.4",
-    "schema_changes": "Updated for post-consolidation renumbering to clean 100-103 sequential order"
+    "last_updated": "2025-11-26T05:00:00Z",
+    "updated_by": "system-steward",
+    "version": "2.5",
+    "schema_changes": "Added project_allocations tracking, updated reports range to 854 after eav-monorepo reorganization"
   }
 }

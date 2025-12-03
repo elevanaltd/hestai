@@ -1,16 +1,17 @@
 // HestAI-Doc-Steward: consulted for document-creation-and-placement
 // Approved: sequential-101-102-numbering /docs/guides/-placement agent-governance-scope
 
-===AGENT_CAPABILITY_LOOKUP_v1.1===
+===AGENT_CAPABILITY_LOOKUP_v1.3===
 // Streamlined agent selection guide optimized for LLM consumption
 // Query pattern: "I need to [task]" → Agent recommendation
 
 META:
-  VERSION::"1.2"
+  VERSION::"1.3"
   PURPOSE::"Rapid agent selection via task matching"
   AGENTS_COUNT::56
-  LAST_AUDIT::"2025-10-19"
+  LAST_AUDIT::"2025-12-03"
   OPTIMIZATION::"OCTAVE semantic compression for instant lookup"
+  CHANGELOG_1.3::"Added EXPLORATION_TOOL_SELECTION based on empirical Issue#183 comparison"
 
 0.DEF:
   PHASE::[D1-D3 (DESIGN), B0-B4 (BUILD), ADMIN]
@@ -57,7 +58,7 @@ TASK_TO_AGENT_MAPPING:
     security_audit::mcp__hestai__secaudit // OWASP compliance
     resolve_all_errors::error-architect // Unified error resolution (simple to complex)
     triage_simple_errors::error-architect-surface // Fast surface-level error triage
-    survey_codebase::surveyor // Autonomous file discovery and structural exploration
+    survey_codebase::surveyor // Autonomous file discovery [See: EXPLORATION_TOOL_SELECTION]
     
   CREATE_AND_SYNTHESIZE:
     design_architecture::technical-architect + design-architect // D2-D3
@@ -144,6 +145,59 @@ SELECTION_HEURISTICS:
   IF_DOCUMENTATION::[documentation-compressor, semantic-optimizer, hestai-doc-steward]
   IF_INTEGRATION::[completion-architect, edge-optimizer]
   IF_VALIDATION::[critical-implementation-validator, requirements-steward]
+  IF_EXPLORATION::[Task(Explore), clink(gemini,surveyor), Task(surveyor)]
+
+---
+
+EXPLORATION_TOOL_SELECTION:
+  // Empirical findings from Issue #183 comparison (2025-12-03)
+  // All tools converged on same core findings - selection is about speed/depth/artifacts trade-off
+
+  TOOL_MATRIX::[
+    TASK_EXPLORE::[
+      invocation::Task(subagent_type="Explore"),
+      model::Haiku[default],
+      speed::⭐⭐,
+      depth::⭐⭐⭐⭐⭐,
+      artifacts::❌,
+      cost::Low,
+      reliability::⭐⭐⭐⭐⭐,
+      USE_WHEN::"exhaustive_audit+production_critical+verification_needed"
+    ],
+
+    CLINK_GEMINI_SURVEYOR::[
+      invocation::mcp__hestai__clink(cli_name="gemini",role="surveyor"),
+      model::Gemini,
+      speed::⭐⭐⭐⭐⭐[55_seconds],
+      depth::⭐⭐⭐,
+      artifacts::❌,
+      cost::Low[NOT_free→budget_awareness_required],
+      reliability::⭐⭐⭐⭐,
+      USE_WHEN::"fast_triage+initial_assessment+80%_of_exploration_cases"
+    ],
+
+    TASK_SURVEYOR_HAIKU::[
+      invocation::Task(subagent_type="surveyor"),
+      model::Haiku,
+      speed::⭐⭐⭐⭐,
+      depth::⭐⭐⭐⭐,
+      artifacts::✅[persistent_reports],
+      cost::Low,
+      reliability::⭐⭐⭐,
+      USE_WHEN::"persistent_documentation_needed+report_artifacts",
+      CAVEAT::"⚠️ WORKTREE_CONTEXT_injection_MANDATORY_in_worktrees"
+    ]
+  ]
+
+  DEFAULT_WORKFLOW::[
+    1::START_with_clink(gemini,surveyor)[fast_triage_55s],
+    2::ESCALATE_to_Task(Explore)_IF::[exhaustive_listing_needed,production_critical,gemini_needs_verification],
+    3::USE_Task(surveyor)_IF::[persistent_artifacts_needed,documentation_generation]
+  ]
+
+  WORKTREE_WARNING::"Task() subagents may escape worktree context → inject WORKTREE_CONTEXT in prompt"
+
+  KEY_INSIGHT::"All tools converge on same diagnosis → effort estimates vary 4.5x → use Gemini for optimistic, Explore for conservative"
 
 ---
 
@@ -165,7 +219,7 @@ AGENT_COMBINATIONS:
   IDEATION_AMPLIFICATION::ideator + ideator-catalyst
   IMMUTABLE_REQUIREMENTS::north-star-architect + requirements-steward
   AGENT_CREATION::subagent-creator + octave-forge-master
-  CODEBASE_EXPLORATION::surveyor + critical-engineer
+  CODEBASE_EXPLORATION::surveyor + critical-engineer // See EXPLORATION_TOOL_SELECTION for tool variants
 
 ---
 
@@ -210,7 +264,8 @@ QUICK_LOOKUP_EXAMPLES:
   "refactor this code"::mcp__hestai__refactor // Code refactoring
   "list models"::mcp__hestai__listmodels // List available models
   "get version"::mcp__hestai__version // Get server version
-  "find files in codebase"::surveyor // Autonomous file discovery
+  "find files in codebase"::surveyor // See EXPLORATION_TOOL_SELECTION for tool choice
+  "explore codebase patterns"::clink(gemini,surveyor) // Fast triage, then escalate if needed
   "establish immutable requirements"::north-star-architect // North Star creation
   "create new agent"::subagent-creator // Agent generation
   "analyze for orchestrator"::ho-liaison // HO advisory analysis
@@ -220,6 +275,6 @@ QUICK_LOOKUP_EXAMPLES:
   "session management"::sessions-manager + session-briefer // Context continuity
   "validate senior decisions"::principal-engineer // Senior authority
 
-===END_LOOKUP_v1.2===
+===END_LOOKUP_v1.3===
 
-<!-- SUBAGENT_AUTHORITY: hestai-doc-steward 2025-10-19T14:30:00-04:00 -->
+<!-- SUBAGENT_AUTHORITY: system-steward 2025-12-03 (v1.3 EXPLORATION_TOOL_SELECTION) -->

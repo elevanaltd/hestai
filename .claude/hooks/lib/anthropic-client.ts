@@ -65,6 +65,15 @@ export async function callAnthropicAPI(
     );
   }
 
+  // Debug: Log environment details
+  if (process.env.DEBUG_SKILL_HOOK) {
+    console.error('[anthropic-client] API Key check:', {
+      hasKey: !!apiKey,
+      keyLength: apiKey ? apiKey.length : 0,
+      hooksDir: process.env.HOOKS_DIR,
+    });
+  }
+
   const client = new Anthropic({ apiKey });
 
   // Build skill descriptions for prompt

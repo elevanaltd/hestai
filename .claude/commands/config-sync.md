@@ -20,6 +20,8 @@ Bidirectional sync between global `~/.claude/` and project `.claude/` directorie
 - `eav-monorepo` - /Volumes/HestAI-Projects/eav-monorepo/.claude/
 - `ingest` - /Volumes/HestAI-Projects/ingest-assistant/.claude/
 - `cep` - /Volumes/HestAI-Projects/eav-cep-assist/.claude/
+- `tests` - /Volumes/HestAI-old/hestai-tests/.claude/
+- `research` - /Volumes/HestAI-old/hestai-research/.claude/
 - `all` - All registered projects
 
 ---
@@ -41,6 +43,8 @@ PROJECTS=(
   "eav-monorepo:/Volumes/HestAI-Projects/eav-monorepo/.claude"
   "ingest:/Volumes/HestAI-Projects/ingest-assistant/.claude"
   "cep:/Volumes/HestAI-Projects/eav-cep-assist/.claude"
+  "tests:/Volumes/HestAI-old/hestai-tests/.claude"
+  "research:/Volumes/HestAI-old/hestai-research/.claude"
 )
 
 SYNC_DIRS=("agents" "skills" "commands")
@@ -153,7 +157,7 @@ After any sync:
 Not all agents should go to all projects. Use this matrix:
 
 ```
-UNIVERSAL (all projects - 45 agents):
+UNIVERSAL (all standard projects - 53 agents):
   Core Workflow:
     - implementation-lead, task-decomposer, task-decomposer-validator
     - workspace-architect, completion-architect, solution-steward
@@ -183,27 +187,34 @@ UNIVERSAL (all projects - 45 agents):
     - octave-specialist, documentation-compressor, semantic-optimizer
     - technical-architect
 
-EAV-SPECIFIC (eav, eav-monorepo only - 3 agents):
+EAV-ONLY (eav only - 1 agent):
   - accounting-partner
+
+EAV-SHARED (eav, eav-monorepo - 2 agents):
   - eav-admin
   - eav-coherence-oracle
 
-HESTAI-ONLY (hestai only - 13 agents):
+HESTAI-ONLY (hestai only - 8 agents):
   Governance:
-    - hestai-doc-steward, coherence-oracle, skills-expert
-    - research-curator, session-briefer
+    - hestai-doc-steward, coherence-oracle, skills-expert, session-briefer
   Agent Creation:
     - octave-validator, octave-forge-master, subagent-creator
     - compression-fidelity-validator
-  Test Centre:
-    - test-curator, test-execution-manager, test-setup-coordinator
-    - blind-assessor
+
+HESTAI-TESTS-ONLY (tests only - 4 agents):
+  - blind-assessor
+  - test-curator
+  - test-execution-manager
+  - test-setup-coordinator
+
+HESTAI-RESEARCH-ONLY (research only - 1 agent):
+  - research-curator
 
 PROJECT-SPECIFIC FILES (Never Sync):
   - SUPABASE-SAFETY-SYSTEM.md
   - supabase.yaml
   - settings*.json
-  - Project-specific skills (e.g., github-issue-creation)
+  - Project-specific skills (e.g., github-issue-creation, skill-invocation-test)
 ```
 
 ---

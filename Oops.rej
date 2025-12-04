@@ -1,9 +1,0 @@
-***************
-*** 38
-- | ideator | Claude Code | ✅ Operational | Creative exploration within boundaries |
---- 38 -----
-+ | ideator | Multi-platform | ✅ Operational | Tested across 3 platforms: Claude (deep architectural patterns: event-sourcing, optimistic locking); Gemini (UX-oriented: Wizard, Board, Tabbed); Codex (collaboration: section capsules, isolation envelope). **Context-dependent selection** |
-***************
-*** 0
---- 166 -----
-+ 5. **ideator (Multi-platform)** - D2 ideation tested across 3 platforms. Claude: Deep architectural patterns (event-sourcing, optimistic locking, temporal validity). Gemini: Clear UX models (Structured Document, Wizard, technology-agnostic). Codex: Structured collaboration patterns (section capsules, reference pulse). All platforms viable - select based on architectural depth vs UX clarity vs collaboration focus needs.

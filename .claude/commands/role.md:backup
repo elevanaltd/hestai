@@ -1,0 +1,199 @@
+# Role Activation: $ARGUMENTS
+
+## STEP 1: Normalize & Parse Flags
+```bash
+# Parse arguments for role name and flags
+FULL_ARGS="$ARGUMENTS"
+RAPH_MODE="ceremonial"  # default
+
+# Check for --raph flag
+if echo "$FULL_ARGS" | grep -q -- "--raph"; then
+  RAPH_MODE="enforced"
+  # Remove --raph from arguments to get role name
+  ROLE_INPUT=$(echo "$FULL_ARGS" | sed 's/--raph//g' | xargs)
+else
+  ROLE_INPUT="$FULL_ARGS"
+fi
+
+# Normalize role name (spaces→hyphens, common aliases)
+ROLE_NAME=$(echo "$ROLE_INPUT" | tr ' ' '-' | tr '[:upper:]' '[:lower:]')
+
+# Common aliases (add more as needed)
+case "$ROLE_NAME" in
+  "ce") ROLE_NAME="critical-engineer" ;;
+  "ea") ROLE_NAME="error-architect" ;;
+  "ta") ROLE_NAME="technical-architect" ;;
+  "ca") ROLE_NAME="completion-architect" ;;
+  "il") ROLE_NAME="implementation-lead" ;;
+  "td") ROLE_NAME="task-decomposer" ;;
+  "wa") ROLE_NAME="workspace-architect" ;;
+  "ss") ROLE_NAME="system-steward" ;;
+  "rs") ROLE_NAME="requirements-steward" ;;
+  "ho") ROLE_NAME="holistic-orchestrator" ;;
+  "tmg"|"testguard") ROLE_NAME="test-methodology-guardian" ;;
+  "crs"|"cr") ROLE_NAME="code-review-specialist" ;;
+  "ute"|"test") ROLE_NAME="universal-test-engineer" ;;
+esac
+
+# Clean old sessions & create new marker
+rm -f /tmp/active_role_${ROLE_NAME}_* 2>/dev/null || true
+ROLE_SESSION_ID=$(date +%s)_$$
+cat > "/tmp/active_role_${ROLE_NAME}_${ROLE_SESSION_ID}" <<EOF
+ROLE: $ROLE_NAME
+TIMESTAMP: $(date -Iseconds)
+DIRECT_ACTIVATION: true
+EOF
+echo "✓ Activated: $ROLE_NAME [session: ${ROLE_SESSION_ID}]"
+
+# Link coordination if available
+[ -e ".coord" ] && echo "✓ Coordination linked" || \
+  ([ -d "../../../coordination" ] && ln -sfn ../../../coordination .coord && echo "✓ Coordination linked") || \
+  echo "ℹ️  No coordination repository"
+```
+
+## STEP 2: Load Role (Direct Read)
+```
+Read("/Users/shaunbuswell/.claude/agents/$ROLE_NAME.oct.md")
+```
+
+⚠️  Read directly. NO delegation to other agents.
+
+## STEP 3: RAPH Processing
+```bash
+# Signal RAPH mode for processing
+echo "RAPH_MODE=$RAPH_MODE" > /tmp/raph_mode_$ROLE_SESSION_ID
+if [ "$RAPH_MODE" = "enforced" ]; then
+  echo "🔒 ENFORCED RAPH MODE - Sequential processing with state machine"
+  # Execute RAPH Workflow Engine
+  RAPH_RESULT=$(python3 "/Users/shaunbuswell/.claude/scripts/raph_workflow_engine.py" "$ROLE_NAME" 2>/dev/null)
+  RAPH_EXIT_CODE=$?
+
+  if [ $RAPH_EXIT_CODE -eq 0 ]; then
+    echo "✓ RAPH Engine completed successfully"
+    echo "$RAPH_RESULT"
+  else
+    echo "⚠️  RAPH Engine failed, falling back to manual enforcement"
+    echo "Please follow the enforced RAPH protocol manually:"
+    echo "Source: /Users/shaunbuswell/.claude/commands/role-raph-enforced.md"
+  fi
+else
+  echo "⚡ CEREMONIAL MODE - Quick activation"
+fi
+```
+
+### If RAPH_MODE = enforced:
+Execute SEQUENTIAL RAPH using OPTIMIZED RAPH AGENTS:
+
+```
+📋 RAPH Phase Execution with Optimized Agents:
+
+UPDATED: Optimized RAPH agents now outperform generic specialists through:
+- Phase-specific cognitive optimization (94-95% effectiveness)
+- Empirically validated archetype combinations
+- Strict boundary enforcement preventing ceremonial drift
+
+1. READ Phase → raph-read:
+   Task(
+     "RAPH READ: Constitutional archaeological extraction",
+     "Agent file: /Users/shaunbuswell/.claude/agents/$ROLE_NAME.oct.md
+
+      PHASE_1_READ_ONLY context with APOLLO+THOTH archetypes:
+      - Extract forces, principles, constraints verbatim
+      - NO interpretation, analysis, or relationships
+      - Archaeological discipline with systematic verification
+      - Prepare structured inventory for ABSORB handoff",
+     "raph-read"
+   )
+   → Save complete output as READ_CONTEXT
+
+2. ABSORB Phase → raph-absorb:
+   Task(
+     "RAPH ABSORB: Relationship mapping with boundary discipline",
+     "READ phase output: [INSERT READ_CONTEXT]
+      Agent file: /Users/shaunbuswell/.claude/agents/$ROLE_NAME.oct.md
+
+      PHASE_2_ABSORB_ONLY with PROMETHEUS+HERMES archetypes:
+      - Map force relationships and principle flows
+      - Identify cognitive coherence patterns
+      - Connect elements within extraction boundaries
+      - Prepare relationship web for PERCEIVE",
+     "raph-absorb"
+   )
+   → Save complete output as ABSORB_CONTEXT
+
+3. PERCEIVE Phase → raph-perceive:
+   Task(
+     "RAPH PERCEIVE: Emergent pattern synthesis",
+     "Previous phases:
+      READ: [INSERT READ_CONTEXT]
+      ABSORB: [INSERT ABSORB_CONTEXT]
+      Agent file: /Users/shaunbuswell/.claude/agents/$ROLE_NAME.oct.md
+
+      PHASE_3_PERCEIVE_ONLY with ATHENA+HEPHAESTUS archetypes:
+      - Identify meta-patterns from relationship web
+      - Synthesize operational frameworks
+      - Extract strategic implications
+      - Prepare integrated insights for HARMONISE",
+     "raph-perceive"
+   )
+   → Save complete output as PERCEIVE_CONTEXT
+
+4. HARMONISE Phase → raph-harmonise:
+   Task(
+     "RAPH HARMONISE: Complete integration synthesis",
+     "All previous phases:
+      READ: [INSERT READ_CONTEXT]
+      ABSORB: [INSERT ABSORB_CONTEXT]
+      PERCEIVE: [INSERT PERCEIVE_CONTEXT]
+      Agent file: /Users/shaunbuswell/.claude/agents/$ROLE_NAME.oct.md
+
+      PHASE_4_HARMONISE_ONLY with ZEUS+HARMONIA+SOPHIA archetypes:
+      - Cross-domain synthesis of all phases
+      - Resolution of tensions into unified framework
+      - Complete operational identity integration
+      - Final cognitive state crystallization",
+     "raph-harmonise"
+   )
+   → Final integrated cognitive state
+
+Quality: 9.23/10 target through optimized phase-specific processing
+```
+
+### If RAPH_MODE = ceremonial (default):
+```
+R: Extract forces/principles → "✓ READ: {n} forces, {n} principles"
+A: Map cognition/archetypes → "✓ ABSORB: {COGNITION}↔{ARCHETYPE}"
+P: Identify role/mission → "✓ PERCEIVE: {ROLE}→{mission}"
+H: Integrate matrix → "✓ HARMONISE: Ready"
+```
+
+## FALLBACK PATHS:
+If file not found, try:
+1. `/Users/shaunbuswell/.claude/agents/$ROLE_NAME.oct.md`
+2. `/Volumes/HestAI/hestai-orchestrator/assembly/protocols/gold/$ROLE_NAME-gold.md`
+
+## USAGE MODES:
+
+### Standard (Ceremonial - Fast):
+```bash
+/role holistic-orchestrator     # Quick activation
+/role ho                        # Using alias
+/role holistic orchestrator     # With spaces (auto-normalized)
+```
+
+### Enforced RAPH (Deep - Accurate):
+```bash
+/role holistic-orchestrator --raph   # True sequential processing
+/role ho --raph                      # Alias with enforcement
+```
+
+**Ceremonial Mode**: ~200 tokens, instant activation, 7/10 quality
+**Enforced Mode**: ~2000 tokens, gated processing, 9.23/10 quality
+
+## QUICK REFERENCE:
+**Common:** ce (critical-engineer), ea (error-architect), ta (technical), il (implementation)
+**Testing:** tmg/testguard, ute/test (universal-test-engineer), cr (code-review)
+**Planning:** td (task-decomposer), wa (workspace), rs (requirements), ho (holistic)
+
+---
+Activate as **$ARGUMENTS** now.

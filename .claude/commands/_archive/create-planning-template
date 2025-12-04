@@ -1,0 +1,352 @@
+#!/bin/bash
+
+# EAV Planning Template Creator
+# Usage: /create-planning-template PROJECT_CODE [OPTIONS]
+# Example: /create-planning-template EAV042 --videos=12 --type=standard --buffer=20
+
+set -e
+
+# Default values
+VIDEOS=""
+TYPE="standard"
+BUFFER="0"
+CLIENT=""
+HELP=false
+
+# Check for help first
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+  HELP=true
+fi
+
+# Parse arguments
+PROJECT_CODE="$1"
+
+# Skip PROJECT_CODE if we're showing help
+if [[ "$HELP" != "true" ]]; then
+  shift
+fi
+
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --videos=*)
+      VIDEOS="${1#*=}"
+      shift
+      ;;
+    --type=*)
+      TYPE="${1#*=}"
+      shift
+      ;;
+    --buffer=*)
+      BUFFER="${1#*=}"
+      shift
+      ;;
+    --client=*)
+      CLIENT="${1#*=}"
+      shift
+      ;;
+    --help|-h)
+      HELP=true
+      shift
+      ;;
+    *)
+      echo "Unknown option $1"
+      exit 1
+      ;;
+  esac
+done
+
+if [[ "$HELP" == "true" || -z "$PROJECT_CODE" ]]; then
+  echo "EAV Planning Template Creator"
+  echo ""
+  echo "Usage: /create-planning-template PROJECT_CODE [OPTIONS]"
+  echo ""
+  echo "Arguments:"
+  echo "  PROJECT_CODE    Required. EAV project code (e.g., EAV042)"
+  echo ""
+  echo "Options:"
+  echo "  --videos=N      Number of videos (affects duration calculations)"
+  echo "  --type=TYPE     Project type: 'standard' or 'interactive' (default: standard)"
+  echo "  --buffer=N      Buffer percentage for all phases (default: 0)"
+  echo "  --client=NAME   Client name override (fetched from project if not provided)"
+  echo "  --help, -h      Show this help message"
+  echo ""
+  echo "Examples:"
+  echo "  /create-planning-template EAV042"
+  echo "  /create-planning-template EAV043 --videos=30 --type=interactive --buffer=20"
+  echo "  /create-planning-template EAV044 --videos=5 --client='Special Client'"
+  echo ""
+  echo "Duration Logic:"
+  echo "  Standard Videos:"
+  echo "    - Preparation: 2 days"
+  echo "    - Script & Content: 1 day per 3 videos (min 2 days)"
+  echo "    - VO Generation: 1 day per 5 videos (min 2 days)"  
+  echo "    - Scene Planning: 1 day per 4 videos (min 2 days)"
+  echo "    - Recce: 2 days"
+  echo "    - Filming: 1 day per 5 videos (min 2 days)"
+  echo "    - Ingest: 1 day per 10 videos (min 1 day)"
+  echo "    - Editing: 2 days per video"
+  echo "    - Revisions: 3 days"
+  echo "    - Delivery: 2 days"
+  echo ""
+  echo "  Interactive Videos:"
+  echo "    - Same as standard but editing is 4x longer"
+  exit 0
+fi
+
+echo "🚀 Creating EAV Planning Template for $PROJECT_CODE"
+
+# Source environment
+if [ -f "/Volumes/EAV/.env" ]; then
+  source /Volumes/EAV/.env
+else
+  echo "❌ Error: Cannot find .env file at /Volumes/EAV/.env"
+  exit 1
+fi
+
+# Check if PROJECT_CODE exists and get project details
+echo "📋 Fetching project details for $PROJECT_CODE..."
+
+# Get all projects and filter client-side for exact match
+ALL_PROJECTS=$(curl -s -X POST "https://app.smartsuite.com/api/v1/applications/68a8ff5237fde0bf797c05b3/records/list/" \
+  -H "Authorization: Token ${SMARTSUITE_API_TOKEN}" \
+  -H "ACCOUNT-ID: ${ACCOUNT_ID}" \
+  -H "Content-Type: application/json" \
+  --data '{}')
+
+PROJECT_DATA=$(echo "$ALL_PROJECTS" | jq --arg code "$PROJECT_CODE" '.items[] | select(.title | test("^" + $code + "\\s"))')
+
+PROJECT_ID=$(echo "$PROJECT_DATA" | jq -r '.id // empty')
+
+if [ -z "$PROJECT_ID" ] || [ "$PROJECT_ID" == "null" ]; then
+  echo "❌ Error: Project $PROJECT_CODE not found in EAV Projects table"
+  exit 1
+fi
+
+PROJECT_TITLE=$(echo "$PROJECT_DATA" | jq -r '.title // "Unknown Project"')
+if [ -z "$CLIENT" ]; then
+  CLIENT=$(echo "$PROJECT_DATA" | jq -r '.client[0] // "TEMPLATE CLIENT"')
+fi
+
+echo "✅ Found project: $PROJECT_TITLE"
+echo "📊 Client: $CLIENT"
+
+# Get video count if not provided
+if [ -z "$VIDEOS" ]; then
+  VIDEOS=$(echo "$PROJECT_DATA" | jq -r '.total_videos_count // .video_count // "7"')
+  if [ "$VIDEOS" == "null" ] || [ "$VIDEOS" == "" ]; then
+    VIDEOS=7
+  fi
+fi
+
+# Get project start date for proper timeline calculation
+PROJECT_START=$(echo "$PROJECT_DATA" | jq -r '.project_lifecycle.from_date.date // empty')
+if [ -z "$PROJECT_START" ] || [ "$PROJECT_START" == "null" ]; then
+  echo "⚠️  Warning: No project start date found, using today"
+  PROJECT_START=$(date +%Y-%m-%dT00:00:00Z)
+fi
+
+echo "📹 Videos: $VIDEOS"
+echo "🎬 Type: $TYPE"
+echo "⏰ Buffer: ${BUFFER}%"
+
+# Calculate durations based on video count and type
+calculate_duration() {
+  local base_duration=$1
+  local buffer_pct=${BUFFER:-0}
+  local duration_with_buffer=$(echo "$base_duration + ($base_duration * $buffer_pct / 100)" | bc -l)
+  printf "%.0f" "$duration_with_buffer"
+}
+
+# Duration calculations
+PREP_DAYS=$(calculate_duration 2)
+SCRIPT_DAYS=$(calculate_duration $(echo "scale=0; if ($VIDEOS / 3 < 2) 2 else ($VIDEOS + 2) / 3" | bc))
+VO_DAYS=$(calculate_duration $(echo "scale=0; if ($VIDEOS / 5 < 2) 2 else ($VIDEOS + 4) / 5" | bc))
+SCENE_DAYS=$(calculate_duration $(echo "scale=0; if ($VIDEOS / 4 < 2) 2 else ($VIDEOS + 3) / 4" | bc))
+RECCE_DAYS=$(calculate_duration 2)
+FILMING_DAYS=$(calculate_duration $(echo "scale=0; if ($VIDEOS / 5 < 2) 2 else ($VIDEOS + 4) / 5" | bc))
+INGEST_DAYS=$(calculate_duration $(echo "scale=0; if ($VIDEOS / 10 < 1) 1 else ($VIDEOS + 9) / 10" | bc))
+
+# Editing calculation with type multiplier
+if [ "$TYPE" == "interactive" ]; then
+  EDITING_DAYS=$(calculate_duration $(echo "$VIDEOS * 8" | bc))  # 8 days per interactive video
+else
+  EDITING_DAYS=$(calculate_duration $(echo "$VIDEOS * 2" | bc))  # 2 days per standard video
+fi
+
+REVISIONS_DAYS=$(calculate_duration 3)
+DELIVERY_DAYS=$(calculate_duration 2)
+
+echo "📅 Calculated durations:"
+echo "   Preparation: ${PREP_DAYS} days"
+echo "   Script & Content: ${SCRIPT_DAYS} days"
+echo "   VO Generation: ${VO_DAYS} days"
+echo "   Scene Planning: ${SCENE_DAYS} days"
+echo "   Recce: ${RECCE_DAYS} days"
+echo "   Filming: ${FILMING_DAYS} days"
+echo "   Ingest: ${INGEST_DAYS} days"
+echo "   Editing: ${EDITING_DAYS} days"
+echo "   Revisions: ${REVISIONS_DAYS} days"
+echo "   Delivery: ${DELIVERY_DAYS} days"
+
+# Phase definitions with durations
+declare -A PHASES=(
+  ["preparation"]="Preparation|${PREP_DAYS}|preparation"
+  ["recce"]="Recce|${RECCE_DAYS}|o0u2K"
+  ["script_content"]="Script & Content|${SCRIPT_DAYS}|script_content"
+  ["vo_generation"]="VO Generation|${VO_DAYS}|vo_generation"
+  ["scene_planning"]="Scene Planning|${SCENE_DAYS}|scene_planning"
+  ["filming"]="Filming|${FILMING_DAYS}|filming"
+  ["ingest"]="Ingest|${INGEST_DAYS}|3s5DC"
+  ["editing"]="Editing|${EDITING_DAYS}|editing"
+  ["revisions"]="Revisions & Approval|${REVISIONS_DAYS}|revisions"
+  ["delivery"]="Delivery|${DELIVERY_DAYS}|delivery"
+)
+
+# Dependency mapping
+declare -A DEPENDENCIES=(
+  ["preparation"]=""
+  ["recce"]=""
+  ["script_content"]="preparation"
+  ["vo_generation"]="script_content"
+  ["scene_planning"]="script_content"
+  ["filming"]="recce,scene_planning"
+  ["ingest"]="filming"
+  ["editing"]="vo_generation,ingest"
+  ["revisions"]="editing"
+  ["delivery"]="revisions"
+)
+
+# Create records in correct order with proper date sequencing
+PHASE_ORDER=("preparation" "recce" "script_content" "vo_generation" "scene_planning" "filming" "ingest" "editing" "revisions" "delivery")
+declare -A RECORD_IDS
+
+# Track cumulative days for proper scheduling
+declare -A PHASE_START_DAYS
+PHASE_START_DAYS["preparation"]=0
+PHASE_START_DAYS["recce"]=0  # Runs parallel with preparation
+
+echo "🔨 Creating planning records with project-relative dates..."
+
+for phase in "${PHASE_ORDER[@]}"; do
+  IFS='|' read -r phase_label duration phase_value <<< "${PHASES[$phase]}"
+  
+  echo "   Creating: ${PROJECT_CODE}-${phase_label}..."
+  
+  # Calculate start day based on dependencies
+  case $phase in
+    "preparation"|"recce") START_DAY=0 ;;
+    "script_content") START_DAY=${PREP_DAYS} ;;
+    "vo_generation"|"scene_planning") START_DAY=$((${PREP_DAYS} + ${SCRIPT_DAYS})) ;;
+    "filming") START_DAY=$((${PREP_DAYS} + ${SCRIPT_DAYS} + ${SCENE_DAYS})) ;;
+    "ingest") START_DAY=$((${PREP_DAYS} + ${SCRIPT_DAYS} + ${SCENE_DAYS} + ${FILMING_DAYS})) ;;
+    "editing") START_DAY=$((${PREP_DAYS} + ${SCRIPT_DAYS} + ${SCENE_DAYS} + ${FILMING_DAYS} + ${INGEST_DAYS})) ;;
+    "revisions") START_DAY=$((${PREP_DAYS} + ${SCRIPT_DAYS} + ${SCENE_DAYS} + ${FILMING_DAYS} + ${INGEST_DAYS} + ${EDITING_DAYS})) ;;
+    "delivery") START_DAY=$((${PREP_DAYS} + ${SCRIPT_DAYS} + ${SCENE_DAYS} + ${FILMING_DAYS} + ${INGEST_DAYS} + ${EDITING_DAYS} + ${REVISIONS_DAYS})) ;;
+  esac
+  
+  # Calculate due date from project start + start day + duration
+  END_DAY=$((START_DAY + duration))
+  DUE_DATE=$(date -j -f "%Y-%m-%dT%H:%M:%SZ" "${PROJECT_START}" +%s 2>/dev/null || date -d "${PROJECT_START}" +%s)
+  DUE_DATE=$(date -r $((DUE_DATE + (END_DAY * 86400))) +%Y-%m-%dT00:00:00Z 2>/dev/null || date -d "@$((DUE_DATE + (END_DAY * 86400)))" +%Y-%m-%dT00:00:00Z)
+  
+  RECORD_DATA=$(cat <<EOF
+{
+  "proj_link1": ["$PROJECT_ID"],
+  "phase_sel1": "$phase_value",
+  "status": {"value": "J0lq0"},
+  "assigned_to": [],
+  "duration_o": null,
+  "buffer_day": "$BUFFER",
+  "due_date": {"date": "$DUE_DATE", "include_time": false},
+  "notes_pln1": {
+    "data": {"type": "doc", "content": []},
+    "html": "",
+    "preview": ""
+  }
+}
+EOF
+)
+
+  RESPONSE=$(curl -s -X POST "https://app.smartsuite.com/api/v1/applications/68bace6c51dce2f0d0f5073b/records/" \
+    -H "Authorization: Token ${SMARTSUITE_API_TOKEN}" \
+    -H "ACCOUNT-ID: ${ACCOUNT_ID}" \
+    -H "Content-Type: application/json" \
+    --data "$RECORD_DATA")
+  
+  RECORD_ID=$(echo "$RESPONSE" | jq -r '.id // empty')
+  
+  if [ -z "$RECORD_ID" ] || [ "$RECORD_ID" == "null" ]; then
+    echo "❌ Error creating $phase record: $RESPONSE"
+    exit 1
+  fi
+  
+  RECORD_IDS[$phase]=$RECORD_ID
+  echo "   ✅ Created: ${PROJECT_CODE}-${phase_label} (ID: $RECORD_ID)"
+done
+
+echo "🔗 Setting up dependencies..."
+
+# Set up dependencies
+for phase in "${PHASE_ORDER[@]}"; do
+  deps="${DEPENDENCIES[$phase]}"
+  if [ -n "$deps" ]; then
+    IFS=',' read -ra DEP_ARRAY <<< "$deps"
+    PREDECESSOR_IDS=()
+    
+    for dep in "${DEP_ARRAY[@]}"; do
+      if [ -n "${RECORD_IDS[$dep]}" ]; then
+        PREDECESSOR_IDS+=("\"${RECORD_IDS[$dep]}\"")
+      fi
+    done
+    
+    if [ ${#PREDECESSOR_IDS[@]} -gt 0 ]; then
+      PREDECESSOR_JSON=$(IFS=','; echo "[${PREDECESSOR_IDS[*]}]")
+      
+      # Update dependencies
+      DEP_DATA=$(cat <<EOF
+{
+  "dependency": {
+    "predecessor": [
+$(for pred_id in "${PREDECESSOR_IDS[@]//\"/}"; do
+  echo "      {\"type\": \"fs\", \"lag\": 0, \"application\": \"68bace6c51dce2f0d0f5073b\", \"record\": \"$pred_id\"},"
+done | sed '$ s/,$//')
+    ]
+  }
+}
+EOF
+)
+
+      UPDATE_RESPONSE=$(curl -s -X PATCH "https://app.smartsuite.com/api/v1/applications/68bace6c51dce2f0d0f5073b/records/${RECORD_IDS[$phase]}/" \
+        -H "Authorization: Token ${SMARTSUITE_API_TOKEN}" \
+        -H "ACCOUNT-ID: ${ACCOUNT_ID}" \
+        -H "Content-Type: application/json" \
+        --data "$DEP_DATA")
+      
+      IFS='|' read -r phase_label duration phase_value <<< "${PHASES[$phase]}"
+      echo "   ✅ Set dependencies for ${PROJECT_CODE}-${phase_label}"
+    fi
+  fi
+done
+
+echo ""
+echo "✅ Planning template created successfully for $PROJECT_CODE!"
+echo ""
+echo "📊 Summary:"
+echo "   Project: $PROJECT_TITLE"
+echo "   Client: $CLIENT"
+echo "   Videos: $VIDEOS ($TYPE)"
+echo "   Buffer: ${BUFFER}%"
+echo "   Records Created: ${#RECORD_IDS[@]}"
+echo "   Total Estimated Duration: $(echo "${PREP_DAYS} + ${SCRIPT_DAYS} + ${VO_DAYS} + ${SCENE_DAYS} + ${RECCE_DAYS} + ${FILMING_DAYS} + ${INGEST_DAYS} + ${EDITING_DAYS} + ${REVISIONS_DAYS} + ${DELIVERY_DAYS}" | bc) days"
+echo ""
+echo "🎯 Next steps:"
+echo "   1. Check the Planning table in SmartSuite"
+echo "   2. Review Gantt view for timeline accuracy"
+echo "   3. Assign team members to each phase"
+echo "   4. Adjust durations if needed using Duration Override field"
+echo ""
+echo "🔗 Planning Records Created:"
+for phase in "${PHASE_ORDER[@]}"; do
+  IFS='|' read -r phase_label duration phase_value <<< "${PHASES[$phase]}"
+  echo "   • ${PROJECT_CODE}-${phase_label}: ${RECORD_IDS[$phase]}"
+done

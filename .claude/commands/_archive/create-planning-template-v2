@@ -1,0 +1,321 @@
+#!/bin/bash
+
+# EAV Planning Template Creator V2 - Backward Planning from Due Date
+# Usage: /create-planning-template-v2 PROJECT_CODE
+# Example: /create-planning-template-v2 EAV015
+
+set -e
+
+# Default values
+HELP=false
+
+# Check for help first
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+  echo "EAV Planning Template Creator V2"
+  echo ""
+  echo "Usage: /create-planning-template-v2 PROJECT_CODE"
+  echo ""
+  echo "Arguments:"
+  echo "  PROJECT_CODE    Required. EAV project code (e.g., EAV015)"
+  echo ""
+  echo "This script creates planning records working backward from project due date."
+  echo ""
+  echo "Fixed Phase Durations:"
+  echo "  Project Start: 0 days (milestone)"
+  echo "  Preparation: 1 day"
+  echo "  Recce: 1 day"
+  echo "  Script & Content: 4 days"
+  echo "  VO Generation: 4 days"
+  echo "  Scene Planning: 4 days"
+  echo "  Filming: 7 days"
+  echo "  Ingest: 3 days"
+  echo "  Editing: 14 days"
+  echo "  Revisions: 3 days"
+  echo "  Delivery: 4 days"
+  echo "  Total: 45 days"
+  exit 0
+fi
+
+PROJECT_CODE="$1"
+
+echo "🚀 Creating EAV Planning Template V2 for $PROJECT_CODE"
+echo "📐 Using backward planning from project due date"
+
+# Source environment
+if [ -f "/Volumes/EAV/.env" ]; then
+  source /Volumes/EAV/.env
+else
+  echo "❌ Error: Cannot find .env file at /Volumes/EAV/.env"
+  exit 1
+fi
+
+# Check if PROJECT_CODE exists and get project details
+echo "📋 Fetching project details for $PROJECT_CODE..."
+
+# Get all projects and filter client-side for exact match
+ALL_PROJECTS=$(curl -s -X POST "https://app.smartsuite.com/api/v1/applications/68a8ff5237fde0bf797c05b3/records/list/" \
+  -H "Authorization: Token ${SMARTSUITE_API_TOKEN}" \
+  -H "ACCOUNT-ID: ${ACCOUNT_ID}" \
+  -H "Content-Type: application/json" \
+  --data '{}')
+
+PROJECT_DATA=$(echo "$ALL_PROJECTS" | jq --arg code "$PROJECT_CODE" '.items[] | select(.title | test("^" + $code + "\\s"))')
+
+PROJECT_ID=$(echo "$PROJECT_DATA" | jq -r '.id // empty')
+
+if [ -z "$PROJECT_ID" ] || [ "$PROJECT_ID" == "null" ]; then
+  echo "❌ Error: Project $PROJECT_CODE not found in EAV Projects table"
+  exit 1
+fi
+
+PROJECT_TITLE=$(echo "$PROJECT_DATA" | jq -r '.title // "Unknown Project"')
+CLIENT=$(echo "$PROJECT_DATA" | jq -r '.sbfc98645c[0] // "Unknown Client"')
+
+# Get project due date - CRITICAL for backward planning
+PROJECT_DUE=$(echo "$PROJECT_DATA" | jq -r '.projdue456.to_date.date // empty')
+
+if [ -z "$PROJECT_DUE" ] || [ "$PROJECT_DUE" == "null" ]; then
+  echo "❌ Error: Project $PROJECT_CODE has no due date set (field projdue456)"
+  echo "   Please set a project due date before creating the planning template"
+  exit 1
+fi
+
+echo "✅ Found project: $PROJECT_TITLE"
+echo "📊 Client: $CLIENT"
+echo "📅 Project Due Date: $(echo $PROJECT_DUE | cut -d'T' -f1)"
+
+# Fixed phase durations (in days)
+declare -A DURATIONS=(
+  ["project_start"]=0
+  ["preparation"]=1
+  ["recce"]=1
+  ["script_content"]=4
+  ["vo_generation"]=4
+  ["scene_planning"]=4
+  ["filming"]=7
+  ["ingest"]=3
+  ["editing"]=14
+  ["revisions"]=3
+  ["delivery"]=4
+)
+
+# Phase labels and SmartSuite values
+declare -A PHASE_INFO=(
+  ["project_start"]="Project Start|C4SkO"
+  ["preparation"]="Preparation|preparation"
+  ["recce"]="Recce|o0u2K"
+  ["script_content"]="Script & Content|script_content"
+  ["vo_generation"]="VO Generation|vo_generation"
+  ["scene_planning"]="Scene Planning|scene_planning"
+  ["filming"]="Filming|filming"
+  ["ingest"]="Ingest|3s5DC"
+  ["editing"]="Editing|editing"
+  ["revisions"]="Revisions & Approval|revisions"
+  ["delivery"]="Delivery|delivery"
+)
+
+# Dependency mapping - UPDATED per requirements
+declare -A DEPENDENCIES=(
+  ["project_start"]=""
+  ["preparation"]="project_start"
+  ["recce"]="project_start"
+  ["script_content"]="preparation"
+  ["vo_generation"]="script_content"
+  ["scene_planning"]="script_content"
+  ["filming"]="recce,scene_planning"
+  ["ingest"]="filming"
+  ["editing"]="vo_generation,ingest"
+  ["revisions"]="editing"
+  ["delivery"]="revisions"
+)
+
+# Calculate dates backward from due date
+echo "📅 Calculating phase dates (working backward from due date)..."
+
+# Convert due date to seconds for calculation
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  # macOS date command
+  DUE_SECONDS=$(date -j -f "%Y-%m-%dT%H:%M:%SZ" "${PROJECT_DUE}" +%s 2>/dev/null)
+else
+  # Linux date command
+  DUE_SECONDS=$(date -d "${PROJECT_DUE}" +%s)
+fi
+
+# Calculate cumulative days backward from due date
+declare -A CUMULATIVE_DAYS=(
+  ["delivery"]=0      # Ends on due date
+  ["revisions"]=4     # 4 days before due date
+  ["editing"]=7       # 7 days before due date (4+3)
+  ["ingest"]=21       # 21 days before due date (4+3+14)
+  ["filming"]=24      # 24 days before due date (4+3+14+3)
+  ["scene_planning"]=31  # 31 days before due date (4+3+14+3+7)
+  ["vo_generation"]=31   # Same as scene_planning (parallel)
+  ["script_content"]=35  # 35 days before due date (4+3+14+3+7+4)
+  ["recce"]=39        # 39 days before due date (4+3+14+3+7+4+4)
+  ["preparation"]=39  # Same as recce (parallel)
+  ["project_start"]=40   # 40 days before due date (single point)
+)
+
+# Store calculated dates for each phase - MUST be exported for subshells
+declare -A PHASE_START_DATES
+declare -A PHASE_END_DATES
+export PHASE_START_DATES
+export PHASE_END_DATES
+
+# Calculate actual dates for each phase
+for phase in project_start preparation recce script_content vo_generation scene_planning filming ingest editing revisions delivery; do
+  DAYS_BEFORE=${CUMULATIVE_DAYS[$phase]}
+  DURATION=${DURATIONS[$phase]}
+  
+  # Calculate end date (days before due date)
+  END_SECONDS=$((DUE_SECONDS - (DAYS_BEFORE * 86400)))
+  
+  # Calculate start date (end date minus duration)
+  START_SECONDS=$((END_SECONDS - (DURATION * 86400)))
+  
+  # For milestone (0 duration), start and end are the same
+  if [ "$DURATION" -eq 0 ]; then
+    START_SECONDS=$END_SECONDS
+  fi
+  
+  # Format dates
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    PHASE_START_DATES[$phase]=$(date -r $START_SECONDS +%Y-%m-%dT00:00:00Z)
+    PHASE_END_DATES[$phase]=$(date -r $END_SECONDS +%Y-%m-%dT00:00:00Z)
+  else
+    PHASE_START_DATES[$phase]=$(date -d "@$START_SECONDS" +%Y-%m-%dT00:00:00Z)
+    PHASE_END_DATES[$phase]=$(date -d "@$END_SECONDS" +%Y-%m-%dT00:00:00Z)
+  fi
+  
+  IFS='|' read -r label value <<< "${PHASE_INFO[$phase]}"
+  echo "   $label: $(echo ${PHASE_START_DATES[$phase]} | cut -d'T' -f1) to $(echo ${PHASE_END_DATES[$phase]} | cut -d'T' -f1)"
+done
+
+# Create records in order
+PHASE_ORDER=("project_start" "preparation" "recce" "script_content" "vo_generation" "scene_planning" "filming" "ingest" "editing" "revisions" "delivery")
+declare -A RECORD_IDS
+
+echo ""
+echo "🔨 Creating planning records..."
+
+for phase in "${PHASE_ORDER[@]}"; do
+  IFS='|' read -r phase_label phase_value <<< "${PHASE_INFO[$phase]}"
+  
+  echo "   Creating: ${PROJECT_CODE}-${phase_label}..."
+  
+  # Get dates for this phase
+  START_DATE="${PHASE_START_DATES[$phase]}"
+  END_DATE="${PHASE_END_DATES[$phase]}"
+  
+  # Debug: Check if dates are set
+  if [ -z "$START_DATE" ] || [ -z "$END_DATE" ]; then
+    echo "   ⚠️  Warning: Missing dates for $phase_label (Start: $START_DATE, End: $END_DATE)"
+  fi
+  
+  # Create record with proper date range
+  RECORD_DATA=$(cat <<EOF
+{
+  "proj_link1": ["$PROJECT_ID"],
+  "phase_sel1": "$phase_value",
+  "status": {"value": "J0lq0"},
+  "assigned_to": [],
+  "duration_o": null,
+  "buffer_day": "0",
+  "due_date": {
+    "from_date": {"date": "$START_DATE", "include_time": false},
+    "to_date": {"date": "$END_DATE", "include_time": false}
+  },
+  "notes_pln1": {
+    "data": {"type": "doc", "content": []},
+    "html": "",
+    "preview": ""
+  }
+}
+EOF
+)
+
+  RESPONSE=$(curl -s -X POST "https://app.smartsuite.com/api/v1/applications/68bace6c51dce2f0d0f5073b/records/" \
+    -H "Authorization: Token ${SMARTSUITE_API_TOKEN}" \
+    -H "ACCOUNT-ID: ${ACCOUNT_ID}" \
+    -H "Content-Type: application/json" \
+    --data "$RECORD_DATA")
+  
+  RECORD_ID=$(echo "$RESPONSE" | jq -r '.id // empty')
+  
+  if [ -z "$RECORD_ID" ] || [ "$RECORD_ID" == "null" ]; then
+    echo "❌ Error creating $phase record: $RESPONSE"
+    exit 1
+  fi
+  
+  RECORD_IDS[$phase]=$RECORD_ID
+  echo "   ✅ Created: ${PROJECT_CODE}-${phase_label} (ID: $RECORD_ID)"
+done
+
+echo ""
+echo "🔗 Setting up dependencies..."
+
+# Set up dependencies
+for phase in "${PHASE_ORDER[@]}"; do
+  deps="${DEPENDENCIES[$phase]}"
+  if [ -n "$deps" ]; then
+    IFS=',' read -ra DEP_ARRAY <<< "$deps"
+    PREDECESSOR_IDS=()
+    
+    for dep in "${DEP_ARRAY[@]}"; do
+      if [ -n "${RECORD_IDS[$dep]}" ]; then
+        PREDECESSOR_IDS+=("${RECORD_IDS[$dep]}")
+      fi
+    done
+    
+    if [ ${#PREDECESSOR_IDS[@]} -gt 0 ]; then
+      # Build dependency JSON
+      DEP_JSON="["
+      for pred_id in "${PREDECESSOR_IDS[@]}"; do
+        DEP_JSON+="{\"type\": \"fs\", \"lag\": 0, \"application\": \"68bace6c51dce2f0d0f5073b\", \"record\": \"$pred_id\"},"
+      done
+      DEP_JSON="${DEP_JSON%,}]"
+      
+      # Update dependencies
+      DEP_DATA=$(cat <<EOF
+{
+  "dependency": {
+    "predecessor": $DEP_JSON
+  }
+}
+EOF
+)
+
+      UPDATE_RESPONSE=$(curl -s -X PATCH "https://app.smartsuite.com/api/v1/applications/68bace6c51dce2f0d0f5073b/records/${RECORD_IDS[$phase]}/" \
+        -H "Authorization: Token ${SMARTSUITE_API_TOKEN}" \
+        -H "ACCOUNT-ID: ${ACCOUNT_ID}" \
+        -H "Content-Type: application/json" \
+        --data "$DEP_DATA")
+      
+      IFS='|' read -r phase_label phase_value <<< "${PHASE_INFO[$phase]}"
+      echo "   ✅ Set dependencies for ${PROJECT_CODE}-${phase_label}"
+    fi
+  fi
+done
+
+echo ""
+echo "✅ Planning template created successfully for $PROJECT_CODE!"
+echo ""
+echo "📊 Summary:"
+echo "   Project: $PROJECT_TITLE"
+echo "   Client: $CLIENT"
+echo "   Due Date: $(echo $PROJECT_DUE | cut -d'T' -f1)"
+echo "   Start Date: $(echo ${PHASE_START_DATES[project_start]} | cut -d'T' -f1)"
+echo "   Duration: 40 working days (45 calendar days with overlaps)"
+echo "   Records Created: ${#RECORD_IDS[@]}"
+echo ""
+echo "🎯 Next steps:"
+echo "   1. Check the Planning table in SmartSuite"
+echo "   2. Review Gantt view for timeline accuracy"
+echo "   3. Verify dependencies are correctly linked"
+echo "   4. Assign team members to each phase"
+echo ""
+echo "🔗 Planning Records Created:"
+for phase in "${PHASE_ORDER[@]}"; do
+  IFS='|' read -r phase_label phase_value <<< "${PHASE_INFO[$phase]}"
+  echo "   • ${PROJECT_CODE}-${phase_label}: ${RECORD_IDS[$phase]}"
+done

@@ -1,0 +1,145 @@
+# Test Manipulation Patterns Configuration v1.0
+# Defines patterns that indicate AI is gaming tests instead of fixing code
+
+version: "1.0"
+purpose: "Prevent Claude from taking the easy path of weakening tests"
+
+# Critical patterns that always trigger blocks
+critical_patterns:
+  weakened_assertions:
+    description: "Test assertions made less specific"
+    examples:
+      - from: "expect(value).toBe(5)"
+        to: "expect(value).toBeTruthy()"
+        reason: "Specific value check replaced with existence check"
+      
+      - from: "expect(result).toEqual({id: 1, name: 'test'})"
+        to: "expect(result).toBeDefined()"
+        reason: "Object equality replaced with existence"
+      
+      - from: "expect(fn).toHaveBeenCalledWith('arg1', 'arg2')"
+        to: "expect(fn).toHaveBeenCalled()"
+        reason: "Argument validation removed"
+        
+      - from: "expect(error).toThrow('Specific error message')"
+        to: "expect(error).toThrow()"
+        reason: "Error message validation removed"
+
+  removed_validations:
+    description: "Test checks removed entirely"
+    examples:
+      - pattern: "Deleting expect() statements"
+      - pattern: "Removing assertion blocks"
+      - pattern: "Commenting out validations"
+
+  test_avoidance:
+    description: "Tests disabled instead of fixed"
+    examples:
+      - pattern: "Adding .skip() to test"
+      - pattern: "Adding .only() to isolate passing tests"
+      - pattern: "Using xit() or xdescribe()"
+      - pattern: "Adding @Ignore or @Disabled annotations"
+
+  expectation_adjustment:
+    description: "Expected values changed to match broken output"
+    red_flags:
+      - "Changing expected value to undefined"
+      - "Changing expected value to null"
+      - "Changing expected value to empty string"
+      - "Changing expected value to empty array/object"
+    example: |
+      // BEFORE (test fails)
+      expect(calculateSum(2, 2)).toBe(4);
+      
+      // AFTER (manipulated to pass)
+      expect(calculateSum(2, 2)).toBe(undefined);  // <- Adjusted to match broken function
+
+# Patterns that might be legitimate in some contexts
+contextual_patterns:
+  refactoring:
+    description: "Test structure improvements without weakening"
+    allowed_when:
+      - "Extracting helper functions"
+      - "Improving test names"
+      - "Grouping related tests"
+    blocked_when:
+      - "Assertions become less specific"
+      - "Coverage decreases"
+
+  api_updates:
+    description: "Tests updated for legitimate API changes"
+    allowed_when:
+      - "Corresponding implementation changes exist"
+      - "Commit message explains API change"
+      - "New behavior is properly validated"
+    blocked_when:
+      - "Only test changes, no implementation changes"
+      - "Weakening assertions to accommodate bugs"
+
+# Integration patterns (lower risk)
+integration_exemptions:
+  wiring_tested_components:
+    description: "Connecting already-tested pieces"
+    conditions:
+      - "Component has existing unit tests"
+      - "No new business logic added"
+      - "Just calling tested functions"
+    examples:
+      - "validateEnvironment() in main()"
+      - "initializeConfig() in startup"
+      - "connectDatabase() in server setup"
+
+  test_environment_setup:
+    description: "Test infrastructure and helpers"
+    allowed:
+      - "beforeEach/afterEach setup"
+      - "Test data factories"
+      - "Mock configurations"
+    blocked:
+      - "Mocking to avoid real failures"
+      - "Over-mocking that hides bugs"
+
+# Evidence requirements for overrides
+override_evidence:
+  required_for_bypass:
+    - ticket_number: "TICKET-123 format"
+    - justification: "Why test change is legitimate"
+    - review: "Who approved the change"
+  
+  commit_message_format: |
+    test: Update for new API structure
+    
+    Test-Update-Reason: API contract changed in commit abc123
+    Code-Fixed-First: Yes
+    Testguard-Consulted: Yes
+    Ticket: TICKET-456
+
+# Enforcement levels
+enforcement:
+  test_files:
+    level: "CRITICAL"
+    message: "Tests reveal reality - no manipulation allowed"
+    
+  source_files:
+    level: "HIGH"
+    message: "Test-first development required"
+    
+  integration_files:
+    level: "MEDIUM"
+    message: "Integration of tested components allowed"
+
+# Philosophy statement
+philosophy: |
+  Tests are the truth-tellers of our codebase. They define what "correct" means.
+  
+  When a test fails, it's revealing that the code doesn't match the specification.
+  The solution is to fix the code, not to weaken the test.
+  
+  This hook prevents the natural AI tendency to take the path of least resistance
+  by "fixing" the test instead of fixing the actual problem.
+  
+  Remember:
+  - Tests define correctness
+  - Code must meet the test's requirements
+  - Weakening tests hides bugs
+  - Reality over convenience

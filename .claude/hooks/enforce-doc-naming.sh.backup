@@ -1,0 +1,283 @@
+#!/bin/bash
+# Enforce documentation naming standards from 101-DOC-STRUCTURE-AND-NAMING-STANDARDS
+
+# Read JSON input from stdin
+INPUT_JSON=$(cat)
+
+# Extract tool_name and file_path from the JSON (file_path is in tool_input)
+TOOL_NAME=$(echo "$INPUT_JSON" | grep -o '"tool_name"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*"tool_name"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/')
+FILE_PATH=$(echo "$INPUT_JSON" | grep -o '"tool_input"[^}]*"file_path"[[:space:]]*:[[:space:]]*"[^"]*"' | grep -o '"file_path"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*"file_path"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/')
+
+# Only process Write, MultiEdit, and Edit tools
+if [[ "$TOOL_NAME" != "Write" && "$TOOL_NAME" != "MultiEdit" && "$TOOL_NAME" != "Edit" ]]; then
+  exit 0
+fi
+
+# If no file_path found, exit successfully
+if [[ -z "$FILE_PATH" ]]; then
+  exit 0
+fi
+
+FILE_NAME=$(basename "$FILE_PATH")
+DIR_PATH=$(dirname "$FILE_PATH")
+
+# Check if this is a HestAI project (has specific markers)
+PROJECT_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
+
+if [[ ! "$PROJECT_ROOT" =~ (HestAI|HestAI-New|hestai|eav-orchestrator) ]] && 
+   [[ ! -f "$PROJECT_ROOT/docs/101-DOC-STRUCTURE-AND-NAMING-STANDARDS"* ]]; then
+  # Not a HestAI project, skip enforcement
+  exit 0
+fi
+
+# Only check files in docs/, reports/, or _archive/
+if [[ ! "$DIR_PATH" =~ (^|/)(docs|reports|_archive)(/|$) ]]; then
+  exit 0
+fi
+
+# Skip README files and registry files
+if [[ "$FILE_NAME" == "README.md" ]] || [[ "$DIR_PATH" =~ \.registry ]]; then
+  exit 0
+fi
+
+# Check for sequence conflicts and range validation using registry
+if [[ "$FILE_NAME" =~ ^([0-9]{3})-(.+)\.md$ ]]; then
+  SEQUENCE_NUM="${BASH_REMATCH[1]}"
+  DOC_NAME="${BASH_REMATCH[2]}"
+  
+  # Validate sequence number against directory ranges
+  if [[ "$DIR_PATH" =~ /workflow ]]; then
+    if [[ "$SEQUENCE_NUM" -lt 0 || "$SEQUENCE_NUM" -gt 99 ]]; then
+      cat >&2 <<EOF
+
+🚨 EXACT COMMANDS TO UNBLOCK:
+
+1. Use sequence number 000-099 for workflow directory
+
+2. Check sequence-tracker.json for next available number
+
+3. Update your filename to use correct range
+
+⚠️  DO NOT use sequence $SEQUENCE_NUM - workflow requires 000-099 range.
+EOF
+      exit 2
+    fi
+  elif [[ "$DIR_PATH" =~ /standards ]]; then
+    if [[ "$SEQUENCE_NUM" -lt 100 || "$SEQUENCE_NUM" -gt 199 ]]; then
+      cat >&2 <<EOF
+
+🚨 EXACT COMMANDS TO UNBLOCK:
+
+1. Use sequence number 100-199 for standards directory
+
+2. Check sequence-tracker.json for next available number
+
+3. Update your filename to use correct range
+
+⚠️  DO NOT use sequence $SEQUENCE_NUM - standards requires 100-199 range.
+EOF
+      exit 2
+    fi
+  elif [[ "$DIR_PATH" =~ /future-phases ]]; then
+    if [[ "$SEQUENCE_NUM" -lt 200 || "$SEQUENCE_NUM" -gt 299 ]]; then
+      cat >&2 <<EOF
+
+🚨 EXACT COMMANDS TO UNBLOCK:
+
+1. Use sequence number 200-299 for future-phases directory
+
+2. Check sequence-tracker.json for next available number
+
+3. Update your filename to use correct range
+
+⚠️  DO NOT use sequence $SEQUENCE_NUM - future-phases requires 200-299 range.
+EOF
+      exit 2
+    fi
+  elif [[ "$DIR_PATH" =~ /security ]]; then
+    if [[ "$SEQUENCE_NUM" -lt 400 || "$SEQUENCE_NUM" -gt 499 ]]; then
+      cat >&2 <<EOF
+
+🚨 EXACT COMMANDS TO UNBLOCK:
+
+1. Use sequence number 400-499 for security directory
+
+2. Check sequence-tracker.json for next available number
+
+3. Update your filename to use correct range
+
+⚠️  DO NOT use sequence $SEQUENCE_NUM - security requires 400-499 range.
+EOF
+      exit 2
+    fi
+  fi
+  
+  # Check registry for conflicts within same directory
+  REGISTRY_DIR="/Volumes/HestAI/docs/.registry"
+  SEQUENCE_TRACKER="$REGISTRY_DIR/sequence-tracker.json"
+  
+  if [[ -f "$SEQUENCE_TRACKER" ]]; then
+    # Check for existing documents with same sequence in same directory
+    DOC_DIR=$(dirname "$FILE_PATH")
+    EXISTING_DOCS=$(find "$DOC_DIR" -name "${SEQUENCE_NUM}-*.md" 2>/dev/null | grep -v "$FILE_PATH")
+    if [[ -n "$EXISTING_DOCS" ]]; then
+      cat >&2 <<EOF
+
+🚨 EXACT COMMANDS TO UNBLOCK:
+
+1. Check sequence-tracker.json for next available number
+
+2. Use /role system-steward for conflict resolution
+
+3. Update your filename to use different sequence number
+
+⚠️  DO NOT override existing sequence numbers - this breaks document ordering.
+
+Attempted: $FILE_PATH
+Conflicts with: $EXISTING_DOCS
+EOF
+      exit 2
+    fi
+  fi
+fi
+
+# Check if this is a PROJECT deliverable requiring phase validation
+if [[ "$FILE_NAME" =~ ^[0-9]{3}-PROJECT ]]; then
+  # Check if this is in a project directory - use more flexible validation
+  if [[ "$FILE_PATH" =~ /Volumes/HestAI-Projects/ ]] || [[ "$FILE_PATH" =~ /Volumes/HestAI/builds/ ]]; then
+    # Flexible pattern for project directories: allow more variations in naming
+    # Pattern: {CATEGORY}{NN}-PROJECT-{NAME}-{PHASE}-{NAME}.{EXT} or similar variations
+    PROJECT_FLEXIBLE_PATTERN='^[0-9]{3}-PROJECT(-[A-Z0-9]+)*-(D0|D1|D2|D3|B0|B1|B2|B3|B4|B5)-[A-Z0-9]+(-[A-Z0-9]+)*\.(md|oct\.md)$'
+    
+    if [[ ! "$FILE_NAME" =~ $PROJECT_FLEXIBLE_PATTERN ]]; then
+      cat >&2 <<EOF
+
+🚨 EXACT COMMANDS TO UNBLOCK:
+
+1. Include phase in PROJECT deliverable filename
+
+2. Use pattern: {CATEGORY}{NN}-PROJECT-{NAME}-{PHASE}-{NAME}.{EXT}
+
+3. Example: 209-PROJECT-SMARTSUITE-MCP-B3-TEST-STRATEGY.md
+
+⚠️  DO NOT omit phase - PROJECT deliverables must include workflow phase.
+
+File: $FILE_NAME
+Valid phases: D0, D1, D2, D3, B0, B1, B2, B3, B4, B5
+EOF
+      exit 2
+    fi
+  else
+    # Strict pattern for core HestAI docs
+    # Phase pattern: {CATEGORY}{NN}-PROJECT[-{NAME}]-(D0|D1|D2|D3|B0|B1|B2|B3|B4|B5)-{NAME}.{EXT}
+    PHASE_PATTERN='^[0-9]{3}-PROJECT(-[A-Z0-9]+)?-(D0|D1|D2|D3|B0|B1|B2|B3|B4|B5)-[A-Z0-9]+(-[A-Z0-9]+)*\.(md|oct\.md)$'
+    
+    if [[ ! "$FILE_NAME" =~ $PHASE_PATTERN ]]; then
+      cat >&2 <<EOF
+
+🚨 EXACT COMMANDS TO UNBLOCK:
+
+1. Include phase in PROJECT deliverable filename
+
+2. Use pattern: {CATEGORY}{NN}-PROJECT[-{NAME}]-{PHASE}-{NAME}.{EXT}
+
+3. Example: 201-PROJECT-MYAPP-D2-DESIGN.md
+
+⚠️  DO NOT omit phase - PROJECT deliverables must include workflow phase.
+
+File: $FILE_NAME
+Valid phases: D0, D1, D2, D3, B0, B1, B2, B3, B4, B5
+
+Phase Reference:
+  D0: Ideation Setup & Session Establishment
+  D1: Understanding & North Star
+  D2: Ideation & Solution Approaches  
+  D3: Architecture & Technical Blueprint
+  B0: Validation Gate
+  B1: Planning & Build Roadmap
+  B2: Implementation & Code Construction
+  B3: Integration & System Unification
+  B4: Delivery & Production Handoff
+  B5: Enhancement & Post-Delivery Evolution
+EOF
+      exit 2
+    fi
+  fi
+else
+  # Non-PROJECT documents use standard pattern
+  PATTERN='^[0-9]{3}-(DOC|SYSTEM|WORKFLOW|SCRIPT|AUTH|UI|RUNTIME|DATA|SEC|OPS|BUILD|REPORT)(-[A-Z0-9]+)?-[A-Z0-9]+(-[A-Z0-9]+)*\.(md|oct\.md)$'
+  
+  if [[ ! "$FILE_NAME" =~ $PATTERN ]]; then
+    cat >&2 <<EOF
+
+🚨 EXACT COMMANDS TO UNBLOCK:
+
+1. Use required pattern: {CATEGORY}{NN}-{CONTEXT}[-{QUALIFIER}]-{NAME}.{EXT}
+
+2. Example: 103-DOC-OCTAVE-COMPRESSION-RULES.md
+
+3. Valid CONTEXT: DOC, SYSTEM, WORKFLOW, SCRIPT, AUTH, UI, RUNTIME, DATA, SEC, OPS, BUILD, REPORT
+
+⚠️  DO NOT use custom context names - stick to approved CONTEXT list.
+
+File: $FILE_NAME
+
+Rules:
+- 3-digit category (e.g., 103)
+- UPPERCASE-WITH-HYPHENS for names
+- .md or .oct.md extension only
+- No version suffixes (_v1, _final, etc.)
+
+For PROJECT deliverables, use: {NN}-PROJECT[-{NAME}]-{PHASE}-{NAME}.md
+EOF
+    exit 2
+  fi
+fi
+
+# Check for forbidden version suffixes
+if [[ "$FILE_NAME" =~ (_v[0-9]+|_final|_latest|_draft|_old|_new) ]]; then
+  cat >&2 <<EOF
+
+🚨 EXACT COMMANDS TO UNBLOCK:
+
+1. Remove version suffix from filename
+
+2. Use git branches/history for versions instead
+
+3. Retry with clean filename
+
+⚠️  DO NOT use version suffixes - git handles versioning.
+
+File: $FILE_NAME
+EOF
+  exit 2  # Using successful blocking exit code pattern
+fi
+
+# Check directory depth for docs/
+if [[ "$FILE_PATH" =~ ^(.*/)?docs/ ]]; then
+  # Count depth under docs/
+  DOCS_PORTION=${FILE_PATH#*docs/}
+  DEPTH=$(echo "$DOCS_PORTION" | tr '/' '\n' | wc -l)
+  
+  if [[ $DEPTH -gt 2 ]]; then
+    cat >&2 <<EOF
+
+🚨 EXACT COMMANDS TO UNBLOCK:
+
+1. Move file to shallower directory (max 2 levels under docs/)
+
+2. Example: docs/subfolder/file.md (allowed)
+
+3. Retry with correct path structure
+
+⚠️  DO NOT create deep folder hierarchies - keep docs organization simple.
+
+Path: $FILE_PATH
+Maximum allowed: docs/subfolder/file.md (2 levels)
+Your depth: $DEPTH levels
+EOF
+    exit 2  # Using successful blocking exit code pattern
+  fi
+fi
+
+exit 0

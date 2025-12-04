@@ -1,0 +1,151 @@
+{
+  "version": "1.0",
+  "one_time_approvals": {
+    "TEST-APPROVAL-123": {
+      "content_hash": "sha256:dummy",
+      "blocked_file": "/tmp/test",
+      "expires": "2099-01-01T00:00:00Z",
+      "created": "2025-01-04T12:00:00Z",
+      "used": true,
+      "approved_by": "testguard",
+      "reason": "Test token for validation",
+      "used_at": "2025-09-04T13:31:44+01:00"
+    },
+    "TESTGUARD-APPROVED-1756987170-13688": {
+      "content_hash": "sha256:dummy",
+      "blocked_file": "/tmp/blocked-test-1756987170-13688",
+      "expires": "2099-01-01T00:00:00Z",
+      "created": "2025-09-04T12:47:00Z",
+      "used": true,
+      "approved_by": "testguard",
+      "reason": "Test strengthening improvement approved",
+      "used_at": "2025-09-04T13:01:27+01:00"
+    },
+    "SECURITY-TEST-TOKEN-123": {
+      "content_hash": "sha256:test",
+      "blocked_file": "/tmp/blocked-arch-1756992384-52053",
+      "expires": "2099-01-01T00:00:00Z",
+      "created": "2025-09-04T14:28:30+01:00",
+      "used": true,
+      "approved_by": "security-specialist",
+      "reason": "Corrected JWT architecture - removed database token storage",
+      "used_at": "2025-09-04T14:28:50+01:00"
+    }
+  },
+  "permanent_patterns": {},
+  "blocked_patterns": {},
+  "audit_log": [
+    {
+      "timestamp": "2025-09-04T12:46:58+01:00",
+      "action": "token_use",
+      "token": "FAKE-MULTI-HYPHEN-TOKEN-12345",
+      "file": "/tmp/test-both-fixes.test.js",
+      "outcome": "failed"
+    },
+    {
+      "timestamp": "2025-09-04T13:01:27+01:00",
+      "action": "token_use",
+      "token": "TESTGUARD-APPROVED-1756987170-13688",
+      "file": "/tmp/test-new-token.test.js",
+      "outcome": "success"
+    },
+    {
+      "timestamp": "2025-09-04T13:31:44+01:00",
+      "action": "token_use",
+      "token": "TEST-APPROVAL-123",
+      "file": "/Volumes/HestAI/test-token-validation.test.js",
+      "outcome": "success"
+    },
+    {
+      "timestamp": "2025-09-04T13:31:49+01:00",
+      "action": "token_use",
+      "token": "TEST-APPROVAL-123",
+      "file": "/Volumes/HestAI/test-token-reuse.test.js",
+      "outcome": "failed"
+    },
+    {
+      "timestamp": "2025-09-04T14:23:22+01:00",
+      "action": "token_use",
+      "token": "REFACTOR-API-001",
+      "file": "/Volumes/HestAI-Projects/smartsuite-api-shim/build/test/index.test.ts",
+      "outcome": "failed"
+    },
+    {
+      "timestamp": "2025-09-04T14:28:50+01:00",
+      "action": "token_use",
+      "token": "SECURITY-TEST-TOKEN-123",
+      "file": "/Volumes/HestAI/corrected-schema-v2.sql",
+      "outcome": "success"
+    },
+    {
+      "timestamp": "2025-09-04T14:30:40+01:00",
+      "action": "token_use",
+      "token": "ARCH-APPROVAL-TOKEN-756992516",
+      "file": "/Volumes/HestAI/test-architect-token.sql",
+      "outcome": "failed"
+    },
+    {
+      "timestamp": "2025-09-04T17:15:09+01:00",
+      "action": "token_use",
+      "token": "REFACTOR-API-001",
+      "file": "/Volumes/HestAI-Projects/smartsuite-api-shim/build/test/index.test.ts",
+      "outcome": "failed"
+    },
+    {
+      "timestamp": "2025-09-04T17:39:28+01:00",
+      "action": "token_use",
+      "token": "TECHNICAL-ARCHITECT-20250904-0dd4d8cd",
+      "file": "/Volumes/HestAI-Tools/hestai-mcp-server/tools/registry.py",
+      "outcome": "failed"
+    },
+    {
+      "timestamp": "2025-09-04T17:40:03+01:00",
+      "action": "token_use",
+      "token": "TECHNICAL-ARCHITECT-20250904-0dd4d8cd",
+      "file": "/Volumes/HestAI-Tools/hestai-mcp-server/tests/test_registry_schema.py",
+      "outcome": "failed"
+    },
+    {
+      "timestamp": "2025-09-04T17:42:00+01:00",
+      "action": "token_use",
+      "token": "CI-pipeline-test-stratification",
+      "file": "/Volumes/HestAI-Projects/smartsuite-api-shim/build/package.json",
+      "outcome": "failed"
+    },
+    {
+      "timestamp": "2025-09-04T19:09:34+01:00",
+      "action": "token_use",
+      "token": "fake-invalid-token-123",
+      "file": "/Volumes/HestAI/test-fake-token.sql",
+      "outcome": "failed"
+    },
+    {
+      "timestamp": "2025-09-04T19:14:24+01:00",
+      "action": "token_use",
+      "token": "SECURITY-SPECIALIST-20250904-arch-175",
+      "file": "/Volumes/HestAI/working-format-sessions.sql",
+      "outcome": "failed"
+    },
+    {
+      "timestamp": "2025-09-05T01:08:23+01:00",
+      "action": "token_use",
+      "token": "TECHNICAL-ARCHITECT-20250905-arch-175",
+      "file": "/Volumes/HestAI-Projects/smartsuite-api-shim/build/.github/workflows/ci.yml",
+      "outcome": "failed"
+    },
+    {
+      "timestamp": "2025-09-05T01:08:44+01:00",
+      "action": "token_use",
+      "token": "TECHNICAL-ARCHITECT-20250905-16a92730",
+      "file": "/Volumes/HestAI-Projects/smartsuite-api-shim/build/.github/workflows/ci.yml",
+      "outcome": "failed"
+    },
+    {
+      "timestamp": "2025-09-05T01:10:08+01:00",
+      "action": "token_use",
+      "token": "TECHNICAL-ARCHITECT-20250905-ead8e9db",
+      "file": "/Volumes/HestAI-Projects/smartsuite-api-shim/build/package.json",
+      "outcome": "failed"
+    }
+  ]
+}

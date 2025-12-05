@@ -184,11 +184,22 @@ CHECKLIST::[
 ]
 
 NORTH_STAR::[
-  TRY::Read(".coord/PROJECT-NORTH-STAR.md"),
-  TRY::Read(".coord/NORTH-STAR.md"),
-  TRY::Glob(".coord/workflow-docs/*NORTH-STAR*.md")→Read(first_match),
-  TRY::Glob(".coord/*NORTH-STAR*.md")→Read(first_match),
-  FALLBACK::SKIP["No North Star found - proceeding tactically"]
+  // Check if North Star Summary was pre-loaded via SessionStart hook
+  DETECT::check_conversation_history_for["North Star Summary loaded via SessionStart hook"],
+
+  IF[hook_preloaded]::[
+    SKIP::NORTH_STAR_LOADING,
+    NOTE::"✅ North Star Summary pre-loaded via SessionStart hook - skipping redundant load"
+  ],
+
+  IF[NOT hook_preloaded]::[
+    // Fallback: load North Star if not pre-loaded
+    TRY::Read(".coord/PROJECT-NORTH-STAR.md"),
+    TRY::Read(".coord/NORTH-STAR.md"),
+    TRY::Glob(".coord/workflow-docs/*NORTH-STAR*.md")→Read(first_match),
+    TRY::Glob(".coord/*NORTH-STAR*.md")→Read(first_match),
+    FALLBACK::SKIP["No North Star found - proceeding tactically"]
+  ]
 ]
 
 THEN::mark_todo_4_complete→mark_todo_5_in_progress
@@ -205,6 +216,26 @@ GIT_STATE::[
   COMMAND::"git log --oneline -10",
   COMMAND::"git status --short",
   COMMAND::"git branch --show-current"
+]
+
+BRANCH_SYNC_CHECK::[
+  FETCH::"git fetch origin main --quiet 2>/dev/null || true",
+  BEHIND::$(git rev-list --count HEAD..origin/main 2>/dev/null || echo "0"),
+  AHEAD::$(git rev-list --count origin/main..HEAD 2>/dev/null || echo "0"),
+  RECENT_MISSING::[
+    IF[BEHIND > 0]→"git log --oneline HEAD..origin/main -3"
+  ],
+
+  DETECTION::[
+    IF[BEHIND = 0 AND AHEAD = 0]::"✅ Up to date with main",
+    IF[BEHIND > 0 AND BEHIND ≤ 10]::"⚠️ BRANCH DRIFT: {BEHIND} commits behind origin/main",
+    IF[BEHIND > 10]::"🚨 SIGNIFICANT DRIFT: {BEHIND} commits behind origin/main - Consider merging before work",
+    IF[AHEAD > 0]::"↑ {AHEAD} commits ahead",
+    IF[BEHIND > 0]::SHOW[RECENT_MISSING[latest_3_titles]]
+  ],
+
+  ACTION::INFORM_ONLY[no_auto_merge, no_auto_rebase],
+  PURPOSE::"Parallel worktree drift awareness"
 ]
 
 THEN::mark_todo_5_complete→mark_todo_6_in_progress
@@ -336,6 +367,7 @@ OUTPUT::[
   "   Project:    {project_name_from_context}",
   "   Phase:      {current_phase}",
   "   Branch:     {git_branch} ({clean|dirty})",
+  "   Sync:       {branch_sync_status_from_step_5}",
   "   Alignment:  {north_star_status|'Tactical only'}",
   "   Codebase:   {repomix_outputId} (packed)",
   "",
@@ -409,6 +441,7 @@ OUTPUT::[
   "   Project:    {project_name}",
   "   Phase:      {current_phase}",
   "   Branch:     {git_branch}",
+  "   Sync:       {branch_sync_status}",
   "   Alignment:  {north_star_status}",
   "   Codebase:   {repomix_outputId} (packed)",
   "",

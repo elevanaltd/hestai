@@ -1,10 +1,25 @@
 {
   "registry_version": "1.1",
-  "last_updated": "2025-10-15T06:35:00Z",
+  "last_updated": "2025-12-06T12:00:00Z",
   "updated_by": "hestai-doc-steward",
   "purpose": "Registry-based approval system for HestAI documentation",
-  "sequence": 813,
+  "sequence": 815,
   "approved_docs": {
+    "814-REPORT-BLOCKAGE-RESOLUTION-PROTOCOL-FINDINGS.md": {
+      "approved_date": "2025-12-06",
+      "approved_by": "hestai-doc-steward",
+      "reason": "Empirical testing findings for blockage resolution protocol (GitHub issue #4) - comparative analysis of shared vs isolated agent context models with measurable validation quality metrics (2x gap detection improvement) - informs blockage-resolution-orchestrator agent specification with implementation requirements",
+      "category": "system-analysis",
+      "path": "reports/",
+      "evidence_type": "experimental_validation",
+      "test_methodology": "comparative_A_B_testing",
+      "key_metrics": {
+        "gap_detection_improvement": "2x precision (isolated vs shared)",
+        "risk_quantification": "78% probability estimates vs implicit",
+        "strategic_options": "3 paths vs 1",
+        "governance_integration": "explicit escalation triggers"
+      }
+    },
     "README.md": {
       "approved_date": "2025-08-20",
       "approved_by": "initial-setup",
@@ -156,6 +171,38 @@
         "110-SYSTEM-COGNITION-LOGOS.oct.md",
         "111-SYSTEM-COGNITION-ETHOS.oct.md"
       ]
+    },
+    "813-REPORT-CEREMONIAL-VS-FUNCTIONAL-AUDIT.md": {
+      "approved_date": "2025-12-06",
+      "approved_by": "hestai-doc-steward",
+      "reason": "First systematic audit of HestAI governance functionality - synthesizes findings from 6 explore agents analyzing 18 session logs across 3 projects over 36 days - establishes baseline metrics (60-70% functional vs 30-40% initial estimate) with evidence-based recommendations",
+      "category": "system-analysis",
+      "path": "reports/",
+      "evidence_sources": 18,
+      "observation_period": "2025-11-01 to 2025-12-06",
+      "key_findings": [
+        "RAPH protocol 100% functional with behavioral prediction accuracy",
+        "Constitutional constraints enforced (zero bypasses)",
+        "TDD discipline mixed - constitutional but not automated",
+        "North Star I1/I7/I8 actively functional, I2-I12 underutilized"
+      ]
+    },
+    "011-WORKFLOW-PROTOCOL-BLOCKAGE-RESOLUTION.oct.md": {
+      "approved_date": "2025-12-06",
+      "approved_by": "hestai-doc-steward",
+      "reason": "Signal-driven blockage resolution protocol validated through empirical testing (GitHub Issue #4) - establishes FAST_TRACK vs DEEP_TRACK routing with Synthesis Crucible pattern - includes CLI routing matrix for agent-to-model assignments - fills gap in workflow governance with 87% evidence ratio",
+      "category": "workflow-protocol",
+      "path": "docs/workflow/",
+      "evidence_type": "empirical_validation",
+      "test_scope": "comparative_Claude_Gemini_Codex_testing",
+      "key_components": [
+        "Signal classification (COMPLIANCE vs COHERENCE)",
+        "Synthesis Crucible architecture (Standard + Committee modes)",
+        "CLI routing matrix (gemini for ideation, codex for execution)",
+        "Escalation protocol with authority chain"
+      ],
+      "github_issue": "elevanaltd/hestai#4",
+      "validation_date": "2025-12-06"
     }
   },
   "pending_requests": {},
@@ -205,7 +252,7 @@
     }
   },
   "statistics": {
-    "total_approved": 16,
+    "total_approved": 19,
     "total_consolidated": 7,
     "consolidation_lines_eliminated": 2006,
     "documentation_efficiency_achieved": "67% reduction in standards directory",
@@ -235,5 +282,11 @@
     "redundancy": "0% (all duplicates eliminated)",
     "decision": "CONSOLIDATION_COMPLETE",
     "subagent_authority": "hestai-doc-steward"
+  },
+  "metadata": {
+    "last_updated": "2025-12-06T12:45:00Z",
+    "updated_by": "hestai-doc-steward",
+    "version": "2.8",
+    "schema_changes": "Approved 011-WORKFLOW-PROTOCOL-BLOCKAGE-RESOLUTION.oct.md - empirically validated workflow protocol"
   }
 }

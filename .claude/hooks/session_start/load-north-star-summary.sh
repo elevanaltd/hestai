@@ -4,6 +4,10 @@
 #
 # Loads compressed North Star Summary (~100-130 lines) instead of full document (~300+ lines)
 # Saves ~2.5k tokens at startup while maintaining 100% decision-logic fidelity
+#
+# Dual-Location Support:
+# 1. Primary: .coord/workflow-docs/ (standard coordination structure)
+# 2. Fallback: docs/workflow/ (for HestAI hub or projects without .coord)
 
 set -e
 
@@ -17,31 +21,40 @@ YELLOW='\033[33m'
 BOLD='\033[1m'
 RESET='\033[0m'
 
-# Check for .coord coordination structure
+SUMMARY_FILE=""
+LOCATION_SOURCE=""
+
+# Check for .coord coordination structure (primary location)
 COORD_PATH="$PROJECT_DIR/.coord"
 
-if [ ! -e "$COORD_PATH" ]; then
-  # No coordination - silent exit (this is expected for many projects)
-  exit 0
+if [ -e "$COORD_PATH" ] && { [ -L "$COORD_PATH" ] || [ -d "$COORD_PATH" ]; }; then
+  # Look for workflow-docs folder in coordination structure
+  WORKFLOW_DOCS="$COORD_PATH/workflow-docs"
+
+  if [ -d "$WORKFLOW_DOCS" ]; then
+    # Find North Star Summary file (pattern: *NORTH-STAR-SUMMARY*.md)
+    SUMMARY_FILE=$(find "$WORKFLOW_DOCS" -maxdepth 1 -name "*NORTH-STAR-SUMMARY*.md" -type f 2>/dev/null | head -1)
+    if [ -n "$SUMMARY_FILE" ]; then
+      LOCATION_SOURCE="coordination"
+    fi
+  fi
 fi
 
-# Check if .coord is a symlink or directory
-if [ ! -L "$COORD_PATH" ] && [ ! -d "$COORD_PATH" ]; then
-  exit 0
-fi
-
-# Look for workflow-docs folder
-WORKFLOW_DOCS="$COORD_PATH/workflow-docs"
-
-if [ ! -d "$WORKFLOW_DOCS" ]; then
-  exit 0
-fi
-
-# Find North Star Summary file (pattern: *NORTH-STAR-SUMMARY*.md)
-SUMMARY_FILE=$(find "$WORKFLOW_DOCS" -maxdepth 1 -name "*NORTH-STAR-SUMMARY*.md" -type f 2>/dev/null | head -1)
-
+# Fallback: Check docs/workflow/ if no summary found yet
 if [ -z "$SUMMARY_FILE" ]; then
-  # No summary found - silent exit
+  DOCS_WORKFLOW="$PROJECT_DIR/docs/workflow"
+
+  if [ -d "$DOCS_WORKFLOW" ]; then
+    # Find North Star Summary file (pattern: *NORTH-STAR-SUMMARY*.md)
+    SUMMARY_FILE=$(find "$DOCS_WORKFLOW" -maxdepth 1 -name "*NORTH-STAR-SUMMARY*.md" -type f 2>/dev/null | head -1)
+    if [ -n "$SUMMARY_FILE" ]; then
+      LOCATION_SOURCE="docs"
+    fi
+  fi
+fi
+
+# Exit silently if no summary found in either location
+if [ -z "$SUMMARY_FILE" ]; then
   exit 0
 fi
 
@@ -66,7 +79,7 @@ cat "$SUMMARY_FILE"
 echo ""
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}"
 echo ""
-echo -e "${GREEN}✓ North Star Summary loaded from coordination${RESET}"
+echo -e "${GREEN}✓ North Star Summary loaded from $LOCATION_SOURCE${RESET}"
 echo -e "${BLUE}  Location: $RELATIVE_PATH${RESET}"
 echo -e "${BLUE}  Use '/ns-summary-create' to regenerate summary${RESET}"
 echo ""

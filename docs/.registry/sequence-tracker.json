@@ -33,16 +33,16 @@
   },
   "last_sequences": {
     "docs/standards": 103,
-    "docs/workflow": 10,
+    "docs/workflow": 11,
     "docs/security": 403,
-    "reports": 861
+    "reports": 814
   },
   "active_conflicts": [],
   "next_available": {
     "docs/standards": 104,
-    "docs/workflow": 11,
+    "docs/workflow": 12,
     "docs/security": 404,
-    "reports": 862
+    "reports": 815
   },
   "project_allocations": {
     "eav-monorepo": {
@@ -88,9 +88,9 @@
     "quality_enforcement": "Only operational documents retained - 100% value density achieved"
   },
   "metadata": {
-    "last_updated": "2025-12-04T11:58:13Z",
-    "updated_by": "system-steward",
-    "version": "2.5",
-    "schema_changes": "Added project_allocations tracking, updated reports range to 854 after eav-monorepo reorganization"
+    "last_updated": "2025-12-06T12:45:00Z",
+    "updated_by": "hestai-doc-steward",
+    "version": "2.7",
+    "schema_changes": "Updated workflow sequence to 11 for blockage resolution protocol"
   }
 }

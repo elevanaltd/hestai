@@ -73,16 +73,18 @@
       "description": "Systematic error resolution with priority-based triage preventing cascade failures. Build→Types→Unused→Async→Logic→Tests priority order, TYPE_SAFETY_THEATER detection. Essential for systematic error fixing and cascade prevention.",
       "promptTriggers": {
         "keywords": [
-          "error",
           "fix error",
-          "errors",
-          "debugging",
+          "fix errors",
+          "resolve error",
           "error resolution",
           "cascade failure",
-          "type safety",
+          "type safety theater",
           "build error",
           "type error",
-          "systematic error fixing"
+          "triage error",
+          "systematic error",
+          "error cascade",
+          "multiple errors"
         ]
       }
     },
@@ -337,24 +339,51 @@
       "enforcement": "suggest",
       "priority": "medium",
       "requiredSkills": [],
-      "description": "HestAI workflow phase execution including D0→D1→D2→D3→B0→B1→B2→B3→B4→B5 sequence, agent assignments per phase, phase transition validation, and deliverable requirements. Use when starting new phase, determining next steps, or validating phase completion.",
+      "description": "Core HestAI workflow map (D0-B5) and Build phase execution (B0-B5). Lightweight version for daily work. For Design phase details, load workflow-phases-design.",
       "promptTriggers": {
         "keywords": [
-          "workflow",
-          "phase",
-          "D1",
-          "D2",
-          "D3",
-          "B0",
-          "B1",
-          "B2",
-          "B3",
-          "B4",
-          "B5",
+          "workflow phase",
+          "B0 phase",
+          "B1 phase",
+          "B2 phase",
+          "B3 phase",
+          "B4 phase",
+          "B5 phase",
           "next phase",
           "phase transition",
-          "workflow sequence",
-          "start phase"
+          "current phase",
+          "what phase",
+          "which phase",
+          "B0→B1",
+          "B1→B2",
+          "B2→B3",
+          "HestAI workflow"
+        ]
+      }
+    },
+    "workflow-phases-design": {
+      "type": "domain",
+      "autoInject": true,
+      "enforcement": "suggest",
+      "priority": "low",
+      "requiredSkills": [],
+      "description": "Detailed Design phase execution (D0-D3) including ideation, North Star, design generation, and blueprint creation. Load when doing Design work.",
+      "promptTriggers": {
+        "keywords": [
+          "D0 phase",
+          "D1 phase",
+          "D2 phase",
+          "D3 phase",
+          "ideation phase",
+          "north star phase",
+          "design phase",
+          "blueprint phase",
+          "D0→D1",
+          "D1→D2",
+          "D2→D3",
+          "D3→B0",
+          "parallel exploration",
+          "design generation"
         ]
       }
     },

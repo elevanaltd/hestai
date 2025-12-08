@@ -24,6 +24,10 @@ EXAMPLES OF WHAT NOT TO SUGGEST:
 - "Check the test file" → Do NOT suggest testing-strategy unless writing/running tests
 - "Look at component code" → Do NOT suggest code-patterns unless modifying components
 - "How does X work?" → Research/understanding ≠ implementing features
+- "Try path B" or "option B" → Do NOT suggest workflow-phases (casual letters ≠ HestAI phase markers)
+- "We have an error" → Do NOT suggest error-triage unless actively fixing/debugging errors
+- "There was an issue" → Do NOT suggest error-triage for past tense discussion
+- "Phase of the project" → Only suggest workflow-phases for explicit HestAI D0/D1/D2/D3/B0-B5 references
 
 CRITICAL SELECTION RULES:
 - You MUST select ONLY the TOP 2 most relevant skills for the primary task (confidence > 0.65)

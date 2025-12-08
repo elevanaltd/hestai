@@ -18,9 +18,10 @@ export CLAUDE_PROJECT_DIR="$PROJECT_DIR"
 # Load .env file to export ANTHROPIC_API_KEY and other variables
 ENV_FILE="$HOOKS_DIR/.env"
 if [ -f "$ENV_FILE" ]; then
-  # Read and export ANTHROPIC_API_KEY from .env
+  # Read and export environment variables from .env
   export ANTHROPIC_API_KEY=$(grep '^ANTHROPIC_API_KEY=' "$ENV_FILE" | cut -d '=' -f2-)
   export CLAUDE_SKILLS_MODEL=$(grep '^CLAUDE_SKILLS_MODEL=' "$ENV_FILE" | cut -d '=' -f2-)
+  export CLAUDE_SKILLS_DEBUG=$(grep '^CLAUDE_SKILLS_DEBUG=' "$ENV_FILE" | cut -d '=' -f2-)
 fi
 
 # Log wrapper invocation for debugging

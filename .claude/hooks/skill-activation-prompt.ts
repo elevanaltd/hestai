@@ -226,7 +226,8 @@ async function main(): Promise<void> {
       debugLog(`  All skills to inject: ${JSON.stringify(allSkillsToInject)}`);
 
       if (allSkillsToInject.length > 0) {
-        injectedSkills = resolveSkillDependencies(allSkillsToInject, rules.skills);
+        // Pass acknowledged skills to prevent re-injecting dependencies that are already loaded
+        injectedSkills = resolveSkillDependencies(allSkillsToInject, rules.skills, existingAcknowledged);
 
         // DEBUG: Log final injected skills
         debugLog('Final Injection:');

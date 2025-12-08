@@ -16,24 +16,30 @@ import type { SkillRule } from './types.js';
  *
  * @param skills - Initial set of skills to resolve
  * @param skillRules - Skill configuration from skill-rules.json
+ * @param acknowledgedSkills - Skills already loaded in session (to avoid re-injection)
  * @returns Sorted array of skill names (dependencies first, then ordered by injectionOrder)
  *
  * @example
  * ```typescript
  * const skills = ['service-layer-development'];
- * const resolved = resolveSkillDependencies(skills, skillRules);
- * // Returns: ['api-protocols', 'service-layer-development']
+ * const resolved = resolveSkillDependencies(skills, skillRules, ['api-protocols']);
+ * // Returns: ['service-layer-development'] (api-protocols already acknowledged)
  * ```
  */
 export function resolveSkillDependencies(
   skills: string[],
-  skillRules: Record<string, SkillRule>
+  skillRules: Record<string, SkillRule>,
+  acknowledgedSkills: string[] = []
 ): string[] {
   const resolved = new Set<string>();
   const visiting = new Set<string>(); // For cycle detection
+  const acknowledgedSet = new Set(acknowledgedSkills); // For O(1) lookup
   const errors: string[] = []; // Collect all errors
 
   function visit(skillName: string, path: string[] = []): void {
+    // Skip if already acknowledged (loaded in session)
+    if (acknowledgedSet.has(skillName)) return;
+
     // Cycle detection
     if (visiting.has(skillName)) {
       errors.push(`Circular dependency: ${[...path, skillName].join(' → ')}`);

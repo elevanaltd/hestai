@@ -88,7 +88,13 @@
 ## Authority Chain
 **Domain questions** → Domain specialist → `critical-engineer` → `requirements-steward` → Human
 
+## Browser Automation
+- **Playwright**: Available for UI testing and automation
+- **Chrome DevTools MCP**: Available for browser inspection and debugging
+- **Credentials**: Stored in `.env.local` (SmartSuite, Supabase, etc.)
+- **Use cases**: UI validation, E2E testing, visual verification, web scraping for project management
+
 ## Documentation
 - **Agent capabilities**: `docs/guides/102-DOC-AGENT-CAPABILITY-LOOKUP.oct.md`
-- **Accountability matrix**: `docs/guides/101-DOC-AGENT-ACCOUNTABILITY-MATRIX.md`  
+- **Accountability matrix**: `docs/guides/101-DOC-AGENT-ACCOUNTABILITY-MATRIX.md`
 - **Full workflow**: `docs/workflow/001-WORKFLOW-NORTH-STAR.md`

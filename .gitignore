@@ -6,6 +6,9 @@
 /.cache
 constitution.txt
 
+# Environment variables with credentials
+.env.local
+
 # Claude hooks - operational runtime data
 .claude/hooks/node_modules
 .claude/hooks/.env

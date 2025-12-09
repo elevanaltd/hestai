@@ -24,15 +24,6 @@
             "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/user_prompt_submit/skill-activation-hook.sh"
           }
         ]
-      },
-      {
-        "matcher": "🚀EXPORT-SESSION-NOW",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/user_prompt_submit/session-export-hook.sh"
-          }
-        ]
       }
     ],
     "PreToolUse": [
